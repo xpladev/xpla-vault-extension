@@ -1,0 +1,23 @@
+@import "mixins";
+
+.component {
+  padding: 30px 0;
+  text-align: center;
+}
+
+.icon {
+  font-size: 56px;
+  overflow: hidden;
+  margin-bottom: 4px;
+  svg {
+    color: var(--text-disable);
+    padding: 10px;
+    background-color: var(--bg);
+    border-radius: 20px;
+  }
+}
+
+.content {
+  word-break: break-all;
+  color: var(--text-muted);
+}

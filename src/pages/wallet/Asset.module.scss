@@ -1,0 +1,60 @@
+@import "mixins";
+
+.asset {
+  @include flex(space-between, flex-start);
+  @include mobile {
+    @include flex(space-between, center);
+    padding: 0;
+    height: 72px;
+  }
+  // border-top: 1px solid var(--card-border);
+  padding: 20px 0;
+  position: relative; // to loading indicator
+}
+
+.details {
+  @include flex(space-between, center);
+  @include mobile {
+    // align-items: center;
+    // flex: 1;
+    // @include flex(space-between, center);
+  }
+  gap: 10px;
+  & > div {
+    display: grid;
+    // gap: 1px;
+  }
+}
+
+.detailsContainer {
+  @include mobile {
+    // flex: 1;
+    // @include flex(space-between, flex-start);
+  }
+}
+
+.symbol {
+  font-size: var(--font-size-small);
+  font-weight: var(--bold);
+  color: var(--text-muted);
+}
+
+.amount {
+  font-size: 17px;
+  font-weight: var(--black);
+  > span {
+    font-weight: var(--bold);
+  }
+}
+
+.amountContainer {
+  @include mobile {
+    margin-right: 12px;
+    // text-align: right;
+  }
+}
+
+.value {
+  color: var(--text-muted);
+  font-size: var(--font-size-small);
+}

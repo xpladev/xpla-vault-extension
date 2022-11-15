@@ -1,0 +1,20 @@
+@import "mixins";
+
+.popover {
+  min-width: 260px;
+}
+
+.link {
+  color: var(--text);
+  font-size: 18px;
+  font-weight: var(--black);
+  margin-bottom: 4px;
+}
+
+@include mobile {
+  .mobileItem {
+    position: relative;
+    padding: 20px;
+    border-bottom: var(--border-width) solid var(--card-border);
+  }
+}

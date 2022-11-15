@@ -1,0 +1,19 @@
+@import "mixins";
+
+.wallet {
+  @include flex(space-between);
+
+  background: var(--button-primary-bg);
+  border-radius: 16px;
+  color: var(--button-primary-text);
+  padding: 20px;
+  text-align: left;
+  h1 {
+    margin-bottom: 2px;
+  }
+}
+
+.address {
+  font-size: var(--font-size-small);
+  font-weight: var(--normal);
+}

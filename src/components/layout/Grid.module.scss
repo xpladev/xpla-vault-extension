@@ -1,0 +1,42 @@
+@import "mixins";
+
+.grid {
+  display: grid;
+}
+
+.row {
+  display: flex;
+  gap: var(--grid-gap);
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+@include desktop {
+  .start {
+    align-items: flex-start;
+  }
+}
+
+.col {
+  display: grid;
+  gap: var(--grid-gap);
+}
+
+.confirm {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  height: calc(100vh - var(--header-height) - var(--grid-gap));
+  .grid:first-of-type {
+    grid-auto-rows: min-content;
+    align-content: start;
+    align-items: start;
+    max-height: calc(100vh - 64px);
+    overflow: auto;
+  }
+}
+
+.buttons {
+  padding: 20px 0;
+}

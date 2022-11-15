@@ -1,0 +1,100 @@
+@import "mixins";
+
+.tabs {
+  display: flex;
+  white-space: nowrap;
+  &:not(.line) {
+    gap: 20px;
+  }
+}
+
+.card {
+  font-size: 15px;
+  font-weight: var(--normal);
+  margin-bottom: 32px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--card-border);
+
+  @include mobile {
+    display: flex;
+    margin: 0 20px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.tab {
+  @include inline-flex;
+  color: inherit;
+  border-bottom: 2px solid transparent;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.card .tab {
+  height: 48px;
+  color: var(--text-disable);
+  font-weight: var(--black);
+
+  @include mobile {
+    &:last-child {
+      border-right: 0;
+    }
+  }
+
+  &:hover {
+    color: var(--text);
+  }
+
+  &.active {
+    color: var(--text);
+    border-color: var(--text);
+  }
+
+  &.disabled {
+    color: var(--text-muted);
+  }
+
+  @include desktop {
+    // padding: 0 30px;
+  }
+
+  @include mobile {
+    flex: 1;
+    text-align: center;
+  }
+}
+
+.line {
+  --border-color: var(--card-border);
+}
+
+.reversed {
+  --border-color: var(--card-bg);
+}
+
+.line .tab {
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 12px;
+  font-size: var(--font-size-small);
+  font-weight: var(--bold);
+  color: var(--text-disable);
+  padding: 0 14px;
+  padding-bottom: 5px;
+
+  &:hover {
+    color: var(--text);
+  }
+
+  &.active {
+    color: var(--text);
+    border-bottom: 2px solid var(--text);
+    padding-bottom: 4px;
+  }
+}
+
+.disabled {
+  @include disabled;
+}

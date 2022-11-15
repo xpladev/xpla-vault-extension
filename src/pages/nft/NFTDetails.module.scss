@@ -1,0 +1,18 @@
+.dl {
+  gap: 4px;
+}
+
+.dt {
+  padding-right: 5px;
+}
+
+.dd {
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.name {
+  font-size: var(--font-size-small);
+  font-weight: var(--bold);
+  margin-bottom: 8px;
+}

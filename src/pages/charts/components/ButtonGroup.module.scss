@@ -1,0 +1,25 @@
+.group {
+  font-size: 11px;
+  overflow: hidden;
+
+  border: none;
+  padding: 4px;
+  border-radius: 16px;
+  background: var(--button-default-bg);
+}
+
+.item {
+  flex: 1;
+  color: var(--text-disable);
+  text-align: center;
+  height: 24px;
+
+  font-weight: var(--black);
+  border-radius: 12px;
+  background: transparent;
+}
+
+.active {
+  background: var(--card-bg);
+  color: var(--text);
+}

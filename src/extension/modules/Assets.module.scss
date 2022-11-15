@@ -1,0 +1,8 @@
+.assets {
+  background: var(--card-bg);
+  // border: solid 1px var(--card-border);
+  border-radius: var(--border-radius);
+  padding: 12px 0;
+  display: grid;
+  gap: 10px;
+}

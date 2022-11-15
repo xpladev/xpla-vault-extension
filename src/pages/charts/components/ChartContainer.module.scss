@@ -1,0 +1,22 @@
+@import "mixins";
+
+.grid {
+  display: grid;
+  gap: 40px;
+  grid-template-rows: auto 1fr;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: var(--black);
+  @include desktop {
+    font-size: 24px;
+  }
+  small {
+    font-size: var(--font-size-small);
+  }
+}
+
+.mobileFilter {
+  margin-top: 20px;
+}

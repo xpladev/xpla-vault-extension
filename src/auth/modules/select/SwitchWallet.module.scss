@@ -1,0 +1,30 @@
+@import "mixins";
+
+.list {
+  display: grid;
+  gap: 8px;
+  @include mobile {
+    gap: 0;
+  }
+}
+
+.wallet {
+  @include flex(space-between);
+  width: 100%;
+  padding: 12px 16px;
+  @include mobile {
+    padding: 20px;
+
+    border: none;
+    border-radius: 0;
+    border-bottom: var(--border-width) solid var(--card-border);
+    &.active {
+      border-bottom: var(--border-width) solid var(--card-border);
+    }
+  }
+}
+
+.active {
+  background: var(--button-default-bg);
+  border-color: var(--button-primary-bg);
+}

@@ -1,0 +1,106 @@
+@import "mixins";
+
+.page {
+  overflow: hidden;
+  // padding here to position progress bar
+
+  @include desktop {
+    padding: 54px var(--main-padding-horizontal);
+  }
+
+  @include mobile {
+    padding: 16px 0;
+  }
+}
+
+.grid {
+  display: grid;
+
+  @include desktop {
+    gap: 18px;
+  }
+
+  @include mobile {
+    gap: 16px;
+  }
+}
+
+.sub {
+  padding: unset;
+  margin-top: 20px;
+}
+
+.header {
+  @include flex(space-between);
+
+  @include desktop {
+    --font-size-page-title: 42px;
+  }
+
+  @include mobile {
+    @include flex-column(flex-start, flex-start);
+    --font-size-page-title: 26px;
+    margin: 0;
+    padding: 0 var(--main-padding-horizontal);
+    h1 + a {
+      margin-top: 16px;
+    }
+  }
+}
+
+.extraMobile {
+  @include flex(space-around);
+  padding: 0 20px;
+  * {
+    flex: 1;
+  }
+}
+
+.title {
+  font-size: var(--font-size-page-title);
+  font-weight: var(--black);
+  @include mobile {
+    padding-top: 8px;
+  }
+}
+
+.sub {
+  .header {
+    color: var(--button-default-text);
+    @include mobile {
+      display: grid;
+      gap: 8px;
+    }
+  }
+
+  .title {
+    font-size: 18px;
+    color: var(--text);
+    @include mobile {
+    }
+  }
+}
+
+@include desktop {
+  .small {
+    gap: 36px;
+
+    .header {
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 18px;
+    }
+
+    .main {
+      margin: 0 auto;
+      width: var(--max-width-small);
+      max-width: 100%;
+    }
+  }
+}
+
+.main {
+  overflow: hidden;
+}
+
+.hideMenu {
+}

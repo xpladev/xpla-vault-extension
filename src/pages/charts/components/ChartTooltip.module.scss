@@ -1,0 +1,18 @@
+.tooltip {
+  background: var(--menu-bg);
+  border-radius: var(--border-radius);
+  color: var(--button-primary-text);
+  padding: 8px 16px;
+  min-width: 140px;
+  white-space: nowrap;
+}
+
+.value {
+  font-weight: var(--black);
+}
+
+.date {
+  font-size: var(--font-size-small);
+  font-weight: var(--normal);
+  color: var(--button-primary-text);
+}

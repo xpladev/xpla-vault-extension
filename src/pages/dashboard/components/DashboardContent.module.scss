@@ -1,0 +1,19 @@
+@import "mixins";
+
+.value {
+  font-size: 22px;
+  font-weight: var(--black);
+
+  @include desktop {
+    font-size: 24px;
+  }
+}
+
+.footer button {
+  cursor: zoom-in;
+  font-size: 12px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,47 @@
+@import "mixins";
+
+.asset {
+  @include flex(space-between, flex-start);
+  padding: 10px 20px;
+  position: relative; // to loading indicator
+
+  &:not(:first-child) {
+    // border-top: 1px solid var(--card-border);
+  }
+}
+
+.details {
+  @include flex(space-between, center);
+  gap: 10px;
+  & > div {
+    // display: grid;
+  }
+}
+
+.symbol {
+  font-size: var(--font-size-small);
+  font-weight: var(--bold);
+  color: var(--text-muted);
+}
+
+.amount {
+  font-size: 17px;
+  font-weight: var(--black);
+  > span {
+    font-weight: var(--bold);
+  }
+}
+
+// .symbol,
+// .amount {
+//   font-size: 16px;
+// }
+
+.amount {
+  font-weight: var(--normal);
+}
+
+.value {
+  color: var(--text-muted);
+  font-size: var(--font-size-small);
+}

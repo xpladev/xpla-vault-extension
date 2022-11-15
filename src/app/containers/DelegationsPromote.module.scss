@@ -1,0 +1,49 @@
+@import "mixins";
+
+.vertical {
+  text-align: center;
+  display: grid;
+  gap: 12px;
+
+  & > div {
+    svg {
+      width: 48px;
+      height: 48px;
+      color: var(--success);
+    }
+  }
+
+  .main {
+    display: grid;
+    // gap: 12px;
+  }
+}
+
+.horizontal {
+  text-align: left;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+
+  & > div {
+    svg {
+      width: 48px;
+      height: 48px;
+      color: var(--success);
+    }
+
+  }
+}
+
+.title {
+  font-size: 16px;
+  font-weight: var(--black);
+}
+
+p {
+  font-size: 13px;
+  color: var(--card-title);
+  font-weight: var(--normal);
+}

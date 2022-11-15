@@ -1,0 +1,1 @@
+# XPLA Vault Wallet extension

@@ -1,0 +1,11 @@
+@import "mixins";
+
+.screen {
+  height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+}
+.page {
+  margin-top: -3px;
+  height: 100%;
+}

@@ -1,0 +1,23 @@
+@import "mixins";
+
+.button {
+  border: var(--border-width) solid var(--card-border);
+  border-radius: var(--border-radius);
+  color: inherit;
+  font-weight: var(--normal);
+  transition: all var(--transition) linear;
+
+  &:hover,
+  &.active {
+    text-decoration: none;
+  }
+
+  &:hover {
+    border-color: var(--button-primary-bg);
+  }
+
+  &.active {
+    background: var(--info-light);
+    border-color: var(--button-primary-bg);
+  }
+}

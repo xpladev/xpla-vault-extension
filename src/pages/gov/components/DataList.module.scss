@@ -1,0 +1,31 @@
+@import "mixins";
+
+.list {
+  overflow: auto;
+}
+
+.horizontal {
+  @include flex(space-evenly);
+  text-align: center;
+}
+
+.vertical {
+  display: grid;
+  gap: 20px;
+}
+
+.rowList {
+  display: grid;
+  gap: 16px;
+  & > div {
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    font-weight: var(--bold);
+  }
+}
+
+.title {
+  font-size: var(--font-size-small);
+  font-weight: var(--normal);
+  color: var(--card-title);
+}

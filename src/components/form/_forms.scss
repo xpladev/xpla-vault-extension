@@ -1,0 +1,19 @@
+@mixin border {
+  background: var(--input-bg);
+  border: solid 1px var(--input-border);
+  border-radius: var(--input-border-radius);
+  overflow: hidden;
+  transition: border var(--transition) linear;
+  &:focus {
+    border-color: var(--text-muted);
+  }
+}
+
+@mixin padding {
+  padding: 0 12px;
+}
+
+@mixin size {
+  @include padding;
+  height: var(--input-height);
+}
