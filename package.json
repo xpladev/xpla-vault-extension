@@ -7,7 +7,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "start": "export PORT=9020 && react-scripts start",
+    "start": "react-scripts start",
     "build-scripts": "webpack --config scripts/webpack.config.js",
     "build": "cross-env react-app-rewired build && npm run build-scripts",
     "test": "react-scripts test",
