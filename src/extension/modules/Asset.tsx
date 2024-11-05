@@ -1,12 +1,17 @@
 import { useTranslation } from 'react-i18next';
+import classNames from 'classnames/bind';
+import { EvmAddress } from '@xpla/xpla.js';
 import { WithFetching } from 'components/feedback';
-import { Read, TokenIcon } from 'components/token';
+import { Read, TokenBadge, TokenIcon } from 'components/token';
 import AssetActions from 'pages/wallet/AssetActions';
 import styles from './Asset.module.scss';
+
+const cx = classNames.bind(styles);
 
 export interface Props extends TokenItem, QueryState {
   balance?: Amount;
   value?: Value;
+  erc20?: boolean;
 }
 
 const Asset = (props: Props) => {
@@ -19,7 +24,14 @@ const Asset = (props: Props) => {
         <TokenIcon token={token} icon={icon} size={22} />
 
         <div>
-          <h1 className={styles.symbol}>{symbol}</h1>
+          <div className={cx('tag-wrap')}>
+            <h1 className={styles.symbol}>{symbol}</h1>
+            <TokenBadge
+              className={cx('tag')}
+              token={token}
+              evm={EvmAddress.validate(token)}
+            />
+          </div>
           <h2 className={styles.amount}>
             <WithFetching {...state} height={1}>
               {(progress, wrong) => (

@@ -1,16 +1,15 @@
 import { useTranslation } from 'react-i18next';
-import { Proposal } from '@xpla/xpla.js';
-import { useParseProposalType } from 'data/queries/gov';
+import { ProposalV1 } from '@xpla/xpla.js';
+import { useParseProposalV1Type } from 'data/queries/gov';
 import { useProposalStatusItem } from 'data/queries/gov';
 import { ToNow } from 'components/display';
 import styles from './ProposalHeader.module.scss';
 
-const ProposalHeader = ({ proposal }: { proposal: Proposal }) => {
-  const { id, content, status, submit_time } = proposal;
-  const { title } = content;
+const ProposalHeader = ({ proposal }: { proposal: ProposalV1 }) => {
+  const { id, title, status, submit_time } = proposal;
 
   const { t } = useTranslation();
-  const type = useParseProposalType(content);
+  const type = useParseProposalV1Type(proposal);
   const { color, label } = useProposalStatusItem(status);
 
   return (

@@ -1,4 +1,5 @@
 type XplaAddress = string;
+type EvmAddress = string;
 
 type Amount = string;
 type Value = string | number;
@@ -7,7 +8,7 @@ type Price = number;
 /* coin | token */
 type CoinDenom = string; // axpla
 type IBCDenom = string; // ibc/...
-type TokenAddress = XplaAddress;
+type TokenAddress = XplaAddress | EvmAddress;
 type Denom = CoinDenom | IBCDenom;
 type Token = Denom | TokenAddress;
 
@@ -97,6 +98,8 @@ interface PairDetails {
 type Pair = [Token, Token];
 
 /* cw721 */
+type CW721Whitelist = Record<XplaAddress, CW721ContractItem>;
+
 interface CW721ContractInfoResponse {
   name: string;
   symbol: string;
@@ -111,8 +114,6 @@ interface CW721ContractItem extends CW721ContractInfoResponse {
   marketplace?: string[];
 }
 
-type CW721Whitelist = Record<XplaAddress, CW721ContractItem>;
-
 interface NFTTokenItem {
   token_uri?: string;
   extension?: Extension;
@@ -122,4 +123,44 @@ interface Extension {
   name?: string;
   description?: string;
   image?: string;
+}
+
+/* evm */
+interface EvmContractInfo {
+  symbol: string;
+  name: string;
+  decimals: number;
+  totalSupply: string;
+}
+
+/* erc20 */
+type ERC20Whitelist = Record<EvmAddress, ERC20TokenItem>;
+
+interface ERC20TokenInfoResponse {
+  symbol: string;
+  name: string;
+  decimals: number;
+}
+
+interface ERC20TokenItem extends ERC20TokenInfoResponse {
+  token: EvmAddress;
+  protocol?: string;
+  icon?: string;
+}
+
+/* erc721 */
+type ERC721Whitelist = Record<EvmAddress, ERC721ContractItem>;
+
+interface ERC721ContractInfoResponse {
+  name: string;
+  symbol: string;
+  decimals: number;
+}
+
+interface ERC721ContractItem extends ERC721ContractInfoResponse {
+  contract: EvmAddress;
+  protocol?: string;
+  icon?: string;
+  homepage?: string;
+  marketplace?: string[];
 }

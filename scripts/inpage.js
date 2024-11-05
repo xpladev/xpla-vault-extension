@@ -6,7 +6,7 @@ window.isXplaExtensionAvailable = true;
 const XPLA_WALLET_INFO = {
   name: 'XPLA Vault Wallet',
   identifier: 'xplavault',
-  icon: 'http://assets.xpla.io/icon/extension/icon.png',
+  icon: 'https://assets.xpla.io/icon/extension/icon.png',
 };
 
 if (

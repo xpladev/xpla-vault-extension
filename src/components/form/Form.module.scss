@@ -41,11 +41,18 @@
 /* form item */
 .header {
   @include flex(space-between);
+  overflow-x: scroll;
+  &:has(.extra > button svg + span) .label {
+    background: var(--card-bg);
+  }
 }
 
 .label {
-  font-weight: var(--bold);
+  position: sticky;
+  left: 0;
   margin-bottom: 4px;
+  padding-right: 8px;
+  font-weight: var(--bold);
 }
 
 .extra {
@@ -55,4 +62,16 @@
 .error {
   color: var(--danger);
   font-size: var(--font-size-small);
+}
+
+.memo-notice {
+  font-size: var(--font-size-small);
+  font-weight: var(--normal);
+  color: var(--text-disable);
+  i {
+    font-weight: bold;
+  }
+  &.warning {
+    color: var(--danger);
+  }
 }

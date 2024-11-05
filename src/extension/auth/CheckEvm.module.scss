@@ -1,0 +1,58 @@
+@import "mixins";
+
+.address-container {
+  display: grid;
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .address-walletName {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    svg {
+      path {
+        fill: var(--text);
+      }
+      path:nth-child(6) {
+        opacity: 0.5;
+      }
+      path:nth-child(8) {
+        opacity: 0.4;
+      }
+    }
+  }
+
+  .address {
+    margin-top: 12px;
+    padding: 12px 20px;
+    border-radius: var(--border-radius);
+    background: var(--bg);
+    word-break: break-all;
+    color: var(--text-muted);
+  }
+}
+
+.copy, .qr {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  grid-gap: 4px;
+  gap: 4px;
+  height: 30px;
+  border-radius: 12px;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  padding: 0 10px;
+  background-color: var(--bg);
+  margin-right: 4px;
+  margin-top: 8px;
+  transition: color var(--transition) linear;
+
+  svg {
+    font-size: 11px;
+  }
+}

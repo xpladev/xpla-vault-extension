@@ -1,17 +1,30 @@
-import { Fragment, ReactNode } from 'react';
+import { ChangeEvent, Fragment, ReactNode } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { QueryKey, useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import classNames from 'classnames';
+import classNames from 'classnames/bind';
 import BigNumber from 'bignumber.js';
 import { head, isNil } from 'ramda';
 
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import { isDenom, isDenomIBC, readDenom } from '@xpla.kitchen/utils';
-import { Coin, Coins, LCDClient } from '@xpla/xpla.js';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import CloseIcon from '@mui/icons-material/Close';
+import {
+  isDenom,
+  isDenomIBC,
+  readAmount,
+  readDenom,
+} from '@xpla.kitchen/utils';
+import {
+  Coin,
+  Coins,
+  LCDClient,
+  Msg,
+  SyncTxBroadcastResult,
+} from '@xpla/xpla.js';
 import { CreateTxOptions, Fee } from '@xpla/xpla.js';
 import { ConnectType, UserDenied } from '@xpla/wallet-types';
 import { CreateTxFailed, TxFailed } from '@xpla/wallet-types';
@@ -30,7 +43,15 @@ import { useBankBalance, useIsWalletEmpty } from 'data/queries/bank';
 
 import { Pre } from 'components/general';
 import { Flex, Grid } from 'components/layout';
-import { FormError, Submit, Select, Input, FormItem } from 'components/form';
+import {
+  FormError,
+  Submit,
+  Select,
+  Input,
+  FormItem,
+  FormHelp,
+  FormGroup,
+} from 'components/form';
 import { Modal } from 'components/feedback';
 import { Details } from 'components/display';
 import { Read } from 'components/token';
@@ -43,9 +64,12 @@ import { toInput } from './utils';
 import { useTx } from './TxContext';
 import styles from './Tx.module.scss';
 
+const cx = classNames.bind(styles);
+
 interface Props<TxValues> {
   /* Only when the token is paid out of the balance held */
   token?: Token;
+  symbol?: string;
   decimals?: number;
   amount?: Amount;
   balance?: Amount;
@@ -74,6 +98,12 @@ interface RenderProps<TxValues> {
   submit: { fn: (values: TxValues) => Promise<void>; button: ReactNode };
 }
 
+const gasAdjustments = [
+  { text: 'Low', tag: '1.5', value: 1.5 },
+  { text: 'Average', tag: '1.75', value: 1.75 },
+  { text: 'High', tag: '2.0', value: 2.0 },
+];
+
 function Tx<TxValues>(props: Props<TxValues>) {
   const { token, decimals, amount, balance } = props;
   const { initialGasDenom, estimationTxValues, createTx } = props;
@@ -83,6 +113,14 @@ function Tx<TxValues>(props: Props<TxValues>) {
 
   const [isMax, setIsMax] = useState(false);
   const [gasDenom, setGasDenom] = useState(initialGasDenom);
+  const [gasAdjustment, setGasAdjustment] = useState<string | number>(
+    getLocalSetting<number>(SettingKey.GasAdjustment),
+  );
+  const [selectGasAdjustment, setSelectGasAdjustment] = useState<
+    string | number
+  >(getLocalSetting<number>(SettingKey.GasAdjustment));
+  const [gasAdjustmentError, setGasAdjustmentError] = useState<string>();
+  const [activeOptions, setActiveOptions] = useState<boolean>(false);
 
   /* context */
   const { t } = useTranslation();
@@ -99,9 +137,17 @@ function Tx<TxValues>(props: Props<TxValues>) {
   const bankBalance = useBankBalance();
   const { gasPrices } = useTx();
 
+  /* native token info */
+  const nativeDenom = initialGasDenom;
+  const nativeAmount = getAmount(bankBalance, initialGasDenom);
+  const nativeToken = {
+    denom: nativeDenom,
+    amount: nativeAmount,
+  };
+
   /* simulation: estimate gas */
   const simulationTx = estimationTxValues && createTx(estimationTxValues);
-  const gasAdjustment = getLocalSetting<number>(SettingKey.GasAdjustment);
+  // const gasAdjustment = getLocalSetting<number>(SettingKey.GasAdjustment);
   const key = {
     address,
     network,
@@ -117,11 +163,13 @@ function Tx<TxValues>(props: Props<TxValues>) {
       if (!address || isWalletEmpty) return 0;
       if (!(wallet || connectedWallet?.availablePost)) return 0;
       if (!simulationTx || !simulationTx.msgs.length) return 0;
+      if (!gasAdjustment) return 0;
 
       const config = {
         ...network,
         URL: network.lcd,
-        gasAdjustment: isWallet.multisig(wallet) ? 2 : gasAdjustment,
+        // gasAdjustment: isWallet.multisig(wallet) ? 2 : gasAdjustment,
+        gasAdjustment,
         gasPrices: { [initialGasDenom]: gasPrices[initialGasDenom] },
       };
 
@@ -132,7 +180,7 @@ function Tx<TxValues>(props: Props<TxValues>) {
         feeDenoms: [initialGasDenom],
       });
 
-      return unsignedTx.auth_info.fee.gas_limit;
+      return unsignedTx.auth_info.fee?.gas_limit;
     },
     {
       ...RefetchOptions.INFINITY,
@@ -144,6 +192,11 @@ function Tx<TxValues>(props: Props<TxValues>) {
       enabled: !isBroadcasting,
     },
   );
+
+  const originEstimatedGas = useMemo(() => {
+    if (!estimatedGas) return '0';
+    return new BigNumber(estimatedGas).div(gasAdjustment).toString();
+  }, [estimatedGas, gasAdjustment]);
 
   const getGasAmount = useCallback(
     (denom: CoinDenom) => {
@@ -184,12 +237,19 @@ function Tx<TxValues>(props: Props<TxValues>) {
     if (process.env.NODE_ENV === 'development' && failed) {
       /* eslint-disable */
       console.groupCollapsed('Fee estimation failed');
-      console.info(simulationTx?.msgs.map((msg) => msg.toData(isClassic)));
+      console.info(simulationTx?.msgs.map((msg) => (msg as Msg).toData(isClassic)));
       console.info(failed);
       console.groupEnd();
       /* eslint-enable */
     }
   }, [failed, isClassic, simulationTx]);
+
+  /* custom gas adjustment */
+  const pattern = /^([1-9]{1}\d{0,1}|0{1})(\.{1}\d{1,2})?$/;
+  const handleGasAdjustment = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setGasAdjustment(value);
+  };
 
   /* submit */
   const passwordRequired = isWallet.single(wallet);
@@ -205,6 +265,8 @@ function Tx<TxValues>(props: Props<TxValues>) {
       ? t('Fee estimation failed')
       : isBroadcasting
       ? t('Broadcasting a tx...')
+      : !pattern.test(gasAdjustment.toString())
+      ? t('Invalid gas adjustment')
       : props.disabled || '';
 
   const [submitting, setSubmitting] = useState(false);
@@ -232,7 +294,11 @@ function Tx<TxValues>(props: Props<TxValues>) {
         navigate(toPostMultisigTx(unsignedTx));
       } else if (wallet) {
         const result = await auth.post({ ...tx, fee }, password);
-        setLatestTx({ txhash: result.txhash, queryKeys, redirectAfterTx });
+        setLatestTx({
+          txhash: (result as SyncTxBroadcastResult).txhash,
+          queryKeys,
+          redirectAfterTx,
+        });
       } else {
         const { result } = await post({ ...tx, fee });
         setLatestTx({ txhash: result.txhash, queryKeys, redirectAfterTx });
@@ -252,11 +318,14 @@ function Tx<TxValues>(props: Props<TxValues>) {
   /* render */
   const balanceAfterTx =
     balance &&
-    amount &&
     new BigNumber(balance)
-      .minus(amount)
+      .minus(amount || 0)
       .minus((gasFee.denom === token && gasFee.amount) || 0)
       .toString();
+
+  const nativeAfterTx = new BigNumber(nativeAmount)
+    .minus(gasFee.amount)
+    .toString();
 
   const insufficient = balanceAfterTx
     ? new BigNumber(balanceAfterTx).lt(0)
@@ -301,57 +370,207 @@ function Tx<TxValues>(props: Props<TxValues>) {
   };
 
   const renderFee = (descriptions?: Contents) => {
-    if (!estimatedGas) return null;
+    // if (estimatedGas === undefined) return null;
 
     return (
-      <Details>
-        <dl>
-          {descriptions?.map(({ title, content }, index) => (
-            <Fragment key={index}>
-              <dt>{title}</dt>
-              <dd>{content}</dd>
-            </Fragment>
-          ))}
+      <>
+        {/* <div className={cx('gas-container')}>
+          <Grid gap={4}>
+            <FormItem label={t('Fee')}>
+              <Input
+                autoFocus
+                value={readAmount(estimatedGas, {
+                  decimals: 0,
+                  comma: true,
+                })}
+                disabled
+              />
+            </FormItem>
+          </Grid>
 
-          <dt className={styles.gas}>
-            {t('Fee')}
-            {availableGasDenoms.length > 1 && (
-              <Select
-                value={gasDenom}
-                onChange={(e) => setGasDenom(e.target.value)}
-                className={styles.select}
-                small
-              >
-                {availableGasDenoms.map((denom) => (
-                  <option value={denom} key={denom}>
-                    {readDenom(denom)}
-                  </option>
-                ))}
-              </Select>
+          <button
+            type="button"
+            className={cx('gas-btn', { active: activeOptions })}
+            onClick={() => setActiveOptions(!activeOptions)}
+          >
+            {activeOptions ? (
+              <span>{t('Close')}</span>
+            ) : (
+              <span>{t('Advanced')}</span>
             )}
-          </dt>
-          <dd>{gasFee.amount && <Read {...gasFee} />}</dd>
+            <ExpandMoreIcon className={cx('arrow', 'icon')} />
+          </button>
 
-          {balanceAfterTx && (
-            <>
-              <dt>{t('Balance')}</dt>
+          <div className={cx('gas-options', { active: activeOptions })}>
+            <FormHelp>
+              {t(
+                'Higher fees improve the guarantee of reliable transaction processing.',
+              )}
+            </FormHelp>
+
+            <Grid gap={4}>
+              <FormGroup className={cx('form-group')}>
+                <FormItem
+                  className={cx('input-100')}
+                  label={t('Gas Adjustment Setting')}
+                >
+                  <Input
+                    type="text"
+                    onChange={(e) => {
+                      const { value } = e.target;
+
+                      const reg = /^([1-9]{1}\d{0,1}|0{1})(\.{1}\d{0,2})?$/g;
+                      if (value !== '' && !reg.test(value)) {
+                        setGasAdjustmentError(
+                          t('Fee amount should be bigger than 0.'),
+                        );
+                      } else {
+                        setGasAdjustmentError(undefined);
+                      }
+
+                      const filter = gasAdjustments.filter(
+                        (item) => Number(item.value) === Number(value),
+                      );
+
+                      if (filter && filter.length) {
+                        setSelectGasAdjustment(filter[0].value);
+                      } else {
+                        setSelectGasAdjustment('');
+                      }
+
+                      setGasAdjustment(e.target.value);
+                    }}
+                    value={gasAdjustment}
+                  />
+                </FormItem>
+
+                <Select
+                  style={{ width: '100px' }}
+                  value={selectGasAdjustment}
+                  onChange={(e) => {
+                    setSelectGasAdjustment(e.target.value);
+                    setGasAdjustment(e.target.value);
+                  }}
+                >
+                  {gasAdjustments.map((item) => (
+                    <option value={item.value}>&times;&nbsp;{item.tag}</option>
+                  ))}
+                  <option value="">Manual</option>
+                </Select>
+              </FormGroup>
+              {gasAdjustmentError && (
+                <p className={cx('form-error')}>{gasAdjustmentError}</p>
+              )}
+            </Grid>
+          </div>
+        </div> */}
+
+        <div>
+          <FormItem label={t('Results')} />
+          <Details className={cx('send-results')}>
+            <dl>
+              {descriptions?.map(({ title, content }, index) => (
+                <Fragment key={index}>
+                  <dt>{title}</dt>
+                  <dd>{content}</dd>
+                </Fragment>
+              ))}
+
+              <dt>{t('Pre-Transaction')}</dt>
               <dd>
                 <Read amount={balance} token={token} decimals={decimals} />
+                {!isDenom(token) && amount && (
+                  <Read className={styles.evm} {...nativeToken} />
+                )}
               </dd>
 
-              <dt>{t('Balance after tx')}</dt>
-              <dd>
-                <Read
-                  amount={balanceAfterTx}
-                  token={token}
-                  decimals={decimals}
-                  className={classNames(insufficient && 'danger')}
-                />
-              </dd>
-            </>
-          )}
-        </dl>
-      </Details>
+              <dt className={styles.gas}>
+                {t('Fee')}
+                {availableGasDenoms.length > 1 && (
+                  <Select
+                    value={gasDenom}
+                    onChange={(e) => setGasDenom(e.target.value)}
+                    className={styles.select}
+                    small
+                  >
+                    {availableGasDenoms.map((denom) => (
+                      <option value={denom} key={denom}>
+                        {readDenom(denom)}
+                      </option>
+                    ))}
+                  </Select>
+                )}
+              </dt>
+              <dd>{gasFee.amount && <Read {...gasFee} />}</dd>
+              {amount && (
+                <>
+                  <dt>{t('Amount')}</dt>
+                  <dd>
+                    <Read
+                      amount={amount || '0'}
+                      token={token}
+                      decimals={decimals}
+                    />
+                  </dd>
+                </>
+              )}
+            </dl>
+
+            {token ? (
+              <>
+                {balanceAfterTx && nativeAfterTx && (
+                  <>
+                    <div className={cx('send-line')}></div>
+                    <div className={cx('send-box')}>
+                      <dl>
+                        <dt>Post-Transaction</dt>
+                        <dd>
+                          <Read
+                            amount={balanceAfterTx}
+                            token={token}
+                            decimals={decimals}
+                            className={classNames(insufficient && 'danger')}
+                          />
+                          {!isDenom(token) && amount && (
+                            <Read
+                              className={cx(
+                                styles.evm,
+                                insufficient && 'danger',
+                              )}
+                              amount={nativeAfterTx}
+                              token={nativeDenom}
+                            />
+                          )}
+                        </dd>
+                      </dl>
+                    </div>
+                  </>
+                )}
+              </>
+            ) : (
+              <>
+                {nativeAfterTx && (
+                  <>
+                    <div className={cx('send-line')}></div>
+                    <div className={cx('send-box')}>
+                      <dl>
+                        <dt>Post-Transaction</dt>
+                        <dd>
+                          <Read
+                            className={classNames(insufficient && 'danger')}
+                            amount={nativeAfterTx}
+                            token={nativeDenom}
+                          />
+                        </dd>
+                      </dl>
+                    </div>
+                  </>
+                )}
+              </>
+            )}
+          </Details>
+        </div>
+      </>
     );
   };
 

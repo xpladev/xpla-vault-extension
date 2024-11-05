@@ -1,13 +1,21 @@
 import { ReactNode } from 'react';
 import { isDenomIBC, isDenomNative } from '@xpla.kitchen/utils';
 import { readDenom, truncate } from '@xpla.kitchen/utils';
-import { AccAddress } from '@xpla/xpla.js';
+import { AccAddress, EvmAddress } from '@xpla/xpla.js';
 import { ASSETS } from 'config/constants';
 import { useIsClassic } from './query';
 import { useIBCBaseDenom } from './queries/ibc';
 import { useTokenInfoCW20 } from './queries/wasm';
-import { useCustomTokensCW20 } from './settings/CustomTokens';
-import { useCW20Whitelist, useIBCWhitelist } from './Xpla/XplaAssets';
+import { useContractInfoERC20 } from './queries/evm';
+import {
+  useCustomTokensCW20,
+  useCustomTokensERC20,
+} from './settings/CustomTokens';
+import {
+  useCW20Whitelist,
+  useERC20WhiteList,
+  useIBCWhitelist,
+} from './Xpla/XplaAssets';
 
 export const useTokenItem = (token: Token): TokenItem | undefined => {
   const isClassic = useIsClassic();
@@ -39,8 +47,29 @@ export const useTokenItem = (token: Token): TokenItem | undefined => {
   const shouldQueryIBC = ibcWhitelistState.isSuccess && !listedIBCTokenItem;
   const { data: base_denom } = useIBCBaseDenom(token, shouldQueryIBC);
 
+  /* ERC20 */
+  // 1. Local storage
+  const { list: evmList } = useCustomTokensERC20();
+  const erc20TokenItem = evmList.find(matchToken);
+
+  // 2. Whitelist
+  const erc20WhitelistResult = useERC20WhiteList(!!erc20TokenItem);
+  const { data: erc20Whitelist = {} } = erc20WhitelistResult;
+  const listedERC20TokenItem = Object.values(erc20Whitelist).find(matchToken);
+
+  // 3. Contract query - token info
+  const shouldQueryERC20 =
+    erc20WhitelistResult.isSuccess && !listedERC20TokenItem;
+  const erc20InfoResult = useContractInfoERC20(token, shouldQueryERC20);
+  const { data: erc20Info } = erc20InfoResult;
+  const erc20InfoItem = erc20Info ? { token, ...erc20Info } : undefined;
+
   if (AccAddress.validate(token)) {
     return customTokenItem ?? listedCW20TokenItem ?? tokenInfoItem;
+  }
+
+  if (EvmAddress.validate(token)) {
+    return erc20InfoItem ?? listedERC20TokenItem ?? erc20TokenItem;
   }
 
   if (isDenomIBC(token)) {

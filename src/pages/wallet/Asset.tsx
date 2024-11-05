@@ -10,6 +10,7 @@ export interface Props extends TokenItem, QueryState {
   balance?: Amount;
   value?: Value;
   hideActions?: boolean;
+  erc20?: boolean;
 }
 
 const Asset = (props: Props) => {

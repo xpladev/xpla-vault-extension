@@ -2,16 +2,17 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import PersonIcon from '@mui/icons-material/Person';
-import { AccAddress } from '@xpla/xpla.js';
+import { AccAddress, EvmAddress } from '@xpla/xpla.js';
 import { MsgExecuteContract } from '@xpla/xpla.js';
 import { truncate } from '@xpla.kitchen/utils';
-import { SAMPLE_ADDRESS } from 'config/constants';
 import { queryKey } from 'data/query';
 import { useAddress } from 'data/wallet';
 import { useBankBalance } from 'data/queries/bank';
 import { useTnsAddress } from 'data/external/tns';
+import { hexToBech32 } from 'utils/evm';
 import { Auto, Card, InlineFlex } from 'components/layout';
-import { Form, FormItem, FormHelp, Input } from 'components/form';
+import { Form, FormItem, Input, FormItemMemo } from 'components/form';
+import { TooltipClickIcon } from 'components/display';
 import NFTAssetItem from 'pages/nft/NFTAssetItem';
 import AddressBookList from '../AddressBook/AddressBookList';
 import validate from '../validate';
@@ -26,9 +27,10 @@ interface TxValues {
 interface Props {
   contract: string;
   id: string;
+  balance: Amount;
 }
 
-const TransferCW721Form = ({ contract, id }: Props) => {
+const TransferCW721Form = ({ contract, id, balance }: Props) => {
   const { t } = useTranslation();
   const connectedAddress = useAddress();
   const bankBalance = useBankBalance();
@@ -56,6 +58,8 @@ const TransferCW721Form = ({ contract, id }: Props) => {
       setValue('address', undefined);
     } else if (AccAddress.validate(recipient)) {
       setValue('address', recipient);
+    } else if (EvmAddress.validate(recipient)) {
+      setValue('address', hexToBech32('xpla', recipient));
     } else if (resolvedAddress) {
       setValue('address', resolvedAddress);
     } else {
@@ -70,7 +74,9 @@ const TransferCW721Form = ({ contract, id }: Props) => {
       : '';
 
   const disabled =
-    invalid || (tnsState.isLoading && t('Searching for address...'));
+    invalid ||
+    (tnsState.isLoading && t('Searching for address...')) ||
+    (errors && errors.memo?.message && 'Invalid memo');
 
   useEffect(() => {
     if (invalid) setError('recipient', { type: 'invalid', message: invalid });
@@ -94,12 +100,31 @@ const TransferCW721Form = ({ contract, id }: Props) => {
   );
 
   /* fee */
-  const estimationTxValues = useMemo(
-    () => ({ address: connectedAddress }),
-    [connectedAddress],
-  );
+  const estimationTxValues = useMemo(() => {
+    const defaultTxValues = {
+      address: connectedAddress,
+      isSimul: false,
+    };
+
+    if (recipient) {
+      if (AccAddress.validate(recipient) || EvmAddress.validate(recipient)) {
+        let betchAddress = recipient;
+        if (EvmAddress.validate(recipient)) {
+          betchAddress = hexToBech32('xpla', recipient);
+        }
+
+        return {
+          address: betchAddress,
+          isSimul: true,
+        };
+      }
+    }
+
+    return defaultTxValues;
+  }, [connectedAddress, recipient]);
 
   const tx = {
+    balance,
     initialGasDenom,
     estimationTxValues,
     createTx,
@@ -128,13 +153,26 @@ const TransferCW721Form = ({ contract, id }: Props) => {
     <Auto
       columns={[
         <Card isFetching={tnsState.isLoading}>
-          <NFTAssetItem contract={contract} id={id} />
+          <NFTAssetItem contract={contract} id={id} tx />
 
           <Tx {...tx}>
             {({ fee, submit }) => (
               <Form onSubmit={handleSubmit(submit.fn)}>
                 <FormItem
-                  label={t('Recipient')}
+                  label={
+                    <TooltipClickIcon
+                      content={
+                        <div>
+                          The recipient address can be entered in either
+                          <br />
+                          XPLA Style (xpla1…) or EVM Style Address (0x…).
+                        </div>
+                      }
+                      placement="top"
+                    >
+                      {t('Recipient')}
+                    </TooltipClickIcon>
+                  }
                   extra={renderResolvedAddress()}
                   error={errors.recipient?.message}
                 >
@@ -142,14 +180,14 @@ const TransferCW721Form = ({ contract, id }: Props) => {
                     {...register('recipient', {
                       validate: validate.recipient(),
                     })}
-                    placeholder={SAMPLE_ADDRESS}
+                    placeholder={`Please enter the recipient's address.`}
                     autoFocus
                   />
 
                   <input {...register('address')} readOnly hidden />
                 </FormItem>
 
-                <FormItem
+                <FormItemMemo
                   label={`${t('Memo')} (${t('optional')})`}
                   error={errors.memo?.message}
                 >
@@ -158,18 +196,20 @@ const TransferCW721Form = ({ contract, id }: Props) => {
                       validate: {
                         size: validate.size(256, 'Memo'),
                         brackets: validate.memo(),
+                        mnemonic: validate.mnemonic(),
                       },
                     })}
+                    placeholder="Remember, everyone can see your 'Memo.'"
                   />
-                </FormItem>
+                </FormItemMemo>
 
                 {fee.render()}
 
-                {!memo && (
+                {/* {!memo && (
                   <FormHelp>
                     {t('Check if this transaction requires a memo')}
                   </FormHelp>
-                )}
+                )} */}
 
                 {submit.button}
               </Form>

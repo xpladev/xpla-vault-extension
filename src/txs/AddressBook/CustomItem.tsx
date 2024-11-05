@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { Dl } from 'components/display';
@@ -6,7 +6,7 @@ import styles from './CustomItem.module.scss';
 
 interface Props {
   name: string;
-  contents: { title: string; desc: string }[];
+  contents: { title: string; desc: ReactNode }[];
   onClick: () => void;
   onDelete: (name: string) => void;
 }

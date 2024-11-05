@@ -6,7 +6,7 @@ import BigNumber from 'bignumber.js';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { isDenomXplaNative, readDenom } from '@xpla.kitchen/utils';
-import { Validator, ValAddress, Coin, MsgSwap } from '@xpla/xpla.js';
+import { Validator, ValAddress, Coin } from '@xpla/xpla.js';
 import { Rewards } from '@xpla/xpla.js';
 import { MsgWithdrawDelegatorReward } from '@xpla/xpla.js';
 import { has } from 'utils/num';
@@ -102,41 +102,6 @@ const WithdrawRewardsForm = ({ rewards, validators, ...props }: Props) => {
     {},
   );
 
-  /* simulate swap */
-  const lcd = useLCDClient();
-  const { data: simulation } = useQuery(
-    ['simulate.swap.withdraw', selectedTotal, target] as const,
-    async ({ queryKey: [, selectedTotal, target] }) => {
-      const responses = await Promise.allSettled(
-        Object.entries(selectedTotal)
-          .filter(([denom]) => isDenomXplaNative(denom))
-          .map(async ([denom, amount]) => {
-            if (denom === target) return { denom, amount };
-
-            const received = await lcd.market.swapRate(
-              new Coin(denom, amount),
-              target,
-            );
-
-            return { denom, amount: received.amount.toString() };
-          }),
-      );
-
-      const results = responses.map((result) => {
-        if (result.status === 'rejected') throw new Error(result.reason);
-        return result.value;
-      });
-
-      return {
-        results,
-        total: BigNumber.sum(...results.map(({ amount }) => amount)).toString(),
-      };
-    },
-    { enabled: swap },
-  );
-
-  const simulated = simulation?.total;
-
   const selectedValidatorsText = !selected.length
     ? t('Not selected')
     : selected.length === 1
@@ -157,31 +122,13 @@ const WithdrawRewardsForm = ({ rewards, validators, ...props }: Props) => {
       return new MsgWithdrawDelegatorReward(address, operatorAddress);
     });
 
-    if (swap) {
-      if (!simulation) return;
-
-      const swapMsgs = Object.entries(selectedTotal)
-        .filter(([denom]) => isDenomXplaNative(denom) && denom !== target)
-        .filter(([denom]) => {
-          const result = simulation.results.find(
-            (item) => item.denom === denom,
-          );
-          return has(result?.amount);
-        })
-        .map(([denom, amount]) => {
-          return new MsgSwap(address, new Coin(denom, amount), target);
-        });
-
-      return { msgs: [...msgs, ...swapMsgs] };
-    }
-
     return { msgs };
-  }, [address, selected, selectedTotal, simulation, swap, target]);
+  }, [address, selected, selectedTotal, target]);
 
   /* fee */
   const estimationTxValues = useMemo(() => ({ swap }), [swap]);
 
-  const disabled = swap && !simulated ? t('Simulating....') : (false as const);
+  const disabled = false as const;
 
   const tx = {
     initialGasDenom,
@@ -289,39 +236,25 @@ const WithdrawRewardsForm = ({ rewards, validators, ...props }: Props) => {
             <FormArrow />
 
             <FormItem>
-              {swap ? (
-                <dl>
-                  <dt>{t('Simulated')}</dt>
-                  <dd>
-                    {simulated ? (
-                      <Read amount={simulated} denom={target} approx />
-                    ) : (
-                      t('Simulating...')
-                    )}
-                  </dd>
-                </dl>
-              ) : (
-                <TokenCardGrid maxHeight>
-                  {Object.entries(selectedTotal)
-                    .filter(([denom]) => {
-                      const isListedIBC =
-                        IBCWhitelist[denom.replace('ibc/', '')];
-                      return isDenomXplaNative(denom) || isListedIBC;
-                    })
-                    .map(([denom, amount]) => (
-                      <WithTokenItem token={denom} key={denom}>
-                        {(item) => (
-                          <TokenCard
-                            {...item}
-                            name=""
-                            value={calcValue({ amount, denom })}
-                            amount={amount}
-                          />
-                        )}
-                      </WithTokenItem>
-                    ))}
-                </TokenCardGrid>
-              )}
+              <TokenCardGrid maxHeight>
+                {Object.entries(selectedTotal)
+                  .filter(([denom]) => {
+                    const isListedIBC = IBCWhitelist[denom.replace('ibc/', '')];
+                    return isDenomXplaNative(denom) || isListedIBC;
+                  })
+                  .map(([denom, amount]) => (
+                    <WithTokenItem token={denom} key={denom}>
+                      {(item) => (
+                        <TokenCard
+                          {...item}
+                          name=""
+                          value={calcValue({ amount, denom })}
+                          amount={amount}
+                        />
+                      )}
+                    </WithTokenItem>
+                  ))}
+              </TokenCardGrid>
             </FormItem>
           </Grid>
 

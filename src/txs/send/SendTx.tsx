@@ -6,6 +6,7 @@ import { useTokenBalance } from 'data/queries/wasm';
 import { useBankBalance } from 'data/queries/bank';
 import { useTokenItem } from 'data/token';
 import { Page } from 'components/layout';
+import { TokenBadge } from 'components/token';
 import TxContext from '../TxContext';
 import SendForm from './SendForm';
 
@@ -27,7 +28,12 @@ const SendTx = () => {
     : getAmount(bankBalance, token);
 
   return (
-    <Page {...state} title={t('Send {{symbol}}', { symbol })}>
+    <Page
+      {...state}
+      title={t('Send {{symbol}}', { symbol })}
+      extra={<TokenBadge token={token} className="page-title" />}
+      tx
+    >
       <TxContext>
         {tokenItem && balance && <SendForm {...tokenItem} balance={balance} />}
       </TxContext>

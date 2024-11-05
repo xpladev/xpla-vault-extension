@@ -4,6 +4,8 @@ import InfoIcon from '@mui/icons-material/Info';
 import { Flex } from '../layout';
 import styles from './FormHelp.module.scss';
 
+const cx = classNames.bind(styles);
+
 const Component = (props: PropsWithChildren<{ className: string }>) => {
   const { children, className } = props;
   return (
@@ -16,8 +18,8 @@ const Component = (props: PropsWithChildren<{ className: string }>) => {
   );
 };
 
-export const FormHelp = (props: PropsWithChildren<{}>) => {
-  return <Component {...props} className={styles.info} />;
+export const FormHelp = (props: PropsWithChildren<{ className?: string }>) => {
+  return <Component {...props} className={cx(styles.info, props.className)} />;
 };
 
 export const FormWarning = (props: PropsWithChildren<{}>) => {

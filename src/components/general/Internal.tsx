@@ -17,7 +17,7 @@ interface InternalButtonProps
     HTMLAttributes<HTMLButtonElement> {}
 
 export const InternalButton = (props: InternalButtonProps) => {
-  return <button {...render(props)} type="button" />;
+  return <button type="button" {...render(props)} disabled={props.disabled} />;
 };
 
 interface InternalLinkProps extends Props, LinkProps {}

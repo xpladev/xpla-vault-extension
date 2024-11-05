@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 import { last } from 'ramda';
 import { sentenceCase } from 'sentence-case';
-import { Proposal, Vote } from '@xpla/xpla.js';
+import { Proposal, ProposalV1, Vote } from '@xpla/xpla.js';
 import { Color } from 'types/components';
 import { Pagination, queryKey, RefetchOptions, useIsClassic } from '../query';
 import { useLCDClient } from './lcdClient';
@@ -165,5 +165,17 @@ export const useGetVoteOptionItem = () => {
 export const useParseProposalType = (content: Proposal.Content) => {
   const isClassic = useIsClassic();
   const { '@type': type } = content.toData(isClassic);
+  return sentenceCase(last(type.split('.')) ?? '');
+};
+
+export const useParseProposalV1Type = (propsal: ProposalV1) => {
+  const isClassic = useIsClassic();
+  const data = propsal.toData(isClassic);
+  if (data.messages.length === 0) {
+    return 'Text proposal';
+  }
+
+  const msg = data.messages[0];
+  const { '@type': type } = msg;
   return sentenceCase(last(type.split('.')) ?? '');
 };

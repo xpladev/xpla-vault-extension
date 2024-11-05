@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Tippy, { TippyProps } from '@tippyjs/react';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
@@ -38,6 +38,24 @@ export const TooltipIcon = (props: Props) => {
       {props.children}
       <Tooltip {...props}>
         <HelpOutlineOutlinedIcon fontSize="inherit" className="muted" />
+      </Tooltip>
+    </InlineFlex>
+  );
+};
+
+export const TooltipClickIcon = (props: Props) => {
+  const [visible, setVisible] = useState<boolean>(false);
+
+  const show = () => setVisible(true);
+  const hide = () => setVisible(false);
+
+  return (
+    <InlineFlex gap={4} start>
+      {props.children}
+      <Tooltip {...props} visible={visible} onClickOutside={hide}>
+        <button type="button" onClick={visible ? hide : show}>
+          <HelpOutlineOutlinedIcon fontSize="inherit" className="muted" />
+        </button>
       </Tooltip>
     </InlineFlex>
   );

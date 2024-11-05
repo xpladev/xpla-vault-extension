@@ -14,7 +14,7 @@ import { ModalButton } from 'components/feedback';
 import Buy from './Buy';
 import { Props } from './Asset';
 
-const AssetActions = ({ token, symbol, balance }: Props) => {
+const AssetActions = ({ token, symbol, balance, erc20 }: Props) => {
   const { t } = useTranslation();
   const isWalletEmpty = useIsWalletEmpty();
   const isClassic = useIsClassic();
@@ -41,7 +41,7 @@ const AssetActions = ({ token, symbol, balance }: Props) => {
 
       <InternalLink
         icon={<ShortcutOutlinedIcon style={{ fontSize: 18 }} />}
-        to={`/send?token=${token}`}
+        to={erc20 ? `/evm/send?token=${token}` : `/send?token=${token}`}
         disabled={isWalletEmpty || !has(balance)}
       >
         {t('Send')}

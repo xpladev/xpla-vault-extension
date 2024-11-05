@@ -1,6 +1,6 @@
 import { HTMLAttributes, useState } from 'react';
 import classNames from 'classnames/bind';
-import { AccAddress } from '@xpla/xpla.js';
+import { AccAddress, EvmAddress } from '@xpla/xpla.js';
 import { isDenomIBC } from '@xpla.kitchen/utils';
 import { getIcon } from 'data/token';
 import styles from './TokenIcon.module.scss';
@@ -16,11 +16,12 @@ interface Props extends HTMLAttributes<HTMLImageElement> {
 const TokenIcon = ({ token, icon, size, ...rest }: Props) => {
   const [isError, setIsError] = useState(false);
 
-  const defaultIcon = AccAddress.validate(token)
-    ? getIcon('svg/CW.svg')
-    : isDenomIBC(token)
-    ? getIcon('svg/IBC.svg')
-    : getIcon('CTX.png');
+  const defaultIcon =
+    AccAddress.validate(token) || EvmAddress.validate(token)
+      ? getIcon('svg/CW.svg')
+      : isDenomIBC(token)
+      ? getIcon('svg/IBC.svg')
+      : getIcon('svg/XPLA.svg');
 
   const src = !icon || isError ? defaultIcon : icon;
   const sizes =

@@ -4,9 +4,11 @@ import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
 import { truncate } from '@xpla.kitchen/utils';
 import { RenderButton } from 'types/components';
 import { useAddressBook } from 'data/settings/AddressBook';
+import { bech32ToEip55 } from 'utils/evm';
 import { InternalButton } from 'components/general';
 import { Card, Grid } from 'components/layout';
 import { Empty, ModalButton } from 'components/feedback';
+import { TooltipClickIcon } from 'components/display';
 import AddAddressBookItem from './AddAddressBookItem';
 import CustomItem from './CustomItem';
 
@@ -49,7 +51,19 @@ const AddressBookList = ({ onClick }: Props) => {
               <CustomItem
                 name={name}
                 contents={[
-                  { title: t('Address'), desc: truncate(recipient) },
+                  {
+                    title: t('Address'),
+                    desc: (
+                      <TooltipClickIcon
+                        content={`EVM Style Address: ${bech32ToEip55(
+                          recipient,
+                        )}`}
+                        placement="top"
+                      >
+                        {truncate(recipient)}
+                      </TooltipClickIcon>
+                    ),
+                  },
                   { title: t('Memo'), desc: memo ?? '' },
                 ]}
                 onClick={() => onClick(item)}

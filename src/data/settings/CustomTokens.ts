@@ -11,7 +11,7 @@ const customTokensState = atom({
 });
 
 interface Params<T> {
-  type: 'ibc' | 'cw20' | 'cw721';
+  type: 'ibc' | 'cw20' | 'cw721' | 'erc20' | 'erc721';
   key: keyof T;
 }
 
@@ -51,4 +51,15 @@ export const useCustomTokensCW20 = () => {
 
 export const useCustomTokensCW721 = () => {
   return useCustomTokens<CustomTokenCW721>({ type: 'cw721', key: 'contract' });
+};
+
+export const useCustomTokensERC20 = () => {
+  return useCustomTokens<CustomTokenERC20>({ type: 'erc20', key: 'token' });
+};
+
+export const useCustomTokensERC721 = () => {
+  return useCustomTokens<CustomTokenERC721>({
+    type: 'erc721',
+    key: 'contract',
+  });
 };

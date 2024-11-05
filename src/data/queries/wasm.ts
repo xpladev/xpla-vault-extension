@@ -1,4 +1,4 @@
-import { useQueries, useQuery } from 'react-query';
+import { useInfiniteQuery, useQueries, useQuery } from 'react-query';
 import axios from 'axios';
 import { AccAddress } from '@xpla/xpla.js';
 import { queryKey, RefetchOptions } from '../query';
@@ -122,12 +122,46 @@ export const useCW721Tokens = (contract: AccAddress) => {
   );
 };
 
+export const useCW721InfinityTokens = (contract: AccAddress) => {
+  const address = useAddress();
+  const lcd = useLCDClient();
+
+  return useInfiniteQuery(
+    [queryKey.wasm.contractQuery, contract, address],
+    async ({ pageParam = undefined }) => {
+      const { tokens } = await lcd.wasm.contractQuery<{ tokens: string[] }>(
+        contract,
+        {
+          tokens: {
+            owner: address,
+            start_after: pageParam,
+            limit: 10,
+          },
+        },
+      );
+
+      let lastTokenId: string | undefined = undefined;
+      if (tokens.length === 10) {
+        lastTokenId = tokens[tokens.length - 1];
+      } else {
+        lastTokenId = undefined;
+      }
+
+      return { tokens, lastTokenId };
+    },
+    {
+      getNextPageParam: ({ lastTokenId }) => lastTokenId,
+      enabled: !!address,
+    },
+  );
+};
+
 /* helpers */
 export const getIpfsGateway = (src: any = '') => {
   if (typeof src === 'string') {
     return src.startsWith('ipfs://')
-      ? src.replace('ipfs://', 'https://cloudflare-ipfs.com/ipfs/')
-      : src.startsWith('https://')
+      ? src.replace('ipfs://', 'https://web3-storage.xpla.dev/ipfs/')
+      : src.startsWith('https://') || src.startsWith('http://')
       ? src
       : undefined;
   } else {

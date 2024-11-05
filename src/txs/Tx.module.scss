@@ -16,3 +16,117 @@
 .hidden {
   visibility: hidden;
 }
+
+.gas-container {
+  display: grid;
+  grid-auto-columns: auto;
+  width: 100%;
+}
+
+.gas-btn {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  margin: 12px 0;
+  margin-left: auto;
+  font-size: var(--font-size-small);
+  color: var(--button-primary-bg);
+  &.active .arrow {
+    transform: rotate(180deg);
+  }
+}
+
+.gas-options {
+  display: none;
+  align-items: flex-end;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  background: var(--bg-muted);
+  row-gap: 20px;
+  input:disabled {
+    background: var(--bg-muted);
+    opacity: 100;
+  }
+  &.evm-xpla {
+    grid-template-columns: 1fr auto 1fr;
+  }
+
+  // 추가
+  &.active {
+    display: grid;
+  }
+
+  // 추가
+  .times {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: var(--input-height);
+    padding: 0 8px;
+    font-size: 24px;
+    color: var(--card-border);
+  }
+}
+
+.form-group {
+  > * {
+    flex: inherit;
+  }
+}
+
+.input-100 {
+  width: 100%;
+}
+
+.gas-amount {
+  grid-column: span 3;
+}
+
+// results
+.send-results {
+  padding: 20px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius);
+  background: var(--card-bg);
+  dl {
+    overflow-x: scroll;
+  }
+  dt {
+    position: sticky;
+    left: 0;
+    padding-right: 8px;
+    background: var(--card-bg);
+  }
+  dd {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.send-line {
+  width: 100%;
+  height: 1px;
+  margin: 20px 0;
+  background: var(--card-border);
+}
+
+.send-box {
+  display: block;
+  padding: 20px;
+  border-radius: var(--input-border-radius);
+  background: var(--bg-muted);
+  color: var(--button-primary-bg);
+  dt {
+    background: var(--bg-muted);
+  }
+}
+
+.form-error {
+  font-size: var(--font-size-small);
+  font-weight: var(--normal);
+  color: var(--danger);
+}
+
+.evm {
+  color: var(--text-muted);
+}

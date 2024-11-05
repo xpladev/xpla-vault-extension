@@ -48,7 +48,7 @@ const Front = () => {
   }
 
   const tabs = [
-    { key: 'wallet', tab: 'Wallet', children: <Assets /> },
+    { key: 'wallet', tab: 'Token', children: <Assets /> },
     { key: 'nft', tab: 'NFT', children: <NFTAssets /> },
   ];
 

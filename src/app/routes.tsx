@@ -5,7 +5,6 @@ import { useNavigate, useRoutes } from 'react-router-dom';
 import { ReactComponent as WalletIcon } from 'styles/images/menu/Wallet.svg';
 import { ReactComponent as NFTIcon } from 'styles/images/menu/NFT.svg';
 import { ReactComponent as HistoryIcon } from 'styles/images/menu/History.svg';
-import { ReactComponent as SwapIcon } from 'styles/images/menu/Swap.svg';
 import { ReactComponent as StakeIcon } from 'styles/images/menu/Stake.svg';
 import { ReactComponent as GovernanceIcon } from 'styles/images/menu/Governance.svg';
 import { ReactComponent as ContractIcon } from 'styles/images/menu/Contract.svg';
@@ -27,8 +26,6 @@ import ProposalDetails from 'pages/gov/ProposalDetails';
 /* txs */
 import SendTx from 'txs/send/SendTx';
 import TransferCW721Tx from 'txs/wasm/TransferCW721Tx';
-import SwapTx from 'txs/swap/SwapTx';
-import SwapMultipleTx from 'txs/swap/SwapMultipleTx';
 import StakeTx from 'txs/stake/StakeTx';
 import WithdrawRewardsTx from 'txs/stake/WithdrawRewardsTx';
 import WithdrawCommissionTx from 'txs/stake/WithdrawCommissionTx';
@@ -77,13 +74,6 @@ export const useNav = () => {
       icon: <HistoryIcon {...ICON_SIZE} />,
     },
     {
-      path: '/swap',
-      element: <SwapTx />,
-      title: t('Swap'),
-      icon: <SwapIcon {...ICON_SIZE} />,
-      classic: true,
-    },
-    {
       path: '/stake',
       element: <Stake />,
       title: t('Stake'),
@@ -107,10 +97,7 @@ export const useNav = () => {
       title: t('Contract'),
       icon: <ContractIcon {...ICON_SIZE} />,
     },
-  ].filter(({ classic }) => {
-    if (isClassic) return true;
-    return !classic;
-  });
+  ];
 
   const routes = [
     { path: '/', element: <Dashboard /> },
@@ -127,7 +114,6 @@ export const useNav = () => {
     /* txs */
     { path: '/send', element: <SendTx /> },
     { path: '/nft/transfer', element: <TransferCW721Tx /> },
-    { path: '/swap/multiple', element: <SwapMultipleTx /> },
     { path: '/stake/:address', element: <StakeTx /> },
     { path: '/rewards', element: <WithdrawRewardsTx /> },
     { path: '/commission', element: <WithdrawCommissionTx /> },

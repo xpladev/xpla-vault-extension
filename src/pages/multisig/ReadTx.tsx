@@ -40,7 +40,10 @@ const ReadTx = (props: PropsWithChildren<{ tx: string }>) => {
       },
 
       { title: t('Memo'), content: memo },
-      { title: t('Fee'), content: <ReadMultiple list={fee.amount.toData()} /> },
+      {
+        title: t('Fee'),
+        content: <ReadMultiple list={fee ? fee.amount.toData() : []} />,
+      },
     ];
 
     return (

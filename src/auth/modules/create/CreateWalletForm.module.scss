@@ -1,0 +1,15 @@
+@import "mixins";
+
+.mnemonic-checkbox-wrap {
+  display: grid;
+  gap: 12px;
+  button {
+    justify-content: flex-start;
+    width: 100%;
+    text-decoration: underline;
+    color: var(--text);
+  }
+  i {
+    font-weight: bold;
+  }
+}

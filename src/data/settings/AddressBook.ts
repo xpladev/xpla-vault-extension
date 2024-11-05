@@ -1,4 +1,6 @@
+import { AccAddress, EvmAddress } from '@xpla/xpla.js';
 import { atom, useRecoilState } from 'recoil';
+import { hexToBech32 } from 'utils/evm';
 import { getLocalSetting, setLocalSetting } from 'utils/localStorage';
 import { SettingKey } from 'utils/localStorage';
 
@@ -20,8 +22,12 @@ export const useAddressBook = () => {
 
   const add = (newItem: AddressBook) => {
     const name = newItem.name.trim();
+    let recipient = newItem.recipient;
+    if (EvmAddress.validate(newItem.recipient)) {
+      recipient = hexToBech32('xpla', newItem.recipient);
+    }
     if (!validateName(name)) throw new Error('Already exists');
-    updateList([...list, { ...newItem, name }]);
+    updateList([...list, { ...newItem, name, recipient }]);
   };
 
   const remove = (name: string) => {

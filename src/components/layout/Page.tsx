@@ -13,10 +13,12 @@ interface Props extends QueryState {
   mainClassName?: string;
   small?: boolean;
   sub?: boolean; // used as a page in a page
+  tx?: boolean; // txs page
 }
 
 const Page = (props: PropsWithChildren<Props>) => {
   const { title, extra, children, small, sub, mainClassName } = props;
+  const { tx } = props;
 
   return (
     <WithFetching {...props}>
@@ -26,11 +28,26 @@ const Page = (props: PropsWithChildren<Props>) => {
 
           <article className={cx(styles.page, { sub, small })}>
             <Container className={styles.grid}>
-              {title && (
-                <header className={styles.header}>
-                  <h1 className={styles.title}>{title}</h1>
-                  {extra}
-                </header>
+              {tx ? (
+                <>
+                  {title && (
+                    <header className={styles.header}>
+                      <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <h1 className={styles.title}>{title}</h1>
+                        {extra}
+                      </div>
+                    </header>
+                  )}
+                </>
+              ) : (
+                <>
+                  {title && (
+                    <header className={styles.header}>
+                      <h1 className={styles.title}>{title}</h1>
+                      {extra}
+                    </header>
+                  )}
+                </>
               )}
 
               <section className={classNames(styles.main, mainClassName)}>

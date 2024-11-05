@@ -12,11 +12,13 @@ interface Props<T> extends QueryState {
   getIsAdded: (item: T) => boolean;
   add: (item: T) => void;
   remove: (item: T) => void;
+
+  nft?: boolean;
 }
 
 function TokenList<T extends { symbol: string }>(props: Props<T>) {
   const { list, getIsAdded, add, remove, ...rest } = props;
-  const { results, renderTokenItem, ...state } = rest;
+  const { results, renderTokenItem, nft, ...state } = rest;
   const empty = !state.isLoading && !results.length;
 
   return state.error || empty ? (
@@ -37,6 +39,8 @@ function TokenList<T extends { symbol: string }>(props: Props<T>) {
                   added={getIsAdded(item)}
                   onAdd={() => add(item)}
                   onRemove={() => remove(item)}
+                  evm={tokenItem.token.startsWith('0x')}
+                  nft={nft}
                 />
               </li>
             );

@@ -7,9 +7,12 @@ import InitBankBalance from 'app/InitBankBalance';
 import LatestTx from 'app/sections/LatestTx';
 import NetworkName from 'app/sections/NetworkName';
 import SendTx from 'txs/send/SendTx';
-import SwapTx from 'txs/swap/SwapTx';
+// import SwapTx from 'txs/swap/SwapTx';
+import TransferCW721Tx from 'txs/wasm/TransferCW721Tx';
 import SignMultisigTxPage from 'pages/multisig/SignMultisigTxPage';
 import PostMultisigTxPage from 'pages/multisig/PostMultisigTxPage';
+import EvmSendTx from 'txs-evm/send/SendTx';
+import EvmTransferERC721Tx from 'txs-evm/nft/TransferCW721Tx';
 import {
   clearWalletAddress,
   storeNetwork,
@@ -23,7 +26,6 @@ import Header from './layouts/Header';
 import Logo from './layouts/Logo';
 import Settings from './settings/Settings';
 import Front from './modules/Front';
-import TransferCW721Tx from 'txs/wasm/TransferCW721Tx';
 
 const App = () => {
   const network = useNetwork();
@@ -47,10 +49,14 @@ const App = () => {
 
     /* default txs */
     { path: '/send', element: <SendTx /> },
-    { path: '/swap', element: <SwapTx /> },
+    // { path: '/swap', element: <SwapTx /> },
     { path: '/nft/transfer', element: <TransferCW721Tx /> },
     { path: '/multisig/sign', element: <SignMultisigTxPage /> },
     { path: '/multisig/post', element: <PostMultisigTxPage /> },
+
+    /* evm txs */
+    { path: '/evm/send', element: <EvmSendTx /> },
+    { path: '/evm/nft/transfer', element: <EvmTransferERC721Tx /> },
 
     /* 404 */
     { path: '*', element: <Front /> },

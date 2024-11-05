@@ -3,7 +3,7 @@ import { flatten, path, uniqBy } from 'ramda';
 import BigNumber from 'bignumber.js';
 import { AccAddress, ValAddress, Validator } from '@xpla/xpla.js';
 import { Delegation, UnbondingDelegation } from '@xpla/xpla.js';
-import { BondStatus } from '@terra-money/terra.proto/cosmos/staking/v1beta1/staking';
+import { BondStatus } from '@xpla/xpla.proto/cosmos/staking/v1beta1/staking';
 import { has } from 'utils/num';
 import { StakeAction } from 'txs/stake/StakeForm';
 import { queryKey, Pagination, RefetchOptions } from '../query';

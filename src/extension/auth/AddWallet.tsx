@@ -12,11 +12,11 @@ const AddWallet = () => {
     <ExtensionList
       list={[
         ...available,
-        // {
-        //   icon: <UsbIcon />,
-        //   to: '/auth/ledger',
-        //   children: t('Access with ledger'),
-        // },
+        {
+          icon: <UsbIcon />,
+          to: '/auth/ledger',
+          children: t('Access with ledger'),
+        },
       ].map(({ to, ...item }) => {
         const openURL = getOpenURL(to);
         if (!openURL) return { ...item, to };

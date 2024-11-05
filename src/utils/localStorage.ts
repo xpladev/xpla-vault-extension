@@ -18,7 +18,13 @@ const isSystemDarkMode =
 
 export const DefaultTheme = themes[Number(isSystemDarkMode)];
 
-export const DefaultCustomTokensItem = { ibc: [], cw20: [], cw721: [] };
+export const DefaultCustomTokensItem = {
+  ibc: [],
+  cw20: [],
+  cw721: [],
+  erc20: [],
+  erc721: [],
+};
 const DefaultCustomTokens = { mainnet: DefaultCustomTokensItem };
 
 export const DefaultSettings = {

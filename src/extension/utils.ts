@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { CreateTxOptions, Fee, Msg, Tx } from '@xpla/xpla.js';
+import { CreateTxOptions, EvmMsg, Fee, Msg, Tx, SignMode } from '@xpla/xpla.js';
 import { useIsClassic } from 'data/query';
 
 /* primitive */
@@ -14,6 +14,9 @@ export interface PrimitiveTxRequest
   msgs: string[];
   fee?: string;
   memo?: string;
+  sequence?: number;
+  accountNumber?: number;
+  signMode?: SignMode;
 }
 
 export interface PrimitiveSignBytesRequest
@@ -40,7 +43,11 @@ export interface DefaultRequest extends PrimitiveDefaultRequest {
 export type RequestType = 'sign' | 'post' | 'signBytes';
 
 export interface TxRequest extends DefaultRequest {
-  tx: CreateTxOptions;
+  tx: CreateTxOptions & {
+    sequence?: number;
+    accountNumber?: number;
+    signMode?: SignMode;
+  };
   requestType: 'sign' | 'post';
 }
 
@@ -77,18 +84,24 @@ export const useParseTx = () => {
 
   return useCallback(
     (request: PrimitiveTxRequest): TxRequest['tx'] => {
-      const { msgs, fee, memo } = request;
+      const { msgs, fee, memo, sequence, accountNumber, signMode } = request;
       const isProto = '@type' in JSON.parse(msgs[0]);
       return isProto
         ? {
             msgs: msgs.map((msg) => Msg.fromData(JSON.parse(msg), isClassic)),
             fee: fee ? Fee.fromData(JSON.parse(fee)) : undefined,
             memo,
+            sequence,
+            accountNumber,
+            signMode,
           }
         : {
             msgs: msgs.map((msg) => Msg.fromAmino(JSON.parse(msg), isClassic)),
             fee: fee ? Fee.fromAmino(JSON.parse(fee)) : undefined,
             memo,
+            sequence,
+            accountNumber,
+            signMode,
           };
     },
     [isClassic],
@@ -119,6 +132,12 @@ export const getIsDangerousTx = (
   isClassic: boolean,
 ) =>
   msgs.some((msg) => {
-    const data = msg.toData(isClassic);
-    return data['@type'] === '/cosmos.authz.v1beta1.MsgGrant';
+    if (!isEvmMsg(msg)) {
+      const data = msg.toData(isClassic);
+      return data['@type'] === '/cosmos.authz.v1beta1.MsgGrant';
+    }
   });
+
+export const isEvmMsg = (msg: Msg | EvmMsg): msg is EvmMsg => {
+  return 'tx()' in msg;
+};

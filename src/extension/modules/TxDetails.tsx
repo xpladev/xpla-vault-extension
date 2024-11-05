@@ -8,6 +8,11 @@ import { ReadMultiple } from 'components/token';
 import { getIsNativeMsgFromExternal, TxRequest } from '../utils';
 import Message from './Message';
 import styles from './TxDetails.module.scss';
+import { EvmMsg, Msg } from '@xpla/xpla.js';
+
+const isEvmMsg = (msg: Msg | EvmMsg): msg is EvmMsg => {
+  return 'tx()' in msg;
+};
 
 const TxDetails = ({ origin, timestamp, tx }: TxRequest) => {
   const { msgs, memo, fee } = tx;
@@ -25,6 +30,8 @@ const TxDetails = ({ origin, timestamp, tx }: TxRequest) => {
     { title: t('Memo'), content: memo },
   ];
 
+  const filteredMsgs: Msg[] = (msgs as any).filter((msg: any) => isEvmMsg(msg));
+
   return (
     <Grid gap={12}>
       <Dl className={styles.dl}>
@@ -39,7 +46,7 @@ const TxDetails = ({ origin, timestamp, tx }: TxRequest) => {
         })}
       </Dl>
 
-      {msgs.map((msg, index) => {
+      {filteredMsgs.map((msg, index) => {
         const isNative = getIsNativeMsgFromExternal(origin);
         return (
           <Message msg={msg} warn={isNative(msg, isClassic)} key={index} />
