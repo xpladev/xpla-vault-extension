@@ -59,6 +59,14 @@ export const useCW20Pairs = () => {
   return useXplaAssetsByNetwork<CW20Pairs>('cw20/pairs.dex.json');
 };
 
+export const useERC20WhiteList = (disabled = false) => {
+  return useXplaAssetsByNetwork<ERC20Whitelist>(
+    'erc20/tokens.json',
+    disabled,
+    (data) => sortWhitelistERC20(shuffleByProtocol(data)),
+  );
+};
+
 export type ContractNames =
   | 'assertLimitOrder'
   | 'routeswap'
@@ -78,6 +86,14 @@ export const useCW721Whitelist = () => {
   );
 };
 
+export const useERC721Whitelist = () => {
+  return useXplaAssetsByNetwork<ERC721Whitelist>(
+    'erc721/contracts.json',
+    undefined,
+    shuffleByProtocol,
+  );
+};
+
 interface CW721MarketplaceItem {
   name: string;
   link: string;
@@ -87,8 +103,28 @@ export const useCW721Marketplace = () => {
   return useXplaAssets<CW721MarketplaceItem[]>('cw721/marketplace.json');
 };
 
+export const useERC721Marketplace = () => {
+  return useXplaAssets<CW721MarketplaceItem[]>('cw721/marketplace.json');
+};
+
 /* helpers */
 const sortWhitelistCW20 = (data: CW20Whitelist) => {
+  const sorted = toPairs(data).sort(
+    ([, a], [, b]) =>
+      Number(b.symbol === 'ANC') - Number(a.symbol === 'ANC') ||
+      Number(b.protocol === 'Anchor') - Number(a.protocol === 'Anchor') ||
+      Number(b.symbol === 'MIR') - Number(a.symbol === 'MIR') ||
+      Number(b.protocol === 'Mirror') - Number(a.protocol === 'Mirror'),
+  );
+
+  return fromPairs(
+    sorted.map(([t, { decimals, ...item }]) => {
+      return [t, { ...item, decimals: decimals ?? 6 }];
+    }),
+  );
+};
+
+const sortWhitelistERC20 = (data: ERC20Whitelist) => {
   const sorted = toPairs(data).sort(
     ([, a], [, b]) =>
       Number(b.symbol === 'ANC') - Number(a.symbol === 'ANC') ||

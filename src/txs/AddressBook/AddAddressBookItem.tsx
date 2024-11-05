@@ -6,8 +6,9 @@ import { truncate } from '@xpla.kitchen/utils';
 import { useAddressBook } from 'data/settings/AddressBook';
 import { useTnsAddress } from 'data/external/tns';
 import { InlineFlex } from 'components/layout';
-import { Form, FormItem, Submit, Input } from 'components/form';
+import { Form, FormItem, FormItemMemo, Submit, Input } from 'components/form';
 import { Fetching, useModal } from 'components/feedback';
+import { TooltipClickIcon } from 'components/display';
 import validate from 'txs/validate';
 
 const AddAddressBookItem = () => {
@@ -36,7 +37,9 @@ const AddAddressBookItem = () => {
       : '';
 
   const disabled =
-    invalid || (tnsState.isLoading && t('Searching for address...'));
+    invalid ||
+    (tnsState.isLoading && t('Searching for address...')) ||
+    (errors && errors.memo?.message && 'Invalid memo');
 
   useEffect(() => {
     if (invalid) setError('recipient', { type: 'invalid', message: invalid });
@@ -68,16 +71,30 @@ const AddAddressBookItem = () => {
         </FormItem>
 
         <FormItem
-          label={t('Address')}
+          label={
+            <TooltipClickIcon
+              content={
+                <div>
+                  The recipient address can be entered in either
+                  <br />
+                  XPLA Style (xpla1…) or EVM Style Address (0x…).
+                </div>
+              }
+              placement="top"
+            >
+              {t('Address')}
+            </TooltipClickIcon>
+          }
           extra={renderResolvedAddress()}
           error={errors.recipient?.message}
         >
           <Input
             {...register('recipient', { validate: validate.recipient() })}
+            placeholder={`Please enter the recipient's address.`}
           />
         </FormItem>
 
-        <FormItem
+        <FormItemMemo
           label={`${t('Memo')} (${t('optional')})`}
           error={errors.memo?.message}
         >
@@ -86,10 +103,12 @@ const AddAddressBookItem = () => {
               validate: {
                 size: validate.size(256),
                 bracket: validate.memo(),
+                mnemonic: validate.mnemonic(),
               },
             })}
+            placeholder="Remember, everyone can see your 'Memo.'"
           />
-        </FormItem>
+        </FormItemMemo>
 
         <Submit disabled={!!disabled}>{disabled}</Submit>
       </Form>

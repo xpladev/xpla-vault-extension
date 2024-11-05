@@ -2,17 +2,17 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import PersonIcon from '@mui/icons-material/Person';
-import { AccAddress } from '@xpla/xpla.js';
+import { AccAddress, EvmAddress } from '@xpla/xpla.js';
 import { MsgExecuteContract, MsgSend } from '@xpla/xpla.js';
 import { isDenom, toAmount, truncate } from '@xpla.kitchen/utils';
-import { SAMPLE_ADDRESS } from 'config/constants';
 import { queryKey } from 'data/query';
 import { useAddress } from 'data/wallet';
 import { useBankBalance } from 'data/queries/bank';
 import { useTnsAddress } from 'data/external/tns';
-import { ExternalLink } from 'components/general';
-import { Auto, Card, Grid, InlineFlex } from 'components/layout';
-import { Form, FormItem, FormHelp, Input, FormWarning } from 'components/form';
+import { hexToBech32 } from 'utils/evm';
+import { TooltipClickIcon } from 'components/display';
+import { Auto, Card, InlineFlex } from 'components/layout';
+import { Form, FormItem, FormItemMemo, Input } from 'components/form';
 import AddressBookList from '../AddressBook/AddressBookList';
 import { getPlaceholder, toInput } from '../utils';
 import validate from '../validate';
@@ -30,7 +30,7 @@ interface Props extends TokenItem {
   balance: Amount;
 }
 
-const SendForm = ({ token, decimals, balance }: Props) => {
+const SendForm = ({ token, decimals, balance, symbol }: Props) => {
   const { t } = useTranslation();
   const connectedAddress = useAddress();
   const bankBalance = useBankBalance();
@@ -60,6 +60,9 @@ const SendForm = ({ token, decimals, balance }: Props) => {
     } else if (AccAddress.validate(recipient)) {
       setValue('address', recipient);
       form.setFocus('input');
+    } else if (EvmAddress.validate(recipient)) {
+      setValue('address', hexToBech32('xpla', recipient));
+      form.setFocus('input');
     } else if (resolvedAddress) {
       setValue('address', resolvedAddress);
     } else {
@@ -74,7 +77,9 @@ const SendForm = ({ token, decimals, balance }: Props) => {
       : '';
 
   const disabled =
-    invalid || (tnsState.isLoading && t('Searching for address...'));
+    invalid ||
+    (tnsState.isLoading && t('Searching for address...')) ||
+    (errors && errors.memo?.message && 'Invalid memo');
 
   useEffect(() => {
     if (invalid) setError('recipient', { type: 'invalid', message: invalid });
@@ -82,10 +87,10 @@ const SendForm = ({ token, decimals, balance }: Props) => {
 
   /* tx */
   const createTx = useCallback(
-    ({ address, input, memo }: TxValues) => {
+    ({ address, input, memo, isSimul }: TxValues & { isSimul?: boolean }) => {
       if (!connectedAddress) return;
       if (!(address && AccAddress.validate(address))) return;
-      const amount = toAmount(input, { decimals });
+      const amount = isSimul ? input || '0' : toAmount(input, { decimals });
       const execute_msg = { transfer: { recipient: address, amount } };
 
       const msgs = isDenom(token)
@@ -98,10 +103,34 @@ const SendForm = ({ token, decimals, balance }: Props) => {
   );
 
   /* fee */
-  const estimationTxValues = useMemo(
-    () => ({ address: connectedAddress, input: toInput(1, decimals) }),
-    [connectedAddress, decimals],
-  );
+  const estimationTxValues = useMemo(() => {
+    const defaultTxValues = {
+      address: connectedAddress,
+      input: toInput(1, decimals),
+      isSimul: false,
+    };
+
+    if (isDenom(token)) {
+      return defaultTxValues;
+    }
+
+    if (recipient && input) {
+      if (AccAddress.validate(recipient) || EvmAddress.validate(recipient)) {
+        let bech32Address = recipient;
+        if (EvmAddress.validate(recipient)) {
+          bech32Address = hexToBech32('xpla', recipient);
+        }
+
+        return {
+          address: bech32Address,
+          input: toAmount(input, { decimals }),
+          isSimul: true,
+        };
+      }
+    }
+
+    return defaultTxValues;
+  }, [connectedAddress, recipient, input, decimals]);
 
   const onChangeMax = useCallback(
     async (input: string) => {
@@ -113,6 +142,7 @@ const SendForm = ({ token, decimals, balance }: Props) => {
 
   const tx = {
     token,
+    symbol,
     decimals,
     amount,
     balance,
@@ -144,16 +174,29 @@ const SendForm = ({ token, decimals, balance }: Props) => {
           <Tx {...tx}>
             {({ max, fee, submit }) => (
               <Form onSubmit={handleSubmit(submit.fn)}>
-                <Grid gap={4}>
+                {/* <Grid gap={4}>
                   {!memo && (
                     <FormWarning>
                       {t('Check if this transaction requires a memo')}
                     </FormWarning>
                   )}
-                </Grid>
+                </Grid> */}
 
                 <FormItem
-                  label={t('Recipient')}
+                  label={
+                    <TooltipClickIcon
+                      content={
+                        <div>
+                          The recipient address can be entered in either
+                          <br />
+                          XPLA Style (xpla1…) or EVM Style Address (0x…).
+                        </div>
+                      }
+                      placement="top"
+                    >
+                      {t('Recipient')}
+                    </TooltipClickIcon>
+                  }
                   extra={renderResolvedAddress()}
                   error={errors.recipient?.message ?? errors.address?.message}
                 >
@@ -161,7 +204,7 @@ const SendForm = ({ token, decimals, balance }: Props) => {
                     {...register('recipient', {
                       validate: validate.recipient(),
                     })}
-                    placeholder={SAMPLE_ADDRESS}
+                    placeholder={`Please enter the recipient's address.`}
                     autoFocus
                   />
 
@@ -188,7 +231,7 @@ const SendForm = ({ token, decimals, balance }: Props) => {
                   />
                 </FormItem>
 
-                <FormItem
+                <FormItemMemo
                   label={`${t('Memo')} (${t('optional')})`}
                   error={errors.memo?.message}
                 >
@@ -197,10 +240,12 @@ const SendForm = ({ token, decimals, balance }: Props) => {
                       validate: {
                         size: validate.size(256, 'Memo'),
                         brackets: validate.memo(),
+                        mnemonic: validate.mnemonic(),
                       },
                     })}
+                    placeholder="Remember, everyone can see your 'Memo.'"
                   />
-                </FormItem>
+                </FormItemMemo>
 
                 {fee.render()}
                 {submit.button}

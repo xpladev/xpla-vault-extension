@@ -56,6 +56,7 @@ const App = () => {
           <ConnectWallet />
         </Actions>
         <LatestTx />
+        {/* <LatestEvmTx /> */}
       </Header>
 
       <Content>

@@ -5,6 +5,7 @@ interface XplaNetwork {
   name: NetworkName;
   chainID: string;
   lcd: string;
+  ecd: string;
   api?: string;
 }
 

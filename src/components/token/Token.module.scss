@@ -15,6 +15,7 @@
 
 .title {
   font-weight: var(--bold);
+  width: auto;
 }
 
 .name {
@@ -30,4 +31,14 @@
 .extra {
   font-size: var(--font-size-small);
   font-weight: var(--normal);
+}
+
+.tag-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tag {
+  margin-left: 0;
 }

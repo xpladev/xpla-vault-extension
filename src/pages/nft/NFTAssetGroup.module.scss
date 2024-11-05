@@ -4,7 +4,21 @@
   // to overwrite
   padding-top: 0;
   padding-bottom: 0;
+  border: 0;
 }
+
+.card > header {
+  background: var(--card-bg) !important;
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.card > header + .main > div {
+  // border-top: 1px solid var(--card-border);
+}
+
 
 .icon {
   border-radius: 2px;
@@ -13,4 +27,25 @@
 .link {
   font-size: var(--font-size-small);
   font-weight: var(--bold);
+}
+
+.tag-wrap {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 28px auto;
+  column-gap: 12px;
+  row-gap: 4px;
+  img {
+    grid-row: span 2;
+  }
+  .tag {
+    grid-column-start: 2;
+    grid-row-start: 1;
+    margin-left: 0;
+  }
+}
+
+.expand {
+  color: var(--button-primary-bg);
+  font-size: 18px;
 }

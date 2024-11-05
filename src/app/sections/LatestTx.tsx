@@ -7,7 +7,7 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import CloseIcon from '@mui/icons-material/Close';
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
-import { isTxError, TxInfo } from '@xpla/xpla.js';
+import { EvmTxInfo, isTxError, TxInfo } from '@xpla/xpla.js';
 import * as ruleset from '@xpla/log-finder-ruleset';
 import useInterval from 'utils/hooks/useInterval';
 import { isBroadcastingState, latestTxState } from 'data/queries/tx';
@@ -36,8 +36,8 @@ const TxIndicator = ({ txhash }: { txhash: string }) => {
 
   const [latestTx, setLatestTx] = useRecoilState(latestTxState);
   const [minimized, setMinimized] = useState(false);
-  const initLatestTx = () => setLatestTx({ txhash: '' });
-  const { redirectAfterTx } = latestTx;
+  const initLatestTx = () => setLatestTx({ txhash: '', evm: false });
+  const { redirectAfterTx, evm } = latestTx;
 
   /* polling */
   const { data, isSuccess } = useTxInfo(latestTx);
@@ -46,11 +46,21 @@ const TxIndicator = ({ txhash }: { txhash: string }) => {
   const time = useTimeText(!isSuccess);
 
   /* status */
-  const status = !data
-    ? Status.LOADING
-    : isTxError(data)
-    ? Status.FAILURE
-    : Status.SUCCESS;
+  // const status = !data
+  //   ? Status.LOADING
+  //   : isTxError(data)
+  //   ? Status.FAILURE
+  //   : Status.SUCCESS;
+
+  let status = Status.LOADING;
+  if (data) {
+    if (evm) {
+      status =
+        (data as EvmTxInfo).status === 0 ? Status.FAILURE : Status.SUCCESS;
+    } else {
+      status = isTxError(data as TxInfo) ? Status.FAILURE : Status.SUCCESS;
+    }
+  }
 
   /* render component */
   const icon = {
@@ -161,9 +171,9 @@ const TxIndicator = ({ txhash }: { txhash: string }) => {
       }}
       maxHeight
     >
-      {data && (
+      {!evm && data && (
         <ul className={styles.messages}>
-          {getCanonicalMsgs(data).map((msg, index) => {
+          {getCanonicalMsgs(data as TxInfo).map((msg, index) => {
             if (!msg) return null;
             const { canonicalMsg } = msg;
             return (

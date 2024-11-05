@@ -8,12 +8,15 @@ html {
   box-sizing: border-box;
 }
 
+*:focus {
+  outline: none;
+}
 
 body {
   background: var(--bg);
   color: var(--text);
   font-family: Pretendard, sans-serif;
-  font-feature-settings: "tnum";
+  font-feature-settings: "tnum" 1, "calt" 0;
   font-variant-numeric: tabular-nums;
   font-size: var(--font-size);
   font-weight: var(--normal);
@@ -62,9 +65,11 @@ dt {
 }
 
 dd {
+  text-align: right;
+  word-break: break-all;
+  white-space: normal;
   font-family: var(--font-family-monospace);
   grid-column-start: 2;
-  text-align: right;
 }
 
 strong {
@@ -109,6 +114,7 @@ select {
   background: transparent;
   color: inherit;
   font-family: inherit;
+  font-feature-settings: "tnum" 1, "calt" 0;
   font-size: inherit;
   line-height: inherit;
   border: 0;

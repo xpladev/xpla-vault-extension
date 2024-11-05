@@ -1,9 +1,11 @@
 import { ForwardedRef, HTMLAttributes, PropsWithChildren } from 'react';
 import { forwardRef } from 'react';
 import classNames from 'classnames';
+import { EvmAddress } from '@xpla/xpla.js';
 import { truncate } from '@xpla.kitchen/utils';
-import { ARCHIVE } from 'config/constants';
+import { EXPLORER } from 'config/constants';
 import { useNetworkName } from 'data/wallet';
+import { hexToBech32 } from 'utils/evm';
 import ExternalLink from './ExternalLink';
 import styles from './FinderLink.module.scss';
 
@@ -26,7 +28,7 @@ const FinderLink = forwardRef(
   ) => {
     const { block, tx, validator, ...attrs } = rest;
     const networkName = useNetworkName();
-    const path = tx
+    let path = tx
       ? 'tx'
       : block
       ? 'block'
@@ -34,8 +36,21 @@ const FinderLink = forwardRef(
       ? 'validator'
       : 'address';
 
-    const value = rest.value ?? children;
-    const link = [ARCHIVE, networkName, path, value].join('/');
+    const temp = rest.value ?? children;
+    const tempValue = temp ? temp.toString() : '';
+    let value = tempValue;
+
+    if (path === 'tx') {
+      if (tempValue.startsWith('0x')) {
+        path = 'evmtx';
+      }
+    } else if (path === 'address') {
+      value = EvmAddress.validate(tempValue)
+        ? hexToBech32('xpla', tempValue)
+        : tempValue;
+    }
+
+    const link = [EXPLORER, networkName, path, value].join('/');
     const className = classNames(attrs.className, styles.link);
 
     return (

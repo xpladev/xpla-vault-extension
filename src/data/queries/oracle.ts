@@ -13,12 +13,7 @@ export const useActiveDenoms = () => {
   return useQuery(
     [queryKey.oracle.activeDenoms, isClassic],
     async () => {
-      if (isClassic) {
-        const activeDenoms = await lcd.oracle.activeDenoms();
-        return sortDenoms(['axpla', ...activeDenoms]);
-      } else {
-        return ['axpla'];
-      }
+      return ['axpla'];
     },
     { ...RefetchOptions.INFINITY },
   );
@@ -31,7 +26,7 @@ export const useExchangeRates = () => {
   return useQuery(
     [queryKey.oracle.exchangeRates, isClassic],
     async () => {
-      if (isClassic) return await lcd.oracle.exchangeRates();
+      if (isClassic) return undefined;
     },
     { ...RefetchOptions.DEFAULT },
   );
@@ -44,7 +39,7 @@ export const useOracleParams = () => {
   return useQuery(
     [queryKey.oracle.params, isClassic],
     async () => {
-      if (isClassic) return await lcd.oracle.parameters();
+      if (isClassic) return undefined;
     },
     { ...RefetchOptions.INFINITY },
   );

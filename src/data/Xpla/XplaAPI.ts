@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useQuery } from 'react-query';
 import axios, { AxiosError } from 'axios';
 import BigNumber from 'bignumber.js';
-import { OracleParams, ValAddress } from '@xpla/xpla.js';
+import { ValAddress } from '@xpla/xpla.js';
 import { XplaValidator } from 'types/validator';
 import { XplaProposalItem } from 'types/proposal';
 import { useNetwork } from 'data/wallet';
@@ -144,13 +144,13 @@ export const calcSelfDelegation = (validator?: XplaValidator) => {
   return self ? Number(self) / Number(tokens) : undefined;
 };
 
-export const getCalcUptime = ({ slash_window }: OracleParams) => {
-  return (validator?: XplaValidator) => {
-    if (!validator) return;
-    const { miss_counter } = validator;
-    return miss_counter ? 1 - Number(miss_counter) / slash_window : undefined;
-  };
-};
+// export const getCalcUptime = ({ slash_window }: OracleParams) => {
+//   return (validator?: XplaValidator) => {
+//     if (!validator) return;
+//     const { miss_counter } = validator;
+//     return miss_counter ? 1 - Number(miss_counter) / slash_window : undefined;
+//   };
+// };
 
 export const useVotingPowerRate = (address: ValAddress) => {
   const { data: XplaValidators, ...state } = useXplaValidators();
@@ -167,18 +167,18 @@ export const useVotingPowerRate = (address: ValAddress) => {
   return { data, ...state };
 };
 
-export const useUptime = (validator: XplaValidator) => {
-  const { data: oracleParams, ...state } = useOracleParams();
+// export const useUptime = (validator: XplaValidator) => {
+//   const { data: oracleParams, ...state } = useOracleParams();
 
-  const calc = useMemo(() => {
-    if (!oracleParams) return;
-    return getCalcUptime(oracleParams);
-  }, [oracleParams]);
+//   const calc = useMemo(() => {
+//     if (!oracleParams) return;
+//     return getCalcUptime(oracleParams);
+//   }, [oracleParams]);
 
-  const data = useMemo(() => {
-    if (!calc) return;
-    return calc(validator);
-  }, [calc, validator]);
+//   const data = useMemo(() => {
+//     if (!calc) return;
+//     return calc(validator);
+//   }, [calc, validator]);
 
-  return { data, ...state };
-};
+//   return { data, ...state };
+// };

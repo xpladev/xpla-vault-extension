@@ -13,6 +13,7 @@ import ProposalVotes from './ProposalVotes';
 import ProposalVotesByValidator from './ProposalVotesByValidator';
 import ProposalParams from './ProposalParams';
 import useProposalId from './useProposalId';
+import ProposalMessageList from './ProposalMessageList';
 
 const ProposalDetails = () => {
   const { t } = useTranslation();
@@ -39,7 +40,7 @@ const ProposalDetails = () => {
             </Card>
           </Col>
 
-          <ProposalSummary proposal={proposal} />
+          <ProposalMessageList proposal={proposal} />
         </Row>
 
         {status === Proposal.Status.PROPOSAL_STATUS_DEPOSIT_PERIOD ? (

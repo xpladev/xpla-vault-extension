@@ -6,6 +6,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { ReactComponent as CheckEvmIcon } from 'styles/images/menu/CheckEvm.svg';
 import { Col, Page } from 'components/layout';
 import is from '../../scripts/is';
 import useAuth from '../../hooks/useAuth';
@@ -21,6 +22,12 @@ export const useManageWallet = () => {
     to: '/auth/export',
     children: t('Export wallet'),
     icon: <QrCodeIcon />,
+  };
+
+  const toEvmStyle = {
+    to: '/auth/evm',
+    children: t('Check EVM Style Address'),
+    icon: <CheckEvmIcon />,
   };
 
   const toPassword = {
@@ -71,7 +78,7 @@ export const useManageWallet = () => {
     ? [toPostMultisig, toDelete, disconnectWallet]
     : is.ledger(wallet)
     ? [toSignMultisig, disconnectWallet]
-    : [toExport, toPassword, toDelete, toSignMultisig, lockWallet];
+    : [toExport, toEvmStyle, toPassword, toDelete, toSignMultisig, lockWallet];
 };
 
 const ManageWallets = () => {

@@ -1,0 +1,46 @@
+@import "mixins";
+
+.list {
+  overflow: auto;
+}
+
+.horizontal {
+  @include flex(space-evenly, flex-end);
+  text-align: center;
+  > div {
+    display: flex;
+    flex-direction: column-reverse;
+    section {
+      font-weight: var(--black);
+    }
+  }
+  @include mobile {
+    flex-direction: column ;
+    align-items: flex-start;
+    text-align: center;
+    gap: 8px;
+    > div {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;    
+    }
+  }
+}
+
+
+.vertical {
+  display: grid;
+  gap: 20px;
+}
+
+// .title {
+//   font-size: var(--font-size-small);
+// }
+
+.title {
+  // font-size: var(--font-size-small);
+  font-size: 12px;
+  font-weight: var(--normal);
+  color: var(--card-title);
+}

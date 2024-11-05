@@ -76,6 +76,9 @@ export const queryKey = mirror({
   tx: { txInfo: '', create: '' },
   wasm: { contractInfo: '', contractQuery: '' },
 
+  evmtx: { txInfo: '', create: '' },
+  evm: { contractInfo: '', contractQuery: '', gasPrice: '' },
+
   /* external */
   Anchor: { TotalDeposit: '', APY: '', MarketEpochState: '' },
   TNS: '',

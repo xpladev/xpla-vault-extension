@@ -1,7 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames/bind';
 import { useAddress } from 'data/wallet';
-import { useCustomTokensCW721 } from 'data/settings/CustomTokens';
+import {
+  useCustomTokensCW721,
+  useCustomTokensERC721,
+} from 'data/settings/CustomTokens';
 import { InternalButton } from 'components/general';
 import { Col, Card, Grid } from 'components/layout';
 import { ModalButton } from 'components/feedback';
@@ -16,8 +19,9 @@ const cx = classNames.bind(styles);
 const NFTAssets = () => {
   const { t } = useTranslation();
   const address = useAddress();
-  const { list } = useCustomTokensCW721();
-  const empty = !address || !list.length;
+  const { list: cw721 } = useCustomTokensCW721();
+  const { list: erc721 } = useCustomTokensERC721();
+  const empty = !address || (!cw721.length && !erc721.length);
 
   // const renderExtra = (render: boolean) => (
   //   <ModalButton
@@ -42,17 +46,21 @@ const NFTAssets = () => {
         <NFTPlaceholder />
       ) : (
         <Col>
-          {list.map((item) => (
-            <NFTAssetGroup {...item} key={item.contract} />
+          {cw721.map((item) => (
+            <NFTAssetGroup key={item.contract} item={item} />
+          ))}
+
+          {erc721.map((item) => (
+            <NFTAssetGroup key={item.contract} item={item} evm />
           ))}
         </Col>
       )}
 
       {/* To maintain the modal even if empty is false when add an NFT */}
       <ModalButton
-        title={t('NFT')}
+        title={t('Manage NFT List')}
         renderButton={(open) => {
-          return <Button onClick={open}>{t('Add tokens')}</Button>;
+          return <Button onClick={open}>{t('Mange List')}</Button>;
         }}
       >
         <ManageCustomTokensCW721 />

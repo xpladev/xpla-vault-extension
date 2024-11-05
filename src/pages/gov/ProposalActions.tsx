@@ -1,16 +1,16 @@
 import { useTranslation } from 'react-i18next';
-import { Proposal } from '@xpla/xpla.js';
+import { ProposalV1 } from '@xpla/xpla.js';
 import { LinkButton } from 'components/general';
 
-const ProposalActions = ({ proposal }: { proposal: Proposal }) => {
+const ProposalActions = ({ proposal }: { proposal: ProposalV1 }) => {
   const { t } = useTranslation();
   const { status } = proposal;
 
-  return status === Proposal.Status.PROPOSAL_STATUS_VOTING_PERIOD ? (
+  return status === ProposalV1.Status.PROPOSAL_STATUS_VOTING_PERIOD ? (
     <LinkButton to="./vote" color="primary" size="small">
       {t('Vote')}
     </LinkButton>
-  ) : status === Proposal.Status.PROPOSAL_STATUS_DEPOSIT_PERIOD ? (
+  ) : status === ProposalV1.Status.PROPOSAL_STATUS_DEPOSIT_PERIOD ? (
     <LinkButton to="./deposit" color="primary" size="small">
       {t('Deposit')}
     </LinkButton>

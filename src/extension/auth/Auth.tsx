@@ -12,6 +12,7 @@ import NewMultisigWalletPage from './NewMultisigWalletPage';
 
 /* manage */
 import ExportWalletPage from './ExportWalletPage';
+import CheckEvm from './CheckEvm';
 import ChangePasswordPage from './ChangePasswordPage';
 import DeleteWalletPage from './DeleteWalletPage';
 import Disconnect from './Disconnect';
@@ -31,6 +32,7 @@ const Auth = () => {
 
       {/* manage */}
       <Route path="export" element={<ExportWalletPage />} />
+      <Route path="evm" element={<CheckEvm />} />
       <Route path="password" element={<ChangePasswordPage />} />
       <Route path="delete" element={<DeleteWalletPage />} />
       <Route path="disconnect" element={<Disconnect />} />

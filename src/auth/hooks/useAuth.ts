@@ -1,7 +1,13 @@
 import { useCallback, useMemo } from 'react';
 import { atom, useRecoilState } from 'recoil';
 import { encode } from 'js-base64';
-import { CreateTxOptions, Tx, isTxError } from '@xpla/xpla.js';
+import {
+  CreateEvmTxOptions,
+  CreateTxOptions,
+  EvmTx,
+  Tx,
+  isTxError,
+} from '@xpla/xpla.js';
 import { AccAddress, SignDoc } from '@xpla/xpla.js';
 import { MnemonicKey, RawKey, SignatureV2 } from '@xpla/xpla.js';
 import { LedgerKey } from '@xpla/ledger-xpla-js';
@@ -10,6 +16,7 @@ import { LEDGER_TRANSPORT_TIMEOUT } from 'config/constants';
 import { useChainID } from 'data/wallet';
 import { useIsClassic } from 'data/query';
 import { useLCDClient } from 'data/queries/lcdClient';
+import { useECDClient } from 'data/queries/ecdClient';
 import is from '../scripts/is';
 import { PasswordError } from '../scripts/keystore';
 import { getDecryptedKey, testPassword } from '../scripts/keystore';
@@ -33,6 +40,7 @@ const walletState = atom({
 const useAuth = () => {
   const isClassic = useIsClassic();
   const lcd = useLCDClient();
+  const ecd = useECDClient();
   const available = useAvailable();
 
   const [wallet, setWallet] = useRecoilState(walletState);
@@ -167,7 +175,17 @@ const useAuth = () => {
     }
   };
 
-  const sign = async (txOptions: CreateTxOptions, password = '') => {
+  const sign = async (
+    txOptions:
+      | (CreateTxOptions & {
+          sequence?: number;
+          accountNumber?: number;
+          signMode?: SignatureV2.SignMode;
+        })
+      | CreateEvmTxOptions,
+    password = '',
+    evm = false,
+  ) => {
     if (!wallet) throw new Error('Wallet is not defined');
 
     if (is.ledger(wallet)) {
@@ -176,22 +194,37 @@ const useAuth = () => {
       const { account_number: accountNumber, sequence } =
         await wallet.accountNumberAndSequence();
       const signMode = SignatureV2.SignMode.SIGN_MODE_LEGACY_AMINO_JSON;
-      const unsignedTx = await create(txOptions);
+      const unsignedTx = await create(txOptions as CreateTxOptions);
       const options = { chainID, accountNumber, sequence, signMode };
       return await key.signTx(unsignedTx, options, isClassic);
     } else if (is.preconfigured(wallet)) {
       const key = new MnemonicKey({ mnemonic: wallet.mnemonic });
-      return await lcd.wallet(key).createAndSignTx(txOptions);
+      return await lcd
+        .wallet(key)
+        .createAndSignTx(txOptions as CreateTxOptions);
     } else {
       const pk = getKey(password);
       if (!pk) throw new PasswordError('Incorrect password');
       const key = new RawKey(Buffer.from(pk, 'hex'));
-      const wallet = lcd.wallet(key);
-      return await wallet.createAndSignTx(txOptions);
+
+      if (evm && txOptions) {
+        const wallet = ecd.wallet(key);
+        return await wallet.createAndSignTx(txOptions as CreateEvmTxOptions);
+      } else {
+        const wallet = lcd.wallet(key);
+
+        const options = { ...txOptions } as CreateTxOptions & {
+          sequence?: number;
+          accountNumber?: number;
+          signMode?: SignatureV2.SignMode;
+        };
+
+        return await wallet.createAndSignTx(options);
+      }
     }
   };
 
-  const signBytes = (bytes: Buffer, password = '') => {
+  const signBytes = async (bytes: Buffer, password = '') => {
     if (!wallet) throw new Error('Wallet is not defined');
 
     if (is.ledger(wallet)) {
@@ -200,24 +233,33 @@ const useAuth = () => {
       const pk = getKey(password);
       if (!pk) throw new PasswordError('Incorrect password');
       const key = new RawKey(Buffer.from(pk, 'hex'));
-      const signature = key.ecdsaSign(bytes);
+      // const { signature, recid } = key.ecdsaSign(bytes);
+      const signature = await key.sign(bytes);
       if (!signature) throw new Error('Signature is undefined');
-      const splite = splitSignature(signature);
       return {
-        signature: Buffer.from(arrayify(concat([splite.r, splite.s]))).toString(
-          'base64',
-        ),
+        recid: undefined,
+        signature: Buffer.from(signature).toString('base64'),
         public_key: key.publicKey?.toAmino().value as string,
       };
     }
   };
 
-  const post = async (txOptions: CreateTxOptions, password = '') => {
+  const post = async (
+    txOptions: CreateTxOptions | CreateEvmTxOptions,
+    password = '',
+    evm = false,
+  ) => {
     if (!wallet) throw new Error('Wallet is not defined');
-    const signedTx = await sign(txOptions, password);
-    const result = await lcd.tx.broadcastSync(signedTx);
-    if (isTxError(result)) throw new Error(result.raw_log);
-    return result;
+    const signedTx = await sign(txOptions, password, evm);
+    if (evm) {
+      const result = await ecd.tx.broadcastSync(signedTx as EvmTx);
+      // if (isTxError(result)) throw new Error(result.raw_log);
+      return result;
+    } else {
+      const result = await lcd.tx.broadcastSync(signedTx as Tx);
+      if (isTxError(result)) throw new Error(result.raw_log);
+      return result;
+    }
   };
 
   return {

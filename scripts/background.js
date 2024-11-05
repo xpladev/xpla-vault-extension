@@ -13,7 +13,6 @@ const connectRemote = (remotePort) => {
   const portStream = new PortStream(remotePort);
 
   const sendResponse = (name, payload) => {
-    console.log({ name, payload });
     portStream.write({ name, payload });
   };
 
@@ -206,3 +205,15 @@ const closePopup = () => {
 
 /* utils */
 const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+
+// Invoke alarm periodically to keep service worker persistent
+extension.alarms.create('keep-alive-alarm', {
+  periodInMinutes: 0.05,
+  delayInMinutes: 0.05,
+});
+
+extension.alarms.onAlarm.addListener((alarm) => {
+  // eslint-disable-next-line
+  if (alarm.name === 'keep-alive-alarm') {
+  }
+});

@@ -14,8 +14,11 @@
       dt {
         margin-bottom: 2px;
       }
-      dd {
+      dd:not(:last-child) {
         margin-bottom: 16px;
+      }
+      dd {
+        text-align: left;
       }
     }
   }

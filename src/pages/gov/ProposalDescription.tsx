@@ -1,8 +1,8 @@
-import { Proposal } from '@xpla/xpla.js';
+import { ProposalV1 } from '@xpla/xpla.js';
 import xss from 'xss';
 
-const ProposalDescription = ({ proposal }: { proposal: Proposal }) => {
-  const { description } = proposal.content;
+const ProposalDescription = ({ proposal }: { proposal: ProposalV1 }) => {
+  const { summary: description } = proposal;
   return <p dangerouslySetInnerHTML={{ __html: linkify(description) }} />;
 };
 

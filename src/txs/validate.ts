@@ -1,6 +1,6 @@
 import { always } from 'ramda';
 import BigNumber from 'bignumber.js';
-import { AccAddress } from '@xpla/xpla.js';
+import { AccAddress, EvmAddress } from '@xpla/xpla.js';
 import { validateMsg } from 'utils/data';
 
 const lessThan = (max: BigNumber, label = 'Amount', optional = false) => {
@@ -66,10 +66,24 @@ const size = (length: number, label = 'Memo') => {
 
 const memo = () => (value?: string) => {
   if (!value) return;
+
   return (
     ['<', '>'].every((char) => !value.includes(char)) ||
     'Memo cannot include `<` or `>`'
   );
+};
+
+const mnemonic = () => (value?: string) => {
+  if (!value) return;
+
+  const arr = value.trim().split(' ');
+  const length = arr.length;
+
+  if (length === 12 || length === 18 || length === 24) {
+    return 'mnemonic';
+  }
+
+  return;
 };
 
 const msg = () => {
@@ -87,6 +101,7 @@ const validate = {
   address,
   size,
   memo,
+  mnemonic,
   msg,
 };
 
@@ -94,4 +109,6 @@ export default validate;
 
 /* tns */
 export const validateRecipient = (address: string) =>
-  AccAddress.validate(address) || address.endsWith('.ust');
+  AccAddress.validate(address) ||
+  EvmAddress.validate(address) ||
+  address.endsWith('.ust');

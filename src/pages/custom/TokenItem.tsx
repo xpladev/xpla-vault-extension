@@ -17,6 +17,8 @@ export interface TokenItemProps {
   contract?: XplaAddress; // cw20 | cw721
   decimals?: number;
   key: string;
+  evm?: boolean;
+  nft?: boolean;
 }
 
 interface Props extends TokenItemProps {
@@ -27,6 +29,7 @@ interface Props extends TokenItemProps {
 
 const TokenItem = ({ added, onAdd, onRemove, ...props }: Props) => {
   const { token, contract, decimals, ...rest } = props;
+  const { evm, nft } = rest;
   const { t } = useTranslation();
 
   const link = contract && (
@@ -55,6 +58,9 @@ const TokenItem = ({ added, onAdd, onRemove, ...props }: Props) => {
           )}
         </button>
       }
+      badge={true}
+      evm={evm}
+      nft={nft}
     />
   );
 };

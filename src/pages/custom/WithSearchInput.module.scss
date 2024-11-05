@@ -1,0 +1,64 @@
+@import "mixins";
+
+.filter-container {
+  @include mobile {
+    margin: 0 -20px;
+    margin-top: 12px;
+    margin-bottom: 20px;
+  }
+  display: flex;
+  align-items: center;
+  margin: 0 -40px;
+  margin-top: 12px;
+  margin-bottom: 20px;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  .filter-wrap {
+    @include mobile {
+      padding: 0 20px;
+    }
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    gap: 8px;
+    scroll-snap-align: start;
+  }
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    padding: 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 32px;
+    font-size: var(--font-size-small);
+    font-weight: var(--card-border);
+    color: var(--text-disable);
+
+    &.all,
+    &.ibc,
+    &.cw,
+    &.erc {
+      color: white;
+      transition: all var(--transition) linear;
+      border-color: transparent;
+      &:hover {
+        filter: hue-rotate(12deg) grayscale(30%);
+      }
+    }
+    &.all {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    &.ibc {
+      background: var(--ibc);
+    }
+    &.cw {
+      background: var(--cw);
+    }
+    &.erc {
+      background: var(--erc);
+    }
+  }
+}

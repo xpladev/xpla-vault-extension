@@ -6,7 +6,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { AccAddress, Coins, MsgSubmitProposal } from '@xpla/xpla.js';
 import { TextProposal, CommunityPoolSpendProposal } from '@xpla/xpla.js';
 import { ParameterChangeProposal, ParamChange } from '@xpla/xpla.js';
-import { ExecuteContractProposal } from '@xpla/xpla.js/dist/core/wasm/proposals';
+import { ExecuteContractProposal } from '@xpla/xpla.js';
 import { isDenomXplaNative } from '@xpla.kitchen/utils';
 import { readAmount, readDenom, toAmount } from '@xpla.kitchen/utils';
 import { SAMPLE_ADDRESS } from 'config/constants';

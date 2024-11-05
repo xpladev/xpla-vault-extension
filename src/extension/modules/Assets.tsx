@@ -3,14 +3,18 @@ import { useIsClassic } from 'data/query';
 import { useIsWalletEmpty } from 'data/queries/bank';
 import { useActiveDenoms } from 'data/queries/oracle';
 import { readNativeDenom } from 'data/token';
-import { useCustomTokensIBC } from 'data/settings/CustomTokens';
-import { useCustomTokensCW20 } from 'data/settings/CustomTokens';
+import {
+  useCustomTokensIBC,
+  useCustomTokensERC20,
+  useCustomTokensCW20,
+} from 'data/settings/CustomTokens';
 import { Button } from 'components/general';
 import { Grid } from 'components/layout';
 // import { FormError } from 'components/form';
 import { useCoins } from 'pages/wallet/Coins';
 import IBCAsset from 'pages/wallet/IBCAsset';
 import CW20Asset from 'pages/wallet/CW20Asset';
+import ERC20Asset from 'pages/wallet/ERC20Asset';
 import AddTokens from 'pages/wallet/AddTokens';
 // import ExtensionPage from '../components/ExtensionPage';
 // import ConnectedWallet from '../auth/ConnectedWallet';
@@ -25,8 +29,9 @@ const Assets = () => {
   const coins = useCoins(denoms);
   const { list: ibc } = useCustomTokensIBC();
   const { list: cw20 } = useCustomTokensCW20();
+  const { list: erc20 } = useCustomTokensERC20();
 
-  if (!(coins && ibc && cw20)) return null;
+  if (!(coins && ibc && cw20 && erc20)) return null;
 
   const [all, filtered] = coins;
   const list = isClassic ? filtered : all;
@@ -64,10 +69,18 @@ const Assets = () => {
                 {(item) => <Asset {...item} />}
               </CW20Asset>
             ))}
+
+        {!erc20.length
+          ? null
+          : erc20.map((item) => (
+              <ERC20Asset {...item} key={item.token}>
+                {(item) => <Asset {...item} erc20 />}
+              </ERC20Asset>
+            ))}
       </div>
 
       <AddTokens>
-        {(open) => <Button onClick={open}>{t('Add tokens')}</Button>}
+        {(open) => <Button onClick={open}>{t('Manage List')}</Button>}
       </AddTokens>
     </Grid>
   );

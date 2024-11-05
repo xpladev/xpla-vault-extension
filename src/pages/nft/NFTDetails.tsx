@@ -3,8 +3,19 @@ import { Fragment } from 'react';
 import _ from 'lodash';
 import { Details } from 'components/display';
 import styles from './NFTDetails.module.scss';
+import { TokenBadge } from 'components/token';
 
-const NFTDetails = ({ data, id }: { data: object; id: string }) => {
+const NFTDetails = ({
+  data,
+  id,
+  evm,
+  nft,
+}: {
+  data: object;
+  id: string;
+  evm?: boolean;
+  nft?: boolean;
+}) => {
   const { description, attributes: attr } = data as any;
 
   const arrAttr: { type: string; value: string }[] = [];
@@ -33,6 +44,10 @@ const NFTDetails = ({ data, id }: { data: object; id: string }) => {
 
       <Details>
         <dl className={styles.dl}>
+          <dt className={styles.dt}>NFT Type</dt>
+          <dd className={styles.dd}>
+            <TokenBadge className="nft-type" evm={evm} nft={nft} />
+          </dd>
           <dt className={styles.dt}>token id</dt>
           <dd className={styles.dd}>{id}</dd>
           {arrAttr &&

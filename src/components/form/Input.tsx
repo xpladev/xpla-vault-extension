@@ -23,7 +23,7 @@ const Input = forwardRef(
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     return (
-      <div className={styles.wrapper}>
+      <div className={cx(styles.wrapper, attrs.className)}>
         {selectBefore}
 
         <input

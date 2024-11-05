@@ -2,8 +2,28 @@
 
 .asset {
   @include flex(space-between, flex-start);
-  padding: 10px 20px;
   position: relative; // to loading indicator
+  padding: 10px 20px;
+  
+  a, section + div > span {
+    height: 30px;
+    padding: 0 10px 0 10px;
+    border-radius: 10px;
+    background: var(--card-border);
+    font-size: 12px;
+    color: var(--text);
+    &:hover {
+      text-decoration: none;
+    }
+    &:hover:not(:disabled) {
+      opacity: 0.8;
+    }
+    svg {
+      display: none;
+      width: 12px;
+      height: 12px;
+    }
+  }
 
   &:not(:first-child) {
     // border-top: 1px solid var(--card-border);
@@ -25,6 +45,7 @@
 }
 
 .amount {
+  margin-top: 2px;
   font-size: 17px;
   font-weight: var(--black);
   > span {
@@ -44,4 +65,14 @@
 .value {
   color: var(--text-muted);
   font-size: var(--font-size-small);
+}
+
+.tag-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tag {
+  margin-left: 0;
 }

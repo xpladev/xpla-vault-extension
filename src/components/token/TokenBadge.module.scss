@@ -1,0 +1,53 @@
+@import "mixins";
+
+.tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  height: 16px;
+  margin-left: 8px;
+  padding: 0 8px;
+  border-radius: 16px;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: var(--bold);
+  &.page-title {
+    @include mobile {
+      margin-top: 8px;
+    }
+    margin-right: auto;
+    height: 22px;
+    padding: 0 14px;
+    font-size: 13px;
+  }
+
+  &.tag-lg {
+    height: 22px;
+    padding: 0 14px;
+    font-size: 13px;
+  }
+
+  &.native {
+    background: var(--success);
+    color: white;
+  }
+  &.ibc {
+    background: var(--ibc);
+    color: white;
+  }
+  &.erc {
+    background: var(--erc);
+    color: white;
+  }
+  &.cw {
+    background: var(--cw);
+    color: white;
+  }
+
+  &.nft-type {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    margin-left: 0;
+  }
+}

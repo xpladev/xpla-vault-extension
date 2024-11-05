@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { BondStatus } from '@terra-money/terra.proto/cosmos/staking/v1beta1/staking';
-import { bondStatusFromJSON } from '@terra-money/terra.proto/cosmos/staking/v1beta1/staking';
+import { BondStatus } from '@xpla/xpla.proto/cosmos/staking/v1beta1/staking';
+import { bondStatusFromJSON } from '@xpla/xpla.proto/cosmos/staking/v1beta1/staking';
 import { Tag } from 'components/display';
 
 export const ValidatorStatus = ({ status }: { status: BondStatus }) => {
