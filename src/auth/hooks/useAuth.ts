@@ -238,7 +238,7 @@ const useAuth = () => {
       if (!signature) throw new Error('Signature is undefined');
       return {
         recid: undefined,
-        signature: Buffer.from(signature).toString('base64'),
+        signature: signature.toString('base64'),
         public_key: key.publicKey?.toAmino().value as string,
       };
     }

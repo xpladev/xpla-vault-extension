@@ -1,7 +1,9 @@
 import { PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import createContext from 'utils/createContext';
-import { GasPrices, useGasPrices } from 'data/Xpla/XplaAPI';
+import { useGasPrices } from 'data/queries/tx';
+import { GasPrices } from 'data/Xpla/XplaAPI';
+import { getAmount } from 'utils/coin';
 import { Card } from 'components/layout';
 import { ErrorBoundary, Wrong } from 'components/feedback';
 import { useTxKey } from './Tx';
@@ -13,10 +15,7 @@ export const [useTx, TxProvider] = createContext<{ gasPrices: GasPrices }>(
 const TxContext = ({ children }: PropsWithChildren<{}>) => {
   const { t } = useTranslation();
   const txKey = useTxKey();
-  // const { data: gasPrices } = useGasPrices();
-  const gasPrices: { [x: string]: string } = {
-    axpla: '850000000000',
-  };
+  const { data } = useGasPrices();
 
   /* on error */
   const fallback = () => (
@@ -26,7 +25,12 @@ const TxContext = ({ children }: PropsWithChildren<{}>) => {
   );
 
   // If the gas prices doesn't exist, nothing is worth rendering.
-  if (!gasPrices) return null;
+  if (!data) return null;
+
+  const amount = getAmount(data, 'axpla');
+  const gasPrices: { [x: string]: string } = {
+    axpla: amount,
+  };
 
   return (
     <TxProvider value={{ gasPrices }} key={txKey}>
