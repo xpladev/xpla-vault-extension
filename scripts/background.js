@@ -208,8 +208,8 @@ const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
 // Invoke alarm periodically to keep service worker persistent
 extension.alarms.create('keep-alive-alarm', {
-  periodInMinutes: 0.05,
-  delayInMinutes: 0.05,
+  periodInMinutes: 0.25,
+  delayInMinutes: 0.25,
 });
 
 extension.alarms.onAlarm.addListener((alarm) => {

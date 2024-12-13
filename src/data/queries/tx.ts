@@ -1,8 +1,11 @@
 import { QueryKey, useQuery, useQueryClient } from 'react-query';
 import { atom, useSetRecoilState } from 'recoil';
-import { queryKey } from '../query';
+import { LCDClient } from '@xpla/xpla.js';
+import { useNetwork } from 'data/wallet';
+import { getLocalSetting, SettingKey } from 'utils/localStorage';
 import { useLCDClient } from './lcdClient';
 import { useECDClient } from './ecdClient';
+import { queryKey, RefetchOptions } from '../query';
 
 interface LatestTx {
   txhash: string;
@@ -39,7 +42,7 @@ export const useTxInfo = ({ txhash, queryKeys, evm }: LatestTx) => {
           if (result.code === 5) {
             throw new Error('tx not found.');
           } else {
-            throw new Error('unknown error.');
+            return result;
           }
         }
 
@@ -61,5 +64,28 @@ export const useTxInfo = ({ txhash, queryKeys, evm }: LatestTx) => {
         queryClient.invalidateQueries(queryKey.tx.create);
       },
     },
+  );
+};
+
+export const useGasPrices = () => {
+  const network = useNetwork();
+
+  const gasAdjustment = getLocalSetting<number>(SettingKey.GasAdjustment);
+
+  const config = {
+    ...network,
+    URL: network.lcd,
+    gasAdjustment,
+  };
+
+  const lcd = new LCDClient(config);
+
+  return useQuery(
+    [network.lcd, 'gas-prices'],
+    async () => {
+      const gasPrices = lcd.gasPrices(await lcd.getGasPrices());
+      return gasPrices;
+    },
+    { ...RefetchOptions.INFINITY },
   );
 };
