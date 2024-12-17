@@ -60,7 +60,7 @@ const NFTAssets = () => {
       <ModalButton
         title={t('Manage NFT List')}
         renderButton={(open) => {
-          return <Button onClick={open}>{t('Mange List')}</Button>;
+          return <Button onClick={open}>{t('Manage List')}</Button>;
         }}
       >
         <ManageCustomTokensCW721 />

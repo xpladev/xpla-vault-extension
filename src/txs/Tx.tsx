@@ -168,8 +168,8 @@ function Tx<TxValues>(props: Props<TxValues>) {
       const config = {
         ...network,
         URL: network.lcd,
-        // gasAdjustment: isWallet.multisig(wallet) ? 2 : gasAdjustment,
-        gasAdjustment,
+        gasAdjustment: isWallet.multisig(wallet) ? 2.25 : gasAdjustment,
+        // gasAdjustment,
         gasPrices: { [initialGasDenom]: gasPrices[initialGasDenom] },
       };
 
