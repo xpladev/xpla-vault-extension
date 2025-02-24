@@ -10,12 +10,13 @@ export const ASSETS = 'https://assets.xpla.io';
 /* website */
 export const VAULT = 'https://vault.xpla.io';
 export const EXPLORER = 'https://explorer.xpla.io';
+export const CEX = 'https://www.xpla.io/en/ecosystem/search?ecosystem_tags=11';
 
 /* ledger */
 export const LEDGER_TRANSPORT_TIMEOUT = 120000;
 
 /* tx */
-export const DEFAULT_GAS_ADJUSTMENT = 1.75;
+export const DEFAULT_GAS_ADJUSTMENT = 1.2;
 
 /* swap */
 export const XPLASWAP_COMMISSION_RATE = 0.003;

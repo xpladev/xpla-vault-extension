@@ -5,6 +5,7 @@ import { useECDClient } from './ecdClient';
 import useEvmAddress from 'auth/hooks/useEvmAddress';
 import { getIpfsGateway } from './wasm';
 import axios from 'axios';
+import BigNumber from 'bignumber.js';
 
 /* erc20 contract info */
 export const useContractInfoERC20 = (token: EvmAddress, enabled = true) => {
@@ -45,7 +46,7 @@ const useGetTokenBalanceQuery = () => {
   const ecd = useECDClient();
 
   return (token: EvmAddress) => ({
-    queryKey: [queryKey.evm.contractQuery, token, address],
+    queryKey: [queryKey.evm.contractQuery, token, address, 'a', 'bd'],
     queryFn: async () => {
       if (!address) return '0';
 

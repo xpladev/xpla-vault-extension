@@ -8,7 +8,7 @@ export const useAccountInfo = () => {
   const lcd = useLCDClient();
 
   return useQuery(
-    [queryKey.auth.accountInfo],
+    [queryKey.auth.accountInfo, address],
     async () => {
       if (!address) throw new Error('Wallet is not connected');
       return await lcd.auth.accountInfo(address);

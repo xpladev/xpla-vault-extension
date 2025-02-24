@@ -3,12 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { intervalToDuration } from 'date-fns';
+import { EvmTxInfo, isTxError, TxInfo } from '@xpla/xpla.js';
+import * as ruleset from '@xpla/log-finder-ruleset';
+import { Transaction } from '@xpla/log-finder-ruleset/dist/types';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import CloseIcon from '@mui/icons-material/Close';
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
-import { EvmTxInfo, isTxError, TxInfo } from '@xpla/xpla.js';
-import * as ruleset from '@xpla/log-finder-ruleset';
 import useInterval from 'utils/hooks/useInterval';
 import { isBroadcastingState, latestTxState } from 'data/queries/tx';
 import { useTxInfo } from 'data/queries/tx';
@@ -110,7 +111,7 @@ const TxIndicator = ({ txhash }: { txhash: string }) => {
   const ruleset = createActionRuleSet(networkName);
   const logMatcher = createLogMatcherForActions(ruleset);
   const getCanonicalMsgs = (txInfo: TxInfo) => {
-    const matchedMsg = getTxCanonicalMsgs(txInfo, logMatcher);
+    const matchedMsg = getTxCanonicalMsgs(txInfo as Transaction, logMatcher);
     return matchedMsg
       ? matchedMsg
           .map((matchedLog) => matchedLog.map(({ transformed }) => transformed))

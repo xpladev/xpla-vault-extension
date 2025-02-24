@@ -1,26 +1,20 @@
-import { useTranslation } from 'react-i18next';
-import { Col } from 'components/layout';
-import TxContext from 'txs/TxContext';
 import { useAuth } from 'auth';
-import { useIsWalletEmpty } from 'data/queries/bank';
-import ExtensionPage from '../components/ExtensionPage';
-import { Grid } from 'components/layout';
-import { FormError } from 'components/form';
+import TxContext from 'txs/TxContext';
+import { Col, Grid, Tabs } from 'components/layout';
+import NFTAssets from 'pages/nft/NFTAssets';
 import SwitchWallet from '../auth/SwitchWallet';
 import AddWallet from '../auth/AddWallet';
 import ConnectedWallet from '../auth/ConnectedWallet';
+import ExtensionPage from '../components/ExtensionPage';
 import { useRequest } from '../RequestContainer';
 import ConfirmConnect from './ConfirmConnect';
 import ConfirmTx from './ConfirmTx';
 import Assets from './Assets';
 import Welcome from './Welcome';
-import { Tabs } from 'components/layout';
-import NFTAssets from 'pages/nft/NFTAssets';
+import Activate from './Activate';
 
 const Front = () => {
-  const { t } = useTranslation();
   const { wallet, wallets } = useAuth();
-  const isWalletEmpty = useIsWalletEmpty();
   const { requests } = useRequest();
   const { connect, tx } = requests;
 
@@ -55,9 +49,15 @@ const Front = () => {
   return (
     <ExtensionPage header={<ConnectedWallet />}>
       <Grid gap={16}>
-        {isWalletEmpty && (
-          <FormError>{t('Coins required to post transactions')}</FormError>
-        )}
+        {/* {isWalletEmpty && (
+          <FormHelp>
+            <ExternalLink href={CEX}>
+              {t('Don’t have XPLA yet? Get it here!')}
+            </ExternalLink>
+          </FormHelp>
+        )} */}
+
+        <Activate />
 
         <Tabs tabs={tabs} type="card" />
       </Grid>

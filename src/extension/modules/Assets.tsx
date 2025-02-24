@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import { useIsClassic } from 'data/query';
-import { useIsWalletEmpty } from 'data/queries/bank';
 import { useActiveDenoms } from 'data/queries/oracle';
 import { readNativeDenom } from 'data/token';
 import {
@@ -10,21 +9,17 @@ import {
 } from 'data/settings/CustomTokens';
 import { Button } from 'components/general';
 import { Grid } from 'components/layout';
-// import { FormError } from 'components/form';
 import { useCoins } from 'pages/wallet/Coins';
 import IBCAsset from 'pages/wallet/IBCAsset';
 import CW20Asset from 'pages/wallet/CW20Asset';
 import ERC20Asset from 'pages/wallet/ERC20Asset';
 import AddTokens from 'pages/wallet/AddTokens';
-// import ExtensionPage from '../components/ExtensionPage';
-// import ConnectedWallet from '../auth/ConnectedWallet';
 import Asset from './Asset';
 import styles from './Assets.module.scss';
 
 const Assets = () => {
   const { t } = useTranslation();
   const isClassic = useIsClassic();
-  const isWalletEmpty = useIsWalletEmpty();
   const { data: denoms, ...state } = useActiveDenoms();
   const coins = useCoins(denoms);
   const { list: ibc } = useCustomTokensIBC();
@@ -38,10 +33,6 @@ const Assets = () => {
 
   return (
     <Grid gap={16}>
-      {/* {isWalletEmpty && (
-          <FormError>{t('Coins required to post transactions')}</FormError>
-        )} */}
-
       <div className={styles.assets}>
         {list.map((item) => {
           const { denom } = item;

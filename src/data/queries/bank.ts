@@ -1,8 +1,10 @@
 import { useQuery } from 'react-query';
 import axios from 'axios';
-import { isDenomXplaNative } from '@xpla.kitchen/utils';
+import BigNumber from 'bignumber.js';
+import { isDenomXplaNative, toAmount } from '@xpla.kitchen/utils';
 import { Coins } from '@xpla/xpla.js';
 import createContext from 'utils/createContext';
+import { getAmount } from 'utils/coin';
 import { queryKey, RefetchOptions, useIsClassic } from '../query';
 import { useAddress, useNetwork } from '../wallet';
 import { useLCDClient } from './lcdClient';
@@ -70,6 +72,12 @@ export const useBalances = () => {
 
 export const useXplaNativeLength = () => {
   const bankBalance = useBankBalance();
+  const amount = getAmount(bankBalance, 'axpla');
+
+  if (new BigNumber(amount).lte(1)) {
+    return 0;
+  }
+
   return bankBalance?.toArray().filter(({ denom }) => isDenomXplaNative(denom))
     .length;
 };
@@ -77,4 +85,15 @@ export const useXplaNativeLength = () => {
 export const useIsWalletEmpty = () => {
   const length = useXplaNativeLength();
   return !length;
+};
+
+export const useIsGetXPLA = () => {
+  const bankBalance = useBankBalance();
+  const amount = getAmount(bankBalance, 'axpla');
+
+  if (new BigNumber(amount).lt(toAmount(1))) {
+    return true;
+  }
+
+  return false;
 };

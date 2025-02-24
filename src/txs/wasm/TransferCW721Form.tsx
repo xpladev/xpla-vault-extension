@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import PersonIcon from '@mui/icons-material/Person';
 import { AccAddress, EvmAddress } from '@xpla/xpla.js';
 import { MsgExecuteContract } from '@xpla/xpla.js';
 import { truncate } from '@xpla.kitchen/utils';
+import { debounce } from 'lodash';
 import { queryKey } from 'data/query';
 import { useAddress } from 'data/wallet';
 import { useBankBalance } from 'data/queries/bank';
@@ -21,6 +22,7 @@ import Tx, { getInitialGasDenom } from '../Tx';
 interface TxValues {
   recipient?: string; // AccAddress | TNS
   address?: AccAddress; // hidden input
+  id: string; // token_id
   memo?: string;
 }
 
@@ -34,6 +36,13 @@ const TransferCW721Form = ({ contract, id, balance }: Props) => {
   const { t } = useTranslation();
   const connectedAddress = useAddress();
   const bankBalance = useBankBalance();
+
+  /* fee */
+  const [estimationTxValues, setEstimationTxValues] = useState<TxValues>({
+    address: connectedAddress,
+    id,
+    memo: '',
+  });
 
   /* tx context */
   const initialGasDenom = getInitialGasDenom(bankBalance);
@@ -100,28 +109,56 @@ const TransferCW721Form = ({ contract, id, balance }: Props) => {
   );
 
   /* fee */
-  const estimationTxValues = useMemo(() => {
-    const defaultTxValues = {
-      address: connectedAddress,
-      isSimul: false,
-    };
+  // const estimationTxValues = useMemo(() => {
+  //   const defaultTxValues = {
+  //     address: connectedAddress,
+  //     isSimul: false,
+  //   };
+
+  //   if (recipient) {
+  //     if (AccAddress.validate(recipient) || EvmAddress.validate(recipient)) {
+  //       let betchAddress = recipient;
+  //       if (EvmAddress.validate(recipient)) {
+  //         betchAddress = hexToBech32('xpla', recipient);
+  //       }
+
+  //       return {
+  //         address: betchAddress,
+  //         isSimul: true,
+  //       };
+  //     }
+  //   }
+
+  //   return defaultTxValues;
+  // }, [connectedAddress, recipient]);
+
+  const updateEstimationTxValues = useCallback(
+    debounce((newValues: TxValues) => {
+      setEstimationTxValues(newValues);
+    }, 500),
+    [],
+  );
+
+  useEffect(() => {
+    let betchAddress = '';
 
     if (recipient) {
       if (AccAddress.validate(recipient) || EvmAddress.validate(recipient)) {
-        let betchAddress = recipient;
+        betchAddress = recipient;
         if (EvmAddress.validate(recipient)) {
           betchAddress = hexToBech32('xpla', recipient);
         }
-
-        return {
-          address: betchAddress,
-          isSimul: true,
-        };
       }
     }
 
-    return defaultTxValues;
-  }, [connectedAddress, recipient]);
+    const newValues = {
+      address: betchAddress || connectedAddress,
+      id,
+      memo: memo ? memo : '',
+    };
+
+    updateEstimationTxValues(newValues);
+  }, [recipient, connectedAddress, memo, updateEstimationTxValues]);
 
   const tx = {
     balance,

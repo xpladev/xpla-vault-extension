@@ -1,0 +1,71 @@
+@import "mixins";
+
+.activate {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.activate-message {
+  margin-bottom: 16px;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  background: var(--button-default-bg);
+  p {
+    font-size: var(--font-size-small);
+    color: var(--text-muted);
+    b {
+      font-weight: var(--bold);
+      color: var(--button-primary-bg);
+    }
+    u {
+      font-weight: var(--bold);
+      color: var(--danger);
+    }
+  }
+}
+
+.activate-address {
+  color: var(--text-muted);
+}
+
+.page {
+  overflow: hidden;
+  // padding here to position progress bar
+
+  @include desktop {
+    padding-top: 54px;
+  }
+
+  @include mobile {
+    padding-top: 16px;
+  }
+}
+
+.header {
+  max-width: 640px;
+  margin: 0 auto;
+
+  @include flex(space-between);
+
+  @include desktop {
+    --font-size-page-title: 42px;
+    padding-bottom: 18px;
+  }
+
+  @include mobile {
+    @include flex-column(flex-start, flex-start);
+    --font-size-page-title: 26px;
+    padding: 0 var(--main-padding-horizontal) 16px;
+    h1 + a {
+      margin-top: 16px;
+    }
+  }
+}
+
+.title {
+  font-size: var(--font-size-page-title);
+  font-weight: var(--black);
+  @include mobile {
+    padding-top: 8px;
+  }
+}

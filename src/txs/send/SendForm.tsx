@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import PersonIcon from '@mui/icons-material/Person';
 import { AccAddress, EvmAddress } from '@xpla/xpla.js';
 import { MsgExecuteContract, MsgSend } from '@xpla/xpla.js';
 import { isDenom, toAmount, truncate } from '@xpla.kitchen/utils';
+import { debounce } from 'lodash';
 import { queryKey } from 'data/query';
 import { useAddress } from 'data/wallet';
 import { useBankBalance } from 'data/queries/bank';
@@ -34,6 +35,13 @@ const SendForm = ({ token, decimals, balance, symbol }: Props) => {
   const { t } = useTranslation();
   const connectedAddress = useAddress();
   const bankBalance = useBankBalance();
+
+  /* fee */
+  const [estimationTxValues, setEstimationTxValues] = useState<TxValues>({
+    address: connectedAddress,
+    input: toInput(1, decimals),
+    memo: '',
+  });
 
   /* tx context */
   const initialGasDenom = getInitialGasDenom(bankBalance);
@@ -103,34 +111,68 @@ const SendForm = ({ token, decimals, balance, symbol }: Props) => {
   );
 
   /* fee */
-  const estimationTxValues = useMemo(() => {
-    const defaultTxValues = {
-      address: connectedAddress,
-      input: toInput(1, decimals),
-      isSimul: false,
-    };
+  // const estimationTxValues = useMemo(() => {
+  //   const defaultTxValues = {
+  //     address: connectedAddress,
+  //     input: toInput(1, decimals),
+  //     isSimul: false,
+  //   };
 
-    if (isDenom(token)) {
-      return defaultTxValues;
-    }
+  //   if (isDenom(token)) {
+  //     return defaultTxValues;
+  //   }
 
-    if (recipient && input) {
+  //   if (recipient && input) {
+  //     if (AccAddress.validate(recipient) || EvmAddress.validate(recipient)) {
+  //       let bech32Address = recipient;
+  //       if (EvmAddress.validate(recipient)) {
+  //         bech32Address = hexToBech32('xpla', recipient);
+  //       }
+
+  //       return {
+  //         address: bech32Address,
+  //         input: toAmount(input, { decimals }),
+  //         isSimul: true,
+  //       };
+  //     }
+  //   }
+
+  //   return defaultTxValues;
+  // }, [connectedAddress, recipient, input, decimals]);
+
+  const updateEstimationTxValues = useCallback(
+    debounce((newValues: TxValues) => {
+      setEstimationTxValues(newValues);
+    }, 500),
+    [],
+  );
+
+  useEffect(() => {
+    let bech32Address = '';
+    if (recipient) {
       if (AccAddress.validate(recipient) || EvmAddress.validate(recipient)) {
-        let bech32Address = recipient;
+        bech32Address = recipient;
         if (EvmAddress.validate(recipient)) {
           bech32Address = hexToBech32('xpla', recipient);
         }
-
-        return {
-          address: bech32Address,
-          input: toAmount(input, { decimals }),
-          isSimul: true,
-        };
       }
     }
 
-    return defaultTxValues;
-  }, [connectedAddress, recipient, input, decimals]);
+    const newValues = {
+      address: bech32Address || connectedAddress,
+      input: input || toInput(1, decimals),
+      memo: memo || '',
+    };
+
+    updateEstimationTxValues(newValues);
+  }, [
+    recipient,
+    connectedAddress,
+    input,
+    memo,
+    decimals,
+    updateEstimationTxValues,
+  ]);
 
   const onChangeMax = useCallback(
     async (input: string) => {

@@ -11,6 +11,7 @@ import SendTx from 'txs/send/SendTx';
 import TransferCW721Tx from 'txs/wasm/TransferCW721Tx';
 import SignMultisigTxPage from 'pages/multisig/SignMultisigTxPage';
 import PostMultisigTxPage from 'pages/multisig/PostMultisigTxPage';
+import ActivateTx from 'txs/activate/ActivateTx';
 import EvmSendTx from 'txs-evm/send/SendTx';
 import EvmTransferERC721Tx from 'txs-evm/nft/TransferCW721Tx';
 import {
@@ -49,10 +50,12 @@ const App = () => {
 
     /* default txs */
     { path: '/send', element: <SendTx /> },
-    // { path: '/swap', element: <SwapTx /> },
     { path: '/nft/transfer', element: <TransferCW721Tx /> },
     { path: '/multisig/sign', element: <SignMultisigTxPage /> },
     { path: '/multisig/post', element: <PostMultisigTxPage /> },
+
+    /* activate */
+    { path: '/activate', element: <ActivateTx /> },
 
     /* evm txs */
     { path: '/evm/send', element: <EvmSendTx /> },

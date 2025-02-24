@@ -170,7 +170,7 @@ const useAuth = () => {
     } else {
       const pk = getKey(password);
       if (!pk) throw new PasswordError('Incorrect password');
-      const key = new RawKey(Buffer.from(pk, 'hex'));
+      const key = new RawKey(Uint8Array.from(Buffer.from(pk, 'hex')));
       return await key.createSignatureAmino(doc, isClassic);
     }
   };
@@ -205,7 +205,7 @@ const useAuth = () => {
     } else {
       const pk = getKey(password);
       if (!pk) throw new PasswordError('Incorrect password');
-      const key = new RawKey(Buffer.from(pk, 'hex'));
+      const key = new RawKey(Uint8Array.from(Buffer.from(pk, 'hex')));
 
       if (evm && txOptions) {
         const wallet = ecd.wallet(key);
@@ -232,7 +232,7 @@ const useAuth = () => {
     } else {
       const pk = getKey(password);
       if (!pk) throw new PasswordError('Incorrect password');
-      const key = new RawKey(Buffer.from(pk, 'hex'));
+      const key = new RawKey(Uint8Array.from(Buffer.from(pk, 'hex')));
       // const { signature, recid } = key.ecdsaSign(bytes);
       const signature = await key.sign(bytes);
       if (!signature) throw new Error('Signature is undefined');
