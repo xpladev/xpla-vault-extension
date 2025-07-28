@@ -22,6 +22,20 @@ interface Props {
   tx?: boolean;
 }
 
+// 비디오 파일 확장자 확인 함수
+const isVideoFile = (src: string): boolean => {
+  const videoExtensions = [
+    '.mp4',
+    '.webm',
+    '.ogg',
+    '.mov',
+    '.avi',
+    '.mkv',
+    '.m4v',
+  ];
+  return videoExtensions.some((ext) => src.toLowerCase().includes(ext));
+};
+
 // Where to use
 // 1. NFT asset list
 // 2. Transfer tx form
@@ -46,11 +60,11 @@ const NFTAssetItemCW721 = ({ contract, id, compact, tx }: Props) => {
     const name = extension?.name ?? truncate(id);
     const extensionImage = extension?.image;
 
-    const filterThumb = extension?.attributes.filter(
+    const filterThumb = extension?.attributes?.filter(
       (item: any) => item.trait_type === 'thumbnail_url',
     );
 
-    const collection = extension?.attributes.filter(
+    const collection = extension?.attributes?.filter(
       (item: any) => item.trait_type === 'collection',
     );
 
@@ -74,11 +88,38 @@ const NFTAssetItemCW721 = ({ contract, id, compact, tx }: Props) => {
                 className={styles.image}
                 style={{ marginRight: tx ? 0 : '8px' }}
               >
-                <img src={src} alt="" {...SIZE} style={{ borderRadius: 12 }} />
+                {isVideoFile(src) ? (
+                  <video
+                    src={src}
+                    {...SIZE}
+                    style={{ borderRadius: 12 }}
+                    loop
+                    autoPlay
+                    playsInline
+                  />
+                ) : (
+                  <img
+                    src={src}
+                    alt=""
+                    {...SIZE}
+                    style={{ borderRadius: 12 }}
+                  />
+                )}
               </button>
             )}
           >
-            <img src={src} alt="" className={styles.large} />
+            {isVideoFile(src) ? (
+              <video
+                src={src}
+                className={styles.large}
+                muted
+                loop
+                autoPlay
+                playsInline
+              />
+            ) : (
+              <img src={src} alt="" className={styles.large} />
+            )}
           </ModalButton>
         )}
 
@@ -92,7 +133,9 @@ const NFTAssetItemCW721 = ({ contract, id, compact, tx }: Props) => {
               <dt>Token ID</dt>
               <dd>{id}</dd>
               <dt>Collection</dt>
-              <dd>{collection.length ? collection[0].value : name}</dd>
+              <dd>
+                {collection && collection.length ? collection[0].value : name}
+              </dd>
             </dl>
           </div>
         ) : (
@@ -112,7 +155,20 @@ const NFTAssetItemCW721 = ({ contract, id, compact, tx }: Props) => {
               maxHeight={400}
             >
               <Grid gap={12}>
-                {src && <img src={src} alt="" className={styles.large} />}
+                {src &&
+                  (isVideoFile(src) ? (
+                    <video
+                      src={src}
+                      className={styles.large}
+                      controls
+                      muted
+                      loop
+                      autoPlay
+                      playsInline
+                    />
+                  ) : (
+                    <img src={src} alt="" className={styles.large} />
+                  ))}
 
                 {extension && <NFTDetails data={extension} id={id} nft />}
               </Grid>

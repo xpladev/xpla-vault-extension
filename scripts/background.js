@@ -16,6 +16,14 @@ const connectRemote = (remotePort) => {
     portStream.write({ name, payload });
   };
 
+  remotePort.onDisconnect.addListener(() => {
+    console.warn('Port disconnected, attempting to reconnect...');
+    setTimeout(
+      () => extension.runtime.connect({ name: 'XplaExtension' }),
+      1000,
+    );
+  });
+
   portStream.on('data', (data) => {
     console.log('Xpla(background): portStream.on', data);
     const { type, ...payload } = data;
@@ -215,5 +223,9 @@ extension.alarms.create('keep-alive-alarm', {
 extension.alarms.onAlarm.addListener((alarm) => {
   // eslint-disable-next-line
   if (alarm.name === 'keep-alive-alarm') {
+    console.log('Service worker kept alive'); // 로그 추가
+    extension.runtime.getPlatformInfo(() => {
+      console.log('Service worker kept alive');
+    });
   }
 });
