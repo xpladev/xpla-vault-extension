@@ -1,78 +1,51 @@
 import { useTranslation } from 'react-i18next';
-import { flatten, uniq } from 'ramda';
-import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import ShortcutOutlinedIcon from '@mui/icons-material/ShortcutOutlined';
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
-import { isDenomXplaNative } from '@xpla.kitchen/utils';
+import axios from 'axios';
+import { ALCHEMY_PAY_API_URL } from 'config/environment';
 import { has } from 'utils/num';
-import { useIsClassic } from 'data/query';
 import { useIsWalletEmpty } from 'data/queries/bank';
-import { useCW20Pairs } from 'data/Xpla/XplaAssets';
-import { InternalButton, InternalLink } from 'components/general';
+import { Button, InternalLink } from 'components/general';
 import { ExtraActions } from 'components/layout';
-import { ModalButton } from 'components/feedback';
-import Buy from './Buy';
 import { Props } from './Asset';
+import { useAddress, useNetworkName } from 'data/wallet';
+import styles from './AssetActions.module.scss';
 
 const AssetActions = ({ token, symbol, balance, erc20 }: Props) => {
   const { t } = useTranslation();
+
+  const address = useAddress();
   const isWalletEmpty = useIsWalletEmpty();
-  const isClassic = useIsClassic();
-  const getIsSwappableToken = useGetIsSwappableToken();
+  const networkName = useNetworkName();
+
+  const handleBuy = async () => {
+    const { data: resData } = await axios.get(
+      `${ALCHEMY_PAY_API_URL}/api/alchemy/generate-link?address=${address}`,
+    );
+
+    const { data } = resData;
+    const link = data.link;
+
+    window.open(link, '_blank', 'noopener noreferrer');
+  };
 
   return (
-    <ExtraActions>
-      {/* {!isClassic && token === 'axpla' && (
-        <ModalButton
-          title={t('Buy {{symbol}}', { symbol })}
-          renderButton={(open) => (
-            <InternalButton
-              icon={<MonetizationOnOutlinedIcon style={{ fontSize: 18 }} />}
-              onClick={open}
-            >
-              {t('Buy')}
-            </InternalButton>
-          )}
-          maxHeight={false}
-        >
-          <Buy token={token} />
-        </ModalButton>
-      )} */}
+    <ExtraActions className={styles['asset-actions']}>
+      {token === 'axpla' && networkName === 'mainnet' && (
+        <Button className={styles['asset-btn']} onClick={handleBuy}>
+          {t('Buy')}
+        </Button>
+      )}
 
       <InternalLink
+        className={styles['asset-btn']}
         icon={<ShortcutOutlinedIcon style={{ fontSize: 18 }} />}
         to={erc20 ? `/evm/send?token=${token}` : `/send?token=${token}`}
         disabled={isWalletEmpty || !has(balance)}
       >
         {t('Send')}
       </InternalLink>
-
-      {isClassic && (
-        <InternalLink
-          icon={<RestartAltIcon style={{ fontSize: 18 }} />}
-          to="/swap"
-          state={token}
-          disabled={
-            isWalletEmpty || !has(balance) || !getIsSwappableToken(token)
-          }
-        >
-          {t('Swap')}
-        </InternalLink>
-      )}
     </ExtraActions>
   );
 };
 
 export default AssetActions;
-
-/* helpers */
-const useGetIsSwappableToken = () => {
-  const { data: pairs } = useCW20Pairs();
-
-  return (token: XplaAddress) => {
-    if (isDenomXplaNative(token)) return true;
-    if (!pairs) return false;
-    const xplaswapAvailableList = uniq(flatten(Object.values(pairs)));
-    return xplaswapAvailableList.find(({ assets }) => assets.includes(token));
-  };
-};

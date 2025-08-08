@@ -4,6 +4,7 @@
   @include flex(space-between, flex-start);
   position: relative; // to loading indicator
   padding: 10px 20px;
+  flex-direction: column;
   
   a, section + div > span {
     height: 30px;

@@ -6,11 +6,16 @@ const cx = classNames.bind(styles);
 
 interface Props {
   align?: 'stretch' | 'end' | 'center';
+  className?: string;
 }
 
-const ExtraActions = ({ children, ...props }: PropsWithChildren<Props>) => {
+const ExtraActions = ({
+  children,
+  className,
+  ...props
+}: PropsWithChildren<Props>) => {
   const { align = 'end' } = props;
-  return <div className={cx(styles.actions, align)}>{children}</div>;
+  return <div className={cx(styles.actions, align, className)}>{children}</div>;
 };
 
 export default ExtraActions;

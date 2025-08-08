@@ -1,6 +1,6 @@
 {
   "name": "xpla-vault-extension",
-  "version": "1.6.5",
+  "version": "1.6.6",
   "hompage": "https://www.xpla.io",
   "author": "XPLA",
   "private": true,
@@ -8,7 +8,8 @@
   "scripts": {
     "start": "export PORT=9020 && react-scripts start",
     "build-scripts": "webpack --config scripts/webpack.config.js",
-    "build": "cross-env react-app-rewired build && npm run build-scripts",
+    "build:stage": "cp .env.stage .env.production && cross-env NODE_ENV=production react-app-rewired build && npm run build-scripts",
+    "build:product": "cp .env.product .env.production && cross-env NODE_ENV=production react-app-rewired build && npm run build-scripts",
     "test": "react-scripts test",
     "prepare": "husky install",
     "pre-commit": "lint-staged",
