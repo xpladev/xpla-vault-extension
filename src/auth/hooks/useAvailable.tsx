@@ -22,8 +22,13 @@ const useAvailable = () => {
       icon: <SettingsBackupRestoreIcon />,
     },
     {
-      to: '/auth/import',
+      to: '/auth/import/key',
       children: t('Import wallet'),
+      icon: <KeyIcon />,
+    },
+    {
+      to: '/auth/import',
+      children: t('Import wallet (Legacy)'),
       icon: <KeyIcon />,
     },
     {

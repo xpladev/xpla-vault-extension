@@ -17,6 +17,7 @@ export const LEDGER_TRANSPORT_TIMEOUT = 120000;
 
 /* tx */
 export const DEFAULT_GAS_ADJUSTMENT = 1.2;
+export const DEFAULT_GAS_PRICE = '280000000000';
 
 /* swap */
 export const XPLASWAP_COMMISSION_RATE = 0.003;

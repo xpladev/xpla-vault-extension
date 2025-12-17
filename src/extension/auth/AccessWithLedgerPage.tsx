@@ -6,7 +6,7 @@ const AccessWithLedgerPage = () => {
   const { t } = useTranslation();
 
   return (
-    <ExtensionPage title={t('Access with ledger')}>
+    <ExtensionPage title={t('Access with Ledger')}>
       <AccessWithLedgerForm />
     </ExtensionPage>
   );

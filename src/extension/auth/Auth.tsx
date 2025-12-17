@@ -7,6 +7,7 @@ import UnlockPage from './UnlockPage';
 /* create */
 import NewWalletPage from './NewWalletPage';
 import RecoverWalletPage from './RecoverWalletPage';
+import ImportWalletKeyPage from './ImportWalletKeyPage';
 import ImportWalletPage from './ImportWalletPage';
 import NewMultisigWalletPage from './NewMultisigWalletPage';
 
@@ -27,6 +28,7 @@ const Auth = () => {
       {/* create */}
       <Route path="new" element={<NewWalletPage />} />
       <Route path="recover" element={<RecoverWalletPage />} />
+      <Route path="import/key" element={<ImportWalletKeyPage />} />
       <Route path="import" element={<ImportWalletPage />} />
       <Route path="multisig/new" element={<NewMultisigWalletPage />} />
 

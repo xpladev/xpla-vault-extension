@@ -16,7 +16,7 @@ const Welcome = () => {
         height={120}
         style={{ width: 'fit-content' }}
       />
-      <p className={styles.content}>{t('Welcome to XPLA Wallet')}</p>
+      <p className={styles.content}>{t('Welcome to XPLA VAULT')}</p>
     </FlexColumn>
   );
 };

@@ -15,7 +15,7 @@ const AddWallet = () => {
         {
           icon: <UsbIcon />,
           to: '/auth/ledger',
-          children: t('Access with ledger'),
+          children: t('Access with Ledger'),
         },
       ].map(({ to, ...item }) => {
         const openURL = getOpenURL(to);

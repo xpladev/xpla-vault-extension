@@ -275,6 +275,7 @@ const useAuth = () => {
     lock,
     available,
     encodeEncryptedWallet,
+    getKey,
     validatePassword,
     createSignature,
     create,

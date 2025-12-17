@@ -1,3 +1,4 @@
+import { RawKey } from '@xpla/xpla.js';
 import { getStoredWallet } from './keystore';
 import wordlist from './wordlist.json';
 
@@ -36,6 +37,19 @@ const validate = {
       const seed = mnemonic.trim().split(' ');
       const invalid = seed.find((word) => !wordlist.includes(word));
       return !invalid || `${invalid} is invalid`;
+    },
+  },
+
+  privateKey: {
+    length: (privateKey: string) => {
+      try {
+        return (
+          RawKey.isValidPrivateKey(Buffer.from(privateKey, 'hex')) ||
+          'Invalid private key'
+        );
+      } catch {
+        return 'Invalid private key';
+      }
     },
   },
 
