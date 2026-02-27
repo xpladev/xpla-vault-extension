@@ -1,5 +1,6 @@
+import { Empty, Fetching } from 'components/feedback';
 import { Flex } from 'components/layout';
-import { Fetching, Empty } from 'components/feedback';
+
 import TokenItem, { TokenItemProps } from './TokenItem';
 import styles from './TokenList.module.scss';
 

@@ -1,6 +1,7 @@
+import classNames from 'classnames';
 import { PropsWithChildren, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import classNames from 'classnames';
+
 import styles from './PopoverNone.module.scss';
 
 interface Props {

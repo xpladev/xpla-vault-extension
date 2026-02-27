@@ -1,5 +1,6 @@
-import { useTranslation } from 'react-i18next';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
+import { useTranslation } from 'react-i18next';
+
 import { Flex } from '../layout';
 
 const Paste = ({ paste }: { paste: (lines: string[]) => void }) => {

@@ -1,7 +1,8 @@
-import { ReactNode } from 'react';
-import { getAmount } from 'utils/coin';
 import { useBankBalance } from 'data/queries/bank';
 import { WithTokenItem } from 'data/token';
+import { ReactNode } from 'react';
+import { getAmount } from 'utils/coin';
+
 import { Props as AssetProps } from './Asset';
 
 interface Props {

@@ -1,8 +1,9 @@
-import { useTranslation } from 'react-i18next';
 import UsbIcon from '@mui/icons-material/Usb';
 import useAvailable from 'auth/hooks/useAvailable';
-import { getOpenURL } from '../storage';
+import { useTranslation } from 'react-i18next';
+
 import ExtensionList from '../components/ExtensionList';
+import { getOpenURL } from '../storage';
 
 const AddWallet = () => {
   const { t } = useTranslation();

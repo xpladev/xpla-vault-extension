@@ -1,5 +1,6 @@
-import { useTranslation } from 'react-i18next';
 import { Card, Page } from 'components/layout';
+import { useTranslation } from 'react-i18next';
+
 import RecoverWalletForm from './RecoverWalletForm';
 
 const RecoverWalletPage = () => {

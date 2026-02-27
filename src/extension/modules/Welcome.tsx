@@ -1,6 +1,7 @@
-import { useTranslation } from 'react-i18next';
-import { useThemeFront } from 'data/settings/Theme';
 import { FlexColumn } from 'components/layout';
+import { useThemeFront } from 'data/settings/Theme';
+import { useTranslation } from 'react-i18next';
+
 import styles from './Welcome.module.scss';
 
 const Welcome = () => {

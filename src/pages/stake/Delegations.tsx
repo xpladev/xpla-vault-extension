@@ -1,15 +1,16 @@
-import { useTranslation } from 'react-i18next';
 import { AccAddress, Coin } from '@xpla/xpla.js';
-import { getMaxHeightStyle } from 'utils/style';
-import { combineState } from 'data/query';
+import { ModalButton } from 'components/feedback';
+import { ValidatorLink } from 'components/general';
+import { Table } from 'components/layout';
+import { Read } from 'components/token';
 import { useMemoizedCalcValue } from 'data/queries/oracle';
 import { calcDelegationsTotal } from 'data/queries/staking';
 import { useDelegations } from 'data/queries/staking';
 import { useValidators } from 'data/queries/staking';
-import { ValidatorLink } from 'components/general';
-import { ModalButton } from 'components/feedback';
-import { Table } from 'components/layout';
-import { Read } from 'components/token';
+import { combineState } from 'data/query';
+import { useTranslation } from 'react-i18next';
+import { getMaxHeightStyle } from 'utils/style';
+
 import StakedCard from './components/StakedCard';
 
 const Delegations = () => {

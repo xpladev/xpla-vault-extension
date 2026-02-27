@@ -1,23 +1,24 @@
-import { useTranslation } from 'react-i18next';
-import BigNumber from 'bignumber.js';
 import BoltIcon from '@mui/icons-material/Bolt';
-import { has } from 'utils/num';
-import { getAmount, sortByDenom } from 'utils/coin';
-import { useCurrency } from 'data/settings/Currency';
-import { useMinimumValue } from 'data/settings/MinimumValue';
-import { readNativeDenom } from 'data/token';
-import { useIsClassic } from 'data/query';
+import BigNumber from 'bignumber.js';
+import { FormError } from 'components/form';
+import { InternalLink } from 'components/general';
+import { Card, Flex, Grid } from 'components/layout';
+import { Read } from 'components/token';
 import { useBankBalance } from 'data/queries/bank';
 import { useIsWalletEmpty, useXplaNativeLength } from 'data/queries/bank';
 import { useActiveDenoms } from 'data/queries/oracle';
 import { useMemoizedCalcValue } from 'data/queries/oracle';
-import { InternalLink } from 'components/general';
-import { Card, Flex, Grid } from 'components/layout';
-import { FormError } from 'components/form';
-import { Read } from 'components/token';
+import { useIsClassic } from 'data/query';
+import { useCurrency } from 'data/settings/Currency';
+import { useMinimumValue } from 'data/settings/MinimumValue';
+import { readNativeDenom } from 'data/token';
+import { useTranslation } from 'react-i18next';
+import { getAmount, sortByDenom } from 'utils/coin';
+import { has } from 'utils/num';
+
 import Asset from './Asset';
-import SelectMinimumValue from './SelectMinimumValue';
 import styles from './Coins.module.scss';
+import SelectMinimumValue from './SelectMinimumValue';
 
 const Coins = () => {
   const { t } = useTranslation();

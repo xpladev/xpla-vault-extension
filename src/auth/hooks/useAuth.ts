@@ -1,36 +1,37 @@
-import { useCallback, useMemo } from 'react';
-import { atom, useRecoilState } from 'recoil';
-import { encode } from 'js-base64';
+import {
+  arrayify,
+  concat,
+  Signature,
+  splitSignature,
+} from '@ethersproject/bytes';
+import BluetoothTransport from '@ledgerhq/hw-transport-web-ble';
+import { LedgerKey } from '@xpla/ledger-xpla-js';
 import {
   CreateEvmTxOptions,
   CreateTxOptions,
   EvmTx,
-  Tx,
   isTxError,
+  Tx,
 } from '@xpla/xpla.js';
 import { AccAddress, SignDoc } from '@xpla/xpla.js';
 import { MnemonicKey, RawKey, SignatureV2 } from '@xpla/xpla.js';
-import { LedgerKey } from '@xpla/ledger-xpla-js';
-import BluetoothTransport from '@ledgerhq/hw-transport-web-ble';
 import { LEDGER_TRANSPORT_TIMEOUT } from 'config/constants';
-import { useChainID } from 'data/wallet';
-import { useIsClassic } from 'data/query';
-import { useLCDClient } from 'data/queries/lcdClient';
 import { useECDClient } from 'data/queries/ecdClient';
+import { useLCDClient } from 'data/queries/lcdClient';
+import { useIsClassic } from 'data/query';
+import { useChainID } from 'data/wallet';
+import { encode } from 'js-base64';
+import { useCallback, useMemo } from 'react';
+import { atom, useRecoilState } from 'recoil';
+
+import encrypt from '../scripts/encrypt';
 import is from '../scripts/is';
 import { PasswordError } from '../scripts/keystore';
 import { getDecryptedKey, testPassword } from '../scripts/keystore';
 import { getWallet, storeWallet } from '../scripts/keystore';
 import { clearWallet, lockWallet } from '../scripts/keystore';
 import { getStoredWallet, getStoredWallets } from '../scripts/keystore';
-import encrypt from '../scripts/encrypt';
 import useAvailable from './useAvailable';
-import {
-  Signature,
-  splitSignature,
-  arrayify,
-  concat,
-} from '@ethersproject/bytes';
 
 const walletState = atom({
   key: 'wallet',

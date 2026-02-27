@@ -1,23 +1,22 @@
 import './polyfills'; // Buffer 전역 주입 - 반드시 첫 번째 import
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { HashRouter } from 'react-router-dom';
-import { ReactQueryDevtools } from 'react-query/devtools';
-import { RecoilRoot } from 'recoil';
+import 'tippy.js/dist/tippy.css';
+import 'config/lang';
+import 'index.scss';
+
 import { getChainOptions } from '@xpla/wallet-controller';
 import { WalletProvider } from '@xpla/wallet-provider';
-import 'tippy.js/dist/tippy.css';
-
-import 'config/lang';
-import { BRIDGE } from 'config/constants';
-import { debug } from 'utils/env';
-
-import 'index.scss';
-import ScrollToTop from 'app/ScrollToTop';
 import InitNetworks from 'app/InitNetworks';
-import InitWallet from 'app/InitWallet';
 import InitTheme from 'app/InitTheme';
+import InitWallet from 'app/InitWallet';
+import ScrollToTop from 'app/ScrollToTop';
+import { BRIDGE } from 'config/constants';
 import App from 'extension/App';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { HashRouter } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
+import { debug } from 'utils/env';
 
 const connectorOpts = { bridge: BRIDGE };
 

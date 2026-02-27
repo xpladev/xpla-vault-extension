@@ -1,8 +1,9 @@
-import classNames from 'classnames/bind';
-import BigNumber from 'bignumber.js';
 import { readPercent } from '@xpla.kitchen/utils';
-import { ReactComponent as Tilde } from './Tilde.svg';
+import BigNumber from 'bignumber.js';
+import classNames from 'classnames/bind';
+
 import styles from './Orb.module.scss';
+import { ReactComponent as Tilde } from './Tilde.svg';
 
 const cx = classNames.bind(styles);
 

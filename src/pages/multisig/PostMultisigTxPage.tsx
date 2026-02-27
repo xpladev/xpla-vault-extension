@@ -1,17 +1,18 @@
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { LegacyAminoMultisigPublicKey } from '@xpla/xpla.js';
-import { useAddress } from 'data/wallet';
-import { useAccountInfo } from 'data/queries/auth';
-import { Card, Grid, Page } from 'components/layout';
-import { FormHelp } from 'components/form';
-import { Wrong } from 'components/feedback';
-import TxContext from 'txs/TxContext';
 import { isWallet, useAuth } from 'auth';
 import CreateMultisigWalletForm from 'auth/modules/create/CreateMultisigWalletForm';
 import ConfirmModal from 'auth/modules/manage/ConfirmModal';
-import useDefaultValues from './utils/useDefaultValues';
+import { Wrong } from 'components/feedback';
+import { FormHelp } from 'components/form';
+import { Card, Grid, Page } from 'components/layout';
+import { useAccountInfo } from 'data/queries/auth';
+import { useAddress } from 'data/wallet';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import TxContext from 'txs/TxContext';
+
 import PostMultisigTxForm from './PostMultisigTxForm';
+import useDefaultValues from './utils/useDefaultValues';
 
 const PostMultisigTxPage = () => {
   const { t } = useTranslation();

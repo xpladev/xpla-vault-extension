@@ -1,20 +1,18 @@
 import { Route, Routes } from 'react-router-dom';
 
-/* connect */
-import UnlockPage from './select/UnlockPage';
 import AccessWithLedgerPage from '../ledger/AccessWithLedgerPage';
-
+import ImportWalletPage from './create/ImportWalletPage';
+import NewMultisigWalletPage from './create/NewMultisigWalletPage';
 /* create */
 import NewWalletPage from './create/NewWalletPage';
 import RecoverWalletPage from './create/RecoverWalletPage';
-import ImportWalletPage from './create/ImportWalletPage';
-import NewMultisigWalletPage from './create/NewMultisigWalletPage';
-
-/* manage */
-import ManageWallets from './manage/ManageWallets';
-import ExportWalletPage from './manage/ExportWalletPage';
 import ChangePasswordPage from './manage/ChangePasswordPage';
 import DeleteWalletPage from './manage/DeleteWalletPage';
+import ExportWalletPage from './manage/ExportWalletPage';
+/* manage */
+import ManageWallets from './manage/ManageWallets';
+/* connect */
+import UnlockPage from './select/UnlockPage';
 
 const Auth = () => {
   return (

@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+
 import styles from './GoBack.module.scss';
 
 const GoBack = () => {

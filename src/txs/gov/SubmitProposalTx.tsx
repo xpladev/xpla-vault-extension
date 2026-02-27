@@ -1,9 +1,10 @@
+import { Card, Page } from 'components/layout';
+import { useCommunityPool } from 'data/queries/distribution';
+import { useDepositParams } from 'data/queries/gov';
+import { combineState } from 'data/query';
 import { useTranslation } from 'react-i18next';
 import { getAmount } from 'utils/coin';
-import { combineState } from 'data/query';
-import { useDepositParams } from 'data/queries/gov';
-import { useCommunityPool } from 'data/queries/distribution';
-import { Page, Card } from 'components/layout';
+
 import TxContext from '../TxContext';
 import SubmitProposalForm from './SubmitProposalForm';
 

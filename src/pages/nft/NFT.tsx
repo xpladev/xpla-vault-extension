@@ -1,5 +1,6 @@
-import { useTranslation } from 'react-i18next';
 import { Auto, Page } from 'components/layout';
+import { useTranslation } from 'react-i18next';
+
 import NFTAssets from './NFTAssets';
 import NFTMarketplace from './NFTMarketplace';
 

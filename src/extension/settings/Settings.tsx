@@ -1,16 +1,17 @@
-import { useTranslation } from 'react-i18next';
-import SettingsIcon from '@mui/icons-material/Settings';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
-import { useIsClassic } from 'data/query';
-import { Flex, Tabs } from 'components/layout';
-import { Popover } from 'components/display';
+import SettingsIcon from '@mui/icons-material/Settings';
 import HeaderIconButton from 'app/components/HeaderIconButton';
 import PopoverNone from 'app/components/PopoverNone';
+import { Popover } from 'components/display';
+import { Flex, Tabs } from 'components/layout';
+import { useIsClassic } from 'data/query';
+import { useTranslation } from 'react-i18next';
+
 import { getOpenURL } from '../storage';
-import NetworkSetting from './NetworkSetting';
-import LanguageSetting from './LanguageSetting';
-import ThemeSetting from './ThemeSetting';
 import BalanceSetting from './BalanceSetting';
+import LanguageSetting from './LanguageSetting';
+import NetworkSetting from './NetworkSetting';
+import ThemeSetting from './ThemeSetting';
 
 const Settings = () => {
   const { t } = useTranslation();

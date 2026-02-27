@@ -1,10 +1,11 @@
-import { useTranslation } from 'react-i18next';
 import BigNumber from 'bignumber.js';
-import { useCurrency } from 'data/settings/Currency';
-import { useMemoizedPrices } from 'data/queries/oracle';
+import { ModalButton } from 'components/feedback';
 import { Card } from 'components/layout';
 import { Read } from 'components/token';
-import { ModalButton } from 'components/feedback';
+import { useMemoizedPrices } from 'data/queries/oracle';
+import { useCurrency } from 'data/settings/Currency';
+import { useTranslation } from 'react-i18next';
+
 import XplaPriceChart from '../charts/XplaPriceChart';
 import DashboardContent from './components/DashboardContent';
 import styles from './Dashboard.module.scss';

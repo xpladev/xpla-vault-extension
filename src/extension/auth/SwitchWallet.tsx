@@ -1,10 +1,11 @@
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { Flex, Grid } from 'components/layout';
 import { isWallet, useAuth } from 'auth';
 import MultisigBadge from 'auth/components/MultisigBadge';
 import SelectPreconfigured from 'auth/modules/select/SelectPreconfigured';
-import { clearStoredPassword } from '../storage';
+import { Flex, Grid } from 'components/layout';
+
 import ExtensionList from '../components/ExtensionList';
+import { clearStoredPassword } from '../storage';
 
 const SwitchWallet = () => {
   const { connectedWallet, wallets, connect } = useAuth();

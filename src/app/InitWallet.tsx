@@ -1,7 +1,8 @@
+import { isWallet, useAuth } from 'auth';
+import { useNetwork, useNetworkName } from 'data/wallet';
 import { PropsWithChildren, useEffect, useMemo } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { useNetwork, useNetworkName } from 'data/wallet';
-import { isWallet, useAuth } from 'auth';
+
 import Online from './containers/Online';
 import WithNodeInfo from './WithNodeInfo';
 

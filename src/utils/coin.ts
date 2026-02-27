@@ -1,5 +1,5 @@
-import { Coins } from '@xpla/xpla.js';
 import { isDenom, isDenomIBC } from '@xpla.kitchen/utils';
+import { Coins } from '@xpla/xpla.js';
 
 /* coin */
 export const getAmount = (coins: Coins, denom: Denom, fallback = '0') => {

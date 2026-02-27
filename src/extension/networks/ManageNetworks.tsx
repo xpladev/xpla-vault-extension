@@ -1,7 +1,8 @@
-import { useTranslation } from 'react-i18next';
+import ManageNetworksForm from 'auth/networks/ManageNetworksForm';
 import { LinkButton } from 'components/general';
 import { Grid } from 'components/layout';
-import ManageNetworksForm from 'auth/networks/ManageNetworksForm';
+import { useTranslation } from 'react-i18next';
+
 import ExtensionPage from '../components/ExtensionPage';
 
 const ManageNetworksPage = () => {

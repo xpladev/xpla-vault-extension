@@ -1,5 +1,6 @@
-import { Link, LinkProps } from 'react-router-dom';
 import classNames from 'classnames';
+import { Link, LinkProps } from 'react-router-dom';
+
 import { ButtonConfig, getClassName } from './Button';
 
 type Props = ButtonConfig & LinkProps;

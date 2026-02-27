@@ -1,5 +1,6 @@
-import { useTranslation } from 'react-i18next';
 import AccessWithLedgerForm from 'auth/ledger/AccessWithLedgerForm';
+import { useTranslation } from 'react-i18next';
+
 import ExtensionPage from '../components/ExtensionPage';
 
 const AccessWithLedgerPage = () => {

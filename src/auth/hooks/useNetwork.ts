@@ -1,6 +1,7 @@
-import { atom, useRecoilState, useRecoilValue } from 'recoil';
 import { useWallet } from '@xpla/wallet-provider';
 import { useNetworks } from 'app/InitNetworks';
+import { atom, useRecoilState, useRecoilValue } from 'recoil';
+
 import { sandbox } from '../scripts/env';
 import { getStoredNetwork, storeNetwork } from '../scripts/network';
 

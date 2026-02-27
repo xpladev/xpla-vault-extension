@@ -1,18 +1,19 @@
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import classNames from 'classnames/bind';
-import { truncate } from '@xpla.kitchen/utils';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { isWallet, useAuth } from 'auth';
-import { useEvmAddress } from 'data/wallet';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import QrCodeIcon from '@mui/icons-material/QrCode';
-import { ReactComponent as CheckEvmIcon } from 'styles/images/menu/CheckEvm.svg';
+import { truncate } from '@xpla.kitchen/utils';
+import { isWallet, useAuth } from 'auth';
+import classNames from 'classnames/bind';
 import { FormHelp } from 'components/form';
 import { Card, Grid } from 'components/layout';
+import { useEvmAddress } from 'data/wallet';
+import { useState } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { useTranslation } from 'react-i18next';
+import { ReactComponent as CheckEvmIcon } from 'styles/images/menu/CheckEvm.svg';
+
 import ExtensionPage from '../components/ExtensionPage';
-import WalletEvmQR from './WalletEvmQR';
 import styles from './CheckEvm.module.scss';
+import WalletEvmQR from './WalletEvmQR';
 
 const cx = classNames.bind(styles);
 

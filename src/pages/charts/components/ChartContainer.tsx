@@ -1,10 +1,11 @@
+import classNames from 'classnames';
+import { Wrong } from 'components/feedback';
+import { Flex } from 'components/layout';
+import { useThemeAnimation } from 'data/settings/Theme';
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import classNames from 'classnames';
-import { useThemeAnimation } from 'data/settings/Theme';
-import { Flex } from 'components/layout';
-import { Wrong } from 'components/feedback';
-import Chart, { ChartProps, CHART_HEIGHT } from './Chart';
+
+import Chart, { CHART_HEIGHT, ChartProps } from './Chart';
 import styles from './ChartContainer.module.scss';
 
 export const LOADING = {

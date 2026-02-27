@@ -1,14 +1,14 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
 import { RawKey } from '@xpla/xpla.js';
 import { Form, FormItem, Submit } from 'components/form';
 import { Input } from 'components/form';
-import validate from '../../scripts/validate';
-import { addWallet } from '../../scripts/keystore';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import useAuth from '../../hooks/useAuth';
+import { addWallet } from '../../scripts/keystore';
+import validate from '../../scripts/validate';
 
 interface Values {
   name: string;

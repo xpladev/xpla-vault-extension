@@ -1,10 +1,11 @@
-import { useTranslation } from 'react-i18next';
-import { Card, Page } from 'components/layout';
-import { Wrong } from 'components/feedback';
 import { isWallet, useAuth } from 'auth';
+import { Wrong } from 'components/feedback';
+import { Card, Page } from 'components/layout';
+import { useTranslation } from 'react-i18next';
+
 import TxContext from '../../txs/TxContext';
-import useDefaultValues from './utils/useDefaultValues';
 import SignMultisigTxForm from './SignMultisigTxForm';
+import useDefaultValues from './utils/useDefaultValues';
 
 const SignMultisigTxPage = () => {
   const { t } = useTranslation();

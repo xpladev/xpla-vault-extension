@@ -1,7 +1,8 @@
+import TxMessage from 'app/containers/TxMessage';
+import { Tag } from 'components/display';
 import { last } from 'ramda';
 import { sentenceCase } from 'sentence-case';
-import { Tag } from 'components/display';
-import TxMessage from 'app/containers/TxMessage';
+
 import styles from './HistoryMessage.module.scss';
 
 interface Props {

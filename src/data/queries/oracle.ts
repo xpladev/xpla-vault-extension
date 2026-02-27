@@ -2,6 +2,7 @@ import { useCallback, useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { getAmount, sortCoins, sortDenoms } from 'utils/coin';
 import { toPrice } from 'utils/num';
+
 import { queryKey, RefetchOptions, useIsClassic } from '../query';
 import { useCurrency } from '../settings/Currency';
 import { useLCDClient } from './lcdClient';

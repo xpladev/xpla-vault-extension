@@ -1,6 +1,7 @@
 import { Msg } from '@xpla/xpla.js';
 import classNames from 'classnames/bind';
 import { Grid } from 'components/layout';
+
 import styles from './DataList.module.scss';
 
 const cx = classNames.bind(styles);

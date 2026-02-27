@@ -1,13 +1,14 @@
+import { ErrorBoundary, Wrong } from 'components/feedback';
+// import { getAmount } from 'utils/coin';
+import { Card } from 'components/layout';
+import { DEFAULT_GAS_PRICE } from 'config/constants';
+// import { useGasPrices } from 'data/queries/tx';
+import { GasPrices } from 'data/Xpla/XplaAPI';
 import { PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import createContext from 'utils/createContext';
-// import { useGasPrices } from 'data/queries/tx';
-import { GasPrices } from 'data/Xpla/XplaAPI';
-// import { getAmount } from 'utils/coin';
-import { Card } from 'components/layout';
-import { ErrorBoundary, Wrong } from 'components/feedback';
+
 import { useTxKey } from './Tx';
-import { DEFAULT_GAS_PRICE } from 'config/constants';
 
 export const [useTx, TxProvider] = createContext<{ gasPrices: GasPrices }>(
   'useTx',

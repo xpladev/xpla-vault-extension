@@ -1,9 +1,10 @@
+import { Proposal, ProposalV1, Vote } from '@xpla/xpla.js';
+import { last } from 'ramda';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
-import { last } from 'ramda';
 import { sentenceCase } from 'sentence-case';
-import { Proposal, ProposalV1, Vote } from '@xpla/xpla.js';
 import { Color } from 'types/components';
+
 import { Pagination, queryKey, RefetchOptions, useIsClassic } from '../query';
 import { useLCDClient } from './lcdClient';
 
@@ -84,7 +85,7 @@ export const useGetProposalStatusItem = () => {
         label: '',
         color: 'danger' as Color,
       },
-    }[status]);
+    })[status];
 };
 
 export const useProposalStatusItem = (status: Proposal.Status) => {
@@ -152,7 +153,7 @@ export const useGetVoteOptionItem = () => {
         label: '',
         color: 'danger' as Color,
       },
-    }[status]);
+    })[status];
 
   return (param: Vote.Option | string) => {
     const option =

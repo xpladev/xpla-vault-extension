@@ -1,9 +1,10 @@
-import { useTranslation } from 'react-i18next';
-import classNames from 'classnames/bind';
 import { EvmAddress } from '@xpla/xpla.js';
+import classNames from 'classnames/bind';
 import { WithFetching } from 'components/feedback';
 import { Read, TokenBadge, TokenIcon } from 'components/token';
 import AssetActions from 'pages/wallet/AssetActions';
+import { useTranslation } from 'react-i18next';
+
 import styles from './Asset.module.scss';
 
 const cx = classNames.bind(styles);

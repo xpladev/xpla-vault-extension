@@ -1,17 +1,18 @@
-import { useCallback, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
-import { MsgDeposit } from '@xpla/xpla.js';
 import { toAmount } from '@xpla.kitchen/utils';
-import { getAmount } from 'utils/coin';
+import { MsgDeposit } from '@xpla/xpla.js';
+import { Form, FormItem, Input } from 'components/form';
+import { useBankBalance } from 'data/queries/bank';
 import { queryKey } from 'data/query';
 import { useAddress } from 'data/wallet';
-import { useBankBalance } from 'data/queries/bank';
-import { Form, FormItem, Input } from 'components/form';
 import useProposalId from 'pages/gov/useProposalId';
+import { useCallback, useMemo } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { getAmount } from 'utils/coin';
+
+import Tx, { getInitialGasDenom } from '../Tx';
 import { getPlaceholder, toInput } from '../utils';
 import validate from '../validate';
-import Tx, { getInitialGasDenom } from '../Tx';
 
 interface TxValues {
   input: string;

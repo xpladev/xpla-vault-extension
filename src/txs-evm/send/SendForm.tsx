@@ -1,17 +1,18 @@
-import { useCallback, useEffect, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
 import PersonIcon from '@mui/icons-material/Person';
-import { AccAddress, EvmAddress, EvmSend, EvmSendToken } from '@xpla/xpla.js';
 import { isDenom, toAmount, truncate } from '@xpla.kitchen/utils';
+import { AccAddress, EvmAddress, EvmSend, EvmSendToken } from '@xpla/xpla.js';
 import useEvmAddress from 'auth/hooks/useEvmAddress';
-import { queryKey } from 'data/query';
-import { useBankBalance } from 'data/queries/bank';
-import { useTnsAddress } from 'data/external/tns';
-import { bech32ToEip55 } from 'utils/evm';
 import { TooltipIcon } from 'components/display';
+import { Form, FormItem, FormWarning, Input } from 'components/form';
 import { Auto, Card, Grid, InlineFlex } from 'components/layout';
-import { Form, FormItem, Input, FormWarning } from 'components/form';
+import { useTnsAddress } from 'data/external/tns';
+import { useBankBalance } from 'data/queries/bank';
+import { queryKey } from 'data/query';
+import { useCallback, useEffect, useMemo } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { bech32ToEip55 } from 'utils/evm';
+
 import AddressBookList from '../../txs/AddressBook/AddressBookList';
 import { getPlaceholder, toInput } from '../../txs/utils';
 import validate from '../../txs/validate';

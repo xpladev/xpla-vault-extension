@@ -1,8 +1,9 @@
-import { useTranslation } from 'react-i18next';
-import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
 import ChevronRight from '@mui/icons-material/ChevronRight';
+import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined';
 import { InternalLink } from 'components/general';
 import { Card, Flex, Grid } from 'components/layout';
+import { useTranslation } from 'react-i18next';
+
 import styles from './DelegationsPromote.module.scss';
 
 const DelegationsPromote = ({ horizontal }: { horizontal?: boolean }) => {

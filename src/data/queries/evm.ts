@@ -1,11 +1,12 @@
-import { useInfiniteQuery, useQuery } from 'react-query';
 import { EvmAddress } from '@xpla/xpla.js';
-import { queryKey, RefetchOptions } from '../query';
-import { useECDClient } from './ecdClient';
 import useEvmAddress from 'auth/hooks/useEvmAddress';
-import { getIpfsGateway } from './wasm';
 import axios from 'axios';
 import BigNumber from 'bignumber.js';
+import { useInfiniteQuery, useQuery } from 'react-query';
+
+import { queryKey, RefetchOptions } from '../query';
+import { useECDClient } from './ecdClient';
+import { getIpfsGateway } from './wasm';
 
 /* erc20 contract info */
 export const useContractInfoERC20 = (token: EvmAddress, enabled = true) => {

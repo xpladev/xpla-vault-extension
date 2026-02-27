@@ -1,4 +1,5 @@
 import { bech32ToEip55 } from 'utils/evm';
+
 import useAuth from './useAuth';
 
 const useEvmAddress = () => {

@@ -1,12 +1,13 @@
-import { useTranslation } from 'react-i18next';
-import classNames from 'classnames/bind';
 import { AccountBalanceWallet } from '@mui/icons-material';
 import { isWallet, useAuth } from 'auth';
-import { useIsGetXPLA } from 'data/queries/bank';
+import classNames from 'classnames/bind';
 import { ExternalLink, LinkButton } from 'components/general';
-import styles from './Activate.module.scss';
 import { CEX } from 'config/constants';
 import { useAccountInfo } from 'data/queries/auth';
+import { useIsGetXPLA } from 'data/queries/bank';
+import { useTranslation } from 'react-i18next';
+
+import styles from './Activate.module.scss';
 
 const cx = classNames.bind(styles);
 

@@ -1,9 +1,10 @@
-import { PropsWithChildren } from 'react';
-import { has } from 'utils/num';
-import { useCurrency } from 'data/settings/Currency';
-import { Grid, Card } from 'components/layout';
+import { Card, Grid } from 'components/layout';
 import { Props as CardProps } from 'components/layout/Card';
 import { Read } from 'components/token';
+import { useCurrency } from 'data/settings/Currency';
+import { PropsWithChildren } from 'react';
+import { has } from 'utils/num';
+
 import styles from './StakedCard.module.scss';
 
 interface Props extends CardProps {

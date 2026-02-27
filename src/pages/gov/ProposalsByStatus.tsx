@@ -1,15 +1,16 @@
+import { Proposal } from '@xpla/xpla.js';
+import { Empty, Fetching } from 'components/feedback';
+import { Toggle } from 'components/form';
+import { Card, Col } from 'components/layout';
+import { useProposals, useProposalStatusItem } from 'data/queries/gov';
+import { combineState, useIsClassic } from 'data/query';
+import { useXplaAssets } from 'data/Xpla/XplaAssets';
+import { reverse } from 'ramda';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { reverse } from 'ramda';
-import { Proposal } from '@xpla/xpla.js';
-import { combineState, useIsClassic } from 'data/query';
-import { useProposals, useProposalStatusItem } from 'data/queries/gov';
-import { useXplaAssets } from 'data/Xpla/XplaAssets';
-import { Col, Card } from 'components/layout';
-import { Fetching, Empty } from 'components/feedback';
-import { Toggle } from 'components/form';
-import ProposalItem from './ProposalItem';
+
 import GovernanceParams from './GovernanceParams';
+import ProposalItem from './ProposalItem';
 import styles from './ProposalsByStatus.module.scss';
 
 const ProposalsByStatus = ({ status }: { status: Proposal.Status }) => {
@@ -69,13 +70,14 @@ const ProposalsByStatus = ({ status }: { status: Proposal.Status }) => {
   return (
     <Fetching {...state}>
       <Col>
-        {isClassic && status === Proposal.Status.PROPOSAL_STATUS_VOTING_PERIOD && (
-          <section>
-            <Toggle checked={showAll} onChange={toggle}>
-              {t('Show all')}
-            </Toggle>
-          </section>
-        )}
+        {isClassic &&
+          status === Proposal.Status.PROPOSAL_STATUS_VOTING_PERIOD && (
+            <section>
+              <Toggle checked={showAll} onChange={toggle}>
+                {t('Show all')}
+              </Toggle>
+            </section>
+          )}
 
         {render()}
       </Col>

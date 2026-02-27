@@ -1,5 +1,5 @@
-import { ForwardedRef, forwardRef, HTMLProps } from 'react';
 import CallMadeIcon from '@mui/icons-material/CallMade';
+import { ForwardedRef, forwardRef, HTMLProps } from 'react';
 
 interface Props extends HTMLProps<HTMLAnchorElement> {
   icon?: boolean;

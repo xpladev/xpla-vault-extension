@@ -1,7 +1,8 @@
-import { ReactNode, useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
-import { Grid } from 'components/layout';
 import { SearchInput } from 'components/form';
+import { Grid } from 'components/layout';
+import { ReactNode, useEffect, useState } from 'react';
+
 import styles from './WithSearchInput.module.scss';
 
 const cx = classNames.bind(styles);

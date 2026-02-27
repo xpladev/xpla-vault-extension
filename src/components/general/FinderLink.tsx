@@ -1,11 +1,12 @@
-import { ForwardedRef, HTMLAttributes, PropsWithChildren } from 'react';
-import { forwardRef } from 'react';
-import classNames from 'classnames';
-import { EvmAddress } from '@xpla/xpla.js';
 import { truncate } from '@xpla.kitchen/utils';
+import { EvmAddress } from '@xpla/xpla.js';
+import classNames from 'classnames';
 import { EXPLORER } from 'config/constants';
 import { useNetworkName } from 'data/wallet';
+import { ForwardedRef, HTMLAttributes, PropsWithChildren } from 'react';
+import { forwardRef } from 'react';
 import { hexToBech32 } from 'utils/evm';
+
 import ExternalLink from './ExternalLink';
 import styles from './FinderLink.module.scss';
 
@@ -31,10 +32,10 @@ const FinderLink = forwardRef(
     let path = tx
       ? 'tx'
       : block
-      ? 'block'
-      : validator
-      ? 'validator'
-      : 'address';
+        ? 'block'
+        : validator
+          ? 'validator'
+          : 'address';
 
     const temp = rest.value ?? children;
     const tempValue = temp ? temp.toString() : '';

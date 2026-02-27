@@ -1,6 +1,6 @@
+import { Flex } from 'components/layout';
 import { QRCodeSVG } from 'qrcode.react';
 import variable from 'styles/variable';
-import { Flex } from 'components/layout';
 
 const QRCode = ({ value }: { value: string }) => {
   return (

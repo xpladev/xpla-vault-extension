@@ -1,8 +1,9 @@
+import classNames from 'classnames/bind';
 import { PropsWithChildren, ReactNode } from 'react';
 import { Link, To } from 'react-router-dom';
-import classNames from 'classnames/bind';
-import { Flex } from '../layout';
+
 import { ErrorBoundary, WithFetching } from '../feedback';
+import { Flex } from '../layout';
 import styles from './Card.module.scss';
 
 const cx = classNames.bind(styles);

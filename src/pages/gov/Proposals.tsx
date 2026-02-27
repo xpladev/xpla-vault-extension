@@ -1,6 +1,7 @@
 import { Proposal } from '@xpla/xpla.js';
-import { useGetProposalStatusItem } from 'data/queries/gov';
 import { Tabs } from 'components/layout';
+import { useGetProposalStatusItem } from 'data/queries/gov';
+
 import ProposalsByStatus from './ProposalsByStatus';
 
 const Proposals = () => {

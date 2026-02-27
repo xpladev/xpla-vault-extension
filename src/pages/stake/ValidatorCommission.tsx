@@ -1,8 +1,9 @@
-import { useTranslation } from 'react-i18next';
 import { readPercent } from '@xpla.kitchen/utils';
-import { XplaValidator } from 'types/validator';
-import { Card } from 'components/layout';
 import { ToNow } from 'components/display';
+import { Card } from 'components/layout';
+import { useTranslation } from 'react-i18next';
+import { XplaValidator } from 'types/validator';
+
 import ValidatorNumbers from './components/ValidatorNumbers';
 
 const ValidatorCommission = ({ validator }: { validator: XplaValidator }) => {

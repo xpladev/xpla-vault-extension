@@ -1,18 +1,19 @@
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { last } from 'ramda';
-import BigNumber from 'bignumber.js';
 import { capitalize } from '@mui/material';
 import { formatNumber } from '@xpla.kitchen/utils';
+import BigNumber from 'bignumber.js';
+import { TooltipIcon } from 'components/display';
+import { Select } from 'components/form';
+import { Card } from 'components/layout';
 import { combineState } from 'data/query';
 import { AggregateWallets, useSumActiveWallets } from 'data/Xpla/XplaAPI';
 import { useWallets } from 'data/Xpla/XplaAPI';
-import { Select } from 'components/form';
-import { Card } from 'components/layout';
-import { TooltipIcon } from 'components/display';
+import { last } from 'ramda';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import ChartContainer from './components/ChartContainer';
-import Range from './components/Range';
 import Filter from './components/Filter';
+import Range from './components/Range';
 
 const Wallets = () => {
   const { t } = useTranslation();

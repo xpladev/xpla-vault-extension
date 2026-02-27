@@ -1,13 +1,14 @@
-import { Fragment, useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useInfiniteQuery } from 'react-query';
 import axios from 'axios';
+import { Empty } from 'components/feedback';
+import { Button } from 'components/general';
+import { Card, Col, Page } from 'components/layout';
 import { queryKey } from 'data/query';
 import { useAddress } from 'data/wallet';
 import { useXplaAPIURL } from 'data/Xpla/XplaAPI';
-import { Button } from 'components/general';
-import { Card, Col, Page } from 'components/layout';
-import { Empty } from 'components/feedback';
+import { Fragment, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useInfiniteQuery } from 'react-query';
+
 import HistoryItem from './HistoryItem';
 
 const HistoryList = () => {
@@ -71,8 +72,8 @@ const HistoryList = () => {
           {isFetchingNextPage
             ? t('Loading more...')
             : hasNextPage
-            ? t('Load more')
-            : t('Nothing more to load')}
+              ? t('Load more')
+              : t('Nothing more to load')}
         </Button>
       </Col>
     );

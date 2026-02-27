@@ -1,6 +1,6 @@
-import { useTranslation } from 'react-i18next';
-import { Card, Grid } from 'components/layout';
 import { ExternalLink } from 'components/general';
+import { Card, Grid } from 'components/layout';
+import { useTranslation } from 'react-i18next';
 
 const ProposalMetadata = ({ metadata }: { metadata: string }) => {
   const { t } = useTranslation();

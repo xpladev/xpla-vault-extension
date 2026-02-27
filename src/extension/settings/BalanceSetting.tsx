@@ -1,5 +1,5 @@
-import { useMinimumValue } from 'data/settings/MinimumValue';
 import { RadioGroup } from 'components/form';
+import { useMinimumValue } from 'data/settings/MinimumValue';
 
 const BalanceSetting = () => {
   const [value, set, list] = useMinimumValue();

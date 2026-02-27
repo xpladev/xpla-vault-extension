@@ -1,11 +1,12 @@
-import { useTranslation } from 'react-i18next';
 import { readAmount } from '@xpla.kitchen/utils';
-import { combineState } from 'data/query';
-import { useSupply } from 'data/queries/bank';
-import { useStakingPool } from 'data/queries/staking';
+import { Tooltip } from 'components/display';
 import { Card } from 'components/layout';
 import { ReadPercent } from 'components/token';
-import { Tooltip } from 'components/display';
+import { useSupply } from 'data/queries/bank';
+import { useStakingPool } from 'data/queries/staking';
+import { combineState } from 'data/query';
+import { useTranslation } from 'react-i18next';
+
 import DashboardContent from './components/DashboardContent';
 import DashboardTag from './components/DashboardTag';
 

@@ -1,9 +1,10 @@
 import classNames from 'classnames/bind';
 import { useIsClassic } from 'data/query';
 import { useIsXplaAPIAvailable } from 'data/Xpla/XplaAPI';
-import TxVolume from '../charts/TxVolume';
+
 import StakingReturn from '../charts/StakingReturn';
 import TaxRewards from '../charts/TaxRewards';
+import TxVolume from '../charts/TxVolume';
 import Wallets from '../charts/Wallets';
 import styles from './Charts.module.scss';
 

@@ -1,14 +1,15 @@
+import { EvmMsg, Msg } from '@xpla/xpla.js';
+import { Dl, ToNow } from 'components/display';
+import { Grid } from 'components/layout';
+import { ReadMultiple } from 'components/token';
+import { useIsClassic } from 'data/query';
+import { useNetwork } from 'data/wallet';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNetwork } from 'data/wallet';
-import { useIsClassic } from 'data/query';
-import { Grid } from 'components/layout';
-import { Dl, ToNow } from 'components/display';
-import { ReadMultiple } from 'components/token';
+
 import { getIsNativeMsgFromExternal, TxRequest } from '../utils';
 import Message from './Message';
 import styles from './TxDetails.module.scss';
-import { EvmMsg, Msg } from '@xpla/xpla.js';
 
 const isEvmMsg = (msg: Msg | EvmMsg): msg is EvmMsg => {
   return 'tx()' in msg;

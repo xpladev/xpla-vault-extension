@@ -1,12 +1,13 @@
-import { useQuery } from 'react-query';
-import { flatten, path, uniqBy } from 'ramda';
-import BigNumber from 'bignumber.js';
 import { AccAddress, ValAddress, Validator } from '@xpla/xpla.js';
 import { Delegation, UnbondingDelegation } from '@xpla/xpla.js';
 import { BondStatus } from '@xpla/xpla.proto/cosmos/staking/v1beta1/staking';
-import { has } from 'utils/num';
+import BigNumber from 'bignumber.js';
+import { flatten, path, uniqBy } from 'ramda';
+import { useQuery } from 'react-query';
 import { StakeAction } from 'txs/stake/StakeForm';
-import { queryKey, Pagination, RefetchOptions } from '../query';
+import { has } from 'utils/num';
+
+import { Pagination, queryKey, RefetchOptions } from '../query';
 import { useAddress } from '../wallet';
 import { useLCDClient } from './lcdClient';
 

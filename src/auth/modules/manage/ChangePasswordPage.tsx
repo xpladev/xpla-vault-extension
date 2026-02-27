@@ -1,8 +1,9 @@
-import { useTranslation } from 'react-i18next';
 import { Card, Page } from 'components/layout';
+import { useTranslation } from 'react-i18next';
+
+import ChangePasswordForm from './ChangePasswordForm';
 import ConnectedWallet from './ConnectedWallet';
 import GoBack from './GoBack';
-import ChangePasswordForm from './ChangePasswordForm';
 
 const ChangePasswordPage = () => {
   const { t } = useTranslation();

@@ -1,6 +1,7 @@
-import { useTranslation } from 'react-i18next';
 import { LinkButton } from 'components/general';
 import { Col, Page } from 'components/layout';
+import { useTranslation } from 'react-i18next';
+
 import Staked from './Staked';
 import Validators from './Validators';
 

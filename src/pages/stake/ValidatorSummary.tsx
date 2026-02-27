@@ -1,10 +1,11 @@
+import { readPercent } from '@xpla.kitchen/utils';
+import { TooltipIcon } from 'components/display';
+import { Card } from 'components/layout';
+import { calcSelfDelegation } from 'data/Xpla/XplaAPI';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { readPercent } from '@xpla.kitchen/utils';
 import { XplaValidator } from 'types/validator';
-import { calcSelfDelegation } from 'data/Xpla/XplaAPI';
-import { Card } from 'components/layout';
-import { TooltipIcon } from 'components/display';
+
 import Uptime from './components/Uptime';
 import ValidatorNumbers from './components/ValidatorNumbers';
 

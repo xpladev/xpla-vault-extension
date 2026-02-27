@@ -1,5 +1,6 @@
-import { ReactNode } from 'react';
 import { useTokenBalanceERC20 } from 'data/queries/evm';
+import { ReactNode } from 'react';
+
 import { Props as AssetProps } from './Asset';
 
 interface Props extends TokenItem {

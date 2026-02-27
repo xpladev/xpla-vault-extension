@@ -1,4 +1,5 @@
 import { useManageWallet } from 'auth/modules/manage/ManageWallets';
+
 import ExtensionList from '../components/ExtensionList';
 
 const ManageWallet = () => {

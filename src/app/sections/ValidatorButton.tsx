@@ -1,5 +1,5 @@
-import { useConnectedMoniker } from 'data/queries/distribution';
 import { LinkButton } from 'components/general';
+import { useConnectedMoniker } from 'data/queries/distribution';
 
 const ValidatorButton = () => {
   const moniker = useConnectedMoniker();

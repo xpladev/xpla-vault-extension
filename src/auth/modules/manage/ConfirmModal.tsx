@@ -1,8 +1,8 @@
-import { PropsWithChildren } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Modal } from 'components/feedback';
 import { Props as ModalProps } from 'components/feedback/Modal';
 import { Submit } from 'components/form';
+import { PropsWithChildren } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ConfirmModal = (props: PropsWithChildren<Omit<ModalProps, 'isOpen'>>) => {
   const { children, ...rest } = props;

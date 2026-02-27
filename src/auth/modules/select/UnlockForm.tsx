@@ -1,10 +1,11 @@
-import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
 import { Form, FormItem } from 'components/form';
 import { Input, Submit } from 'components/form';
-import { testPassword, unlockWallet } from '../../scripts/keystore';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import useAuth from '../../hooks/useAuth';
+import { testPassword, unlockWallet } from '../../scripts/keystore';
 
 interface Values {
   password: string;

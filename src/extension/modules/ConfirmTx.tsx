@@ -1,24 +1,25 @@
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { getErrorMessage } from 'utils/error';
-import { useIsClassic } from 'data/query';
-import { useThemeAnimation } from 'data/settings/Theme';
-import { FlexColumn, Grid } from 'components/layout';
-import { Form, FormError, FormItem, FormWarning } from 'components/form';
-import { Input, Checkbox } from 'components/form';
-import { useTx } from 'txs/TxContext';
 import Overlay from 'app/components/Overlay';
-import useToPostMultisigTx from 'pages/multisig/utils/useToPostMultisigTx';
 import { isWallet, useAuth } from 'auth';
 import { PasswordError } from 'auth/scripts/keystore';
-import { getOpenURL, getStoredPassword } from '../storage';
-import { getIsDangerousTx, SignBytesRequest, TxRequest } from '../utils';
-import { useRequest } from '../RequestContainer';
+import { Form, FormError, FormItem, FormWarning } from 'components/form';
+import { Checkbox, Input } from 'components/form';
+import { FlexColumn, Grid } from 'components/layout';
+import { useIsClassic } from 'data/query';
+import { useThemeAnimation } from 'data/settings/Theme';
+import useToPostMultisigTx from 'pages/multisig/utils/useToPostMultisigTx';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { useTx } from 'txs/TxContext';
+import { getErrorMessage } from 'utils/error';
+
+import ConfirmButtons from '../components/ConfirmButtons';
 import ExtensionPage from '../components/ExtensionPage';
 import WalletCard from '../components/WalletCard';
-import ConfirmButtons from '../components/ConfirmButtons';
+import { useRequest } from '../RequestContainer';
+import { getOpenURL, getStoredPassword } from '../storage';
+import { getIsDangerousTx, SignBytesRequest, TxRequest } from '../utils';
 import TxDetails from './TxDetails';
 
 interface Values {
@@ -61,8 +62,8 @@ const ConfirmTx = (props: TxRequest | SignBytesRequest) => {
     'tx' in props && getIsDangerousTx(props.tx, isClassic)
       ? t('Dangerous tx')
       : passwordRequired && !password
-      ? t('Enter password')
-      : '';
+        ? t('Enter password')
+        : '';
 
   const navigate = useNavigate();
   const toPostMultisigTx = useToPostMultisigTx();

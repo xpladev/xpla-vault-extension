@@ -1,9 +1,10 @@
+import { format } from 'date-fns';
 import { ReactNode } from 'react';
 import { ResponsiveContainer } from 'recharts';
-import { AreaChart, Area, BarChart, Bar } from 'recharts';
-import { XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
-import { format } from 'date-fns';
+import { Area, AreaChart, Bar, BarChart } from 'recharts';
+import { CartesianGrid, Tooltip, XAxis, YAxis } from 'recharts';
 import variable from 'styles/variable';
+
 import ChartTooltip from './ChartTooltip';
 
 export const CHART_HEIGHT = 240;

@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { useNetworkName } from 'data/wallet';
+
 import styles from './NetworkName.module.scss';
 
 const NetworkName = () => {

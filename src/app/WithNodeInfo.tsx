@@ -1,5 +1,6 @@
-import { PropsWithChildren } from 'react';
 import { useNodeInfo } from 'data/queries/tendermint';
+import { PropsWithChildren } from 'react';
+
 import Overlay from './components/Overlay';
 import NetworkError from './NetworkError';
 

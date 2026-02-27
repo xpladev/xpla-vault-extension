@@ -1,12 +1,13 @@
-import { ReactNode } from 'react';
 import { isDenomIBC, isDenomNative } from '@xpla.kitchen/utils';
 import { readDenom, truncate } from '@xpla.kitchen/utils';
 import { AccAddress, EvmAddress } from '@xpla/xpla.js';
 import { ASSETS } from 'config/constants';
-import { useIsClassic } from './query';
+import { ReactNode } from 'react';
+
+import { useContractInfoERC20 } from './queries/evm';
 import { useIBCBaseDenom } from './queries/ibc';
 import { useTokenInfoCW20 } from './queries/wasm';
-import { useContractInfoERC20 } from './queries/evm';
+import { useIsClassic } from './query';
 import {
   useCustomTokensCW20,
   useCustomTokensERC20,

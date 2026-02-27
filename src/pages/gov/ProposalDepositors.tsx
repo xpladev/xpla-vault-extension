@@ -1,9 +1,9 @@
-import { useTranslation } from 'react-i18next';
-import { getAmount } from 'utils/coin';
-import { useDeposits } from 'data/queries/gov';
 import { FinderLink } from 'components/general';
 import { Card, Table } from 'components/layout';
 import { Read } from 'components/token';
+import { useDeposits } from 'data/queries/gov';
+import { useTranslation } from 'react-i18next';
+import { getAmount } from 'utils/coin';
 
 // FIXME: Pagination (Client)
 

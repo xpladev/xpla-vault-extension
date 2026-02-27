@@ -1,8 +1,9 @@
-import { useQuery } from 'react-query';
 import { Buffer } from 'buffer';
 import keccak256 from 'keccak256';
-import { queryKey, RefetchOptions } from '../query';
+import { useQuery } from 'react-query';
+
 import { useLCDClient } from '../queries/lcdClient';
+import { queryKey, RefetchOptions } from '../query';
 import { useXplaContracts } from '../Xpla/XplaAssets';
 
 /**

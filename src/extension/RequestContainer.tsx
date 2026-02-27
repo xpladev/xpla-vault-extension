@@ -1,14 +1,15 @@
-import { PropsWithChildren, useEffect, useState } from 'react';
+import encrypt from 'auth/scripts/encrypt';
+import { useIsClassic } from 'data/query';
 import extension from 'extensionizer';
 import { isNil, uniq, update } from 'ramda';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import createContext from 'utils/createContext';
-import { useIsClassic } from 'data/query';
-import encrypt from 'auth/scripts/encrypt';
+
 import { ExtensionStorage, PrimitiveDefaultRequest } from './utils';
 import { ConnectRequest, RequestType, TxRequest } from './utils';
 import { SignBytesRequest, TxResponse } from './utils';
 import { isBytes, isSign } from './utils';
-import { parseBytes, parseDefault, useParseTx, toData } from './utils';
+import { parseBytes, parseDefault, toData, useParseTx } from './utils';
 
 interface RequestContext {
   requests: {

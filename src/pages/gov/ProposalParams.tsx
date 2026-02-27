@@ -1,7 +1,8 @@
-import { useTranslation } from 'react-i18next';
 import { readPercent } from '@xpla.kitchen/utils';
-import { useTallyParams } from 'data/queries/gov';
 import { Card } from 'components/layout';
+import { useTallyParams } from 'data/queries/gov';
+import { useTranslation } from 'react-i18next';
+
 import DataList from './components/DataList';
 
 const ProposalParams = () => {

@@ -1,6 +1,6 @@
-import is from './is';
-import encrypt from './encrypt';
 import decrypt from './decrypt';
+import encrypt from './encrypt';
+import is from './is';
 
 /* wallet */
 export const getWallet = () => {

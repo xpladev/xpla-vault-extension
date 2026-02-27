@@ -1,13 +1,13 @@
-import { ReactNode, useMemo } from 'react';
 import { capitalize } from '@mui/material';
 import { isDenom, truncate } from '@xpla.kitchen/utils';
 import { AccAddress, Coin, Coins, ValAddress } from '@xpla/xpla.js';
-import { useAddress } from 'data/wallet';
-import { useValidators } from 'data/queries/staking';
-import { WithTokenItem } from 'data/token';
-import { useCW20Contracts, useCW20Whitelist } from 'data/Xpla/XplaAssets';
 import { FinderLink } from 'components/general';
 import { Read } from 'components/token';
+import { useValidators } from 'data/queries/staking';
+import { WithTokenItem } from 'data/token';
+import { useAddress } from 'data/wallet';
+import { useCW20Contracts, useCW20Whitelist } from 'data/Xpla/XplaAssets';
+import { ReactNode, useMemo } from 'react';
 
 const ValidatorAddress = ({ children: address }: { children: string }) => {
   const { data: validators } = useValidators();

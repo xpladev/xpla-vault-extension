@@ -1,7 +1,8 @@
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import classNames from 'classnames/bind';
 import { HTMLAttributes, ReactNode } from 'react';
 import { Link, LinkProps } from 'react-router-dom';
-import classNames from 'classnames/bind';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
 import styles from './Internal.module.scss';
 
 const cx = classNames.bind(styles);
@@ -13,8 +14,7 @@ interface Props {
 }
 
 interface InternalButtonProps
-  extends Props,
-    HTMLAttributes<HTMLButtonElement> {}
+  extends Props, HTMLAttributes<HTMLButtonElement> {}
 
 export const InternalButton = (props: InternalButtonProps) => {
   return <button type="button" {...render(props)} disabled={props.disabled} />;

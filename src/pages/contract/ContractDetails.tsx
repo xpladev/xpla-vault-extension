@@ -1,7 +1,8 @@
-import { useTranslation } from 'react-i18next';
 import { ContractInfo } from '@xpla/xpla.js';
-import { Pre, FinderLink } from 'components/general';
+import { FinderLink, Pre } from 'components/general';
 import { Grid } from 'components/layout';
+import { useTranslation } from 'react-i18next';
+
 import styles from './ContractDetails.module.scss';
 
 const ContractDetails = (props: ContractInfo) => {

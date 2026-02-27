@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
 import { useThemeFavicon } from 'data/settings/Theme';
+import { Link } from 'react-router-dom';
+
 import styles from './Logo.module.scss';
 
 const Logo = () => {

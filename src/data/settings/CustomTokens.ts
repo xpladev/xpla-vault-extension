@@ -1,8 +1,9 @@
-import { atom, useRecoilState } from 'recoil';
 import update from 'immutability-helper';
+import { atom, useRecoilState } from 'recoil';
 import { DefaultCustomTokensItem } from 'utils/localStorage';
 import { getLocalSetting, setLocalSetting } from 'utils/localStorage';
 import { SettingKey } from 'utils/localStorage';
+
 import { useNetworkName } from '../wallet';
 
 const customTokensState = atom({

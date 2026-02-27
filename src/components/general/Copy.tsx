@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { useState } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { useTranslation } from 'react-i18next';
 import useTimeout from 'utils/hooks/useTimeout';
+
 import styles from './Copy.module.scss';
 
 const Copy = (props: CopyToClipboard.Props) => {

@@ -1,5 +1,6 @@
-import { useTranslation } from 'react-i18next';
 import UnlockForm from 'auth/modules/select/UnlockForm';
+import { useTranslation } from 'react-i18next';
+
 import ExtensionPage from '../components/ExtensionPage';
 
 const UnlockPage = () => {

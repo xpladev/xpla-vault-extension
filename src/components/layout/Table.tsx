@@ -1,9 +1,10 @@
-import { CSSProperties, ReactNode, useMemo, useState } from 'react';
-import { path } from 'ramda';
 import classNames from 'classnames/bind';
-import { ReactComponent as DropUpIcon } from 'styles/images/icons/DropUp.svg';
-import { ReactComponent as DropDownIcon } from 'styles/images/icons/DropDown.svg';
 import { TooltipIcon } from 'components/display';
+import { path } from 'ramda';
+import { CSSProperties, ReactNode, useMemo, useState } from 'react';
+import { ReactComponent as DropDownIcon } from 'styles/images/icons/DropDown.svg';
+import { ReactComponent as DropUpIcon } from 'styles/images/icons/DropUp.svg';
+
 import Grid from './Grid';
 import PaginationButtons from './PaginationButtons';
 import styles from './Table.module.scss';
@@ -50,7 +51,7 @@ function Table<T>({ dataSource, filter, rowKey, ...props }: Props<T>) {
   const getClassName = ({ align }: Column<T>) => cx(align);
   const getKey = ({ dataIndex, key }: Column<T>) =>
     key ??
-    (typeof dataIndex === 'string' ? dataIndex : dataIndex?.join() ?? '');
+    (typeof dataIndex === 'string' ? dataIndex : (dataIndex?.join() ?? ''));
 
   /* pagination */
   const [page, setPage] = useState(1);
@@ -176,8 +177,8 @@ function Table<T>({ dataSource, filter, rowKey, ...props }: Props<T>) {
                     typeof dataIndex === 'string'
                       ? data[dataIndex as keyof T]
                       : dataIndex
-                      ? path(dataIndex, data)
-                      : undefined;
+                        ? path(dataIndex, data)
+                        : undefined;
 
                   const children = render?.(value, data, index) ?? value;
 

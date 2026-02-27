@@ -1,7 +1,7 @@
-import { useCW20Pairs } from 'data/Xpla/XplaAssets';
-import { WithTokenItem } from 'data/token';
-import { Col, Row, Card } from 'components/layout';
+import { Card, Col, Row } from 'components/layout';
 import { Token } from 'components/token';
+import { WithTokenItem } from 'data/token';
+import { useCW20Pairs } from 'data/Xpla/XplaAssets';
 
 const Pairs = () => {
   const { data: pairs } = useCW20Pairs();

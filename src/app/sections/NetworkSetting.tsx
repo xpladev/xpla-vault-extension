@@ -1,8 +1,8 @@
-import { useTranslation } from 'react-i18next';
-import { useNetworkOptions, useNetworkState } from 'data/wallet';
-import { useCustomNetworks } from 'data/settings/CustomNetworks';
-import { InternalLink } from 'components/general';
 import { RadioGroup } from 'components/form';
+import { InternalLink } from 'components/general';
+import { useCustomNetworks } from 'data/settings/CustomNetworks';
+import { useNetworkOptions, useNetworkState } from 'data/wallet';
+import { useTranslation } from 'react-i18next';
 
 const NetworkSetting = () => {
   const { t } = useTranslation();

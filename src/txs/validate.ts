@@ -1,6 +1,6 @@
-import { always } from 'ramda';
-import BigNumber from 'bignumber.js';
 import { AccAddress, EvmAddress } from '@xpla/xpla.js';
+import BigNumber from 'bignumber.js';
+import { always } from 'ramda';
 import { validateMsg } from 'utils/data';
 
 const lessThan = (max: BigNumber, label = 'Amount', optional = false) => {

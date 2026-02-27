@@ -1,8 +1,9 @@
 import { ProposalV1 } from '@xpla/xpla.js';
 import { FlexColumn } from 'components/layout';
-import ProposalVotes from './ProposalVotes';
+
 import ProposalHeader from './ProposalHeader';
 import styles from './ProposalItem.module.scss';
+import ProposalVotes from './ProposalVotes';
 
 interface Props {
   proposal: ProposalV1;

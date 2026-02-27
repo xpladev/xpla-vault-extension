@@ -1,23 +1,24 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { intervalToDuration } from 'date-fns';
-import { EvmTxInfo, isTxError, TxInfo } from '@xpla/xpla.js';
-import * as ruleset from '@xpla/log-finder-ruleset';
-import { Transaction } from '@xpla/log-finder-ruleset/dist/types';
-import DoneAllIcon from '@mui/icons-material/DoneAll';
-import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import CloseIcon from '@mui/icons-material/Close';
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
-import useInterval from 'utils/hooks/useInterval';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import * as ruleset from '@xpla/log-finder-ruleset';
+import { Transaction } from '@xpla/log-finder-ruleset/dist/types';
+import { EvmTxInfo, isTxError, TxInfo } from '@xpla/xpla.js';
+import { LoadingCircular, Modal } from 'components/feedback';
+import { Button, FinderLink, LinkButton } from 'components/general';
+import { Flex } from 'components/layout';
 import { isBroadcastingState, latestTxState } from 'data/queries/tx';
 import { useTxInfo } from 'data/queries/tx';
 import { useThemeAnimation } from 'data/settings/Theme';
 import { useNetworkName } from 'data/wallet';
-import { Button, FinderLink, LinkButton } from 'components/general';
-import { Modal, LoadingCircular } from 'components/feedback';
-import { Flex } from 'components/layout';
+import { intervalToDuration } from 'date-fns';
+import { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import useInterval from 'utils/hooks/useInterval';
+
 import TxMessage from '../containers/TxMessage';
 import styles from './LatestTx.module.scss';
 

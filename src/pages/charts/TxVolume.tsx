@@ -1,17 +1,18 @@
-import { useCallback, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import BigNumber from 'bignumber.js';
-import { head, last } from 'ramda';
 import { capitalize } from '@mui/material';
 import { isDenomXplaNative, readAmount, readDenom } from '@xpla.kitchen/utils';
-import { sortDenoms } from 'utils/coin';
-import { useCurrency } from 'data/settings/Currency';
-import { Aggregate, useTxVolume } from 'data/Xpla/XplaAPI';
-import { useIsClassic } from 'data/query';
-import { useActiveDenoms } from 'data/queries/oracle';
+import BigNumber from 'bignumber.js';
+import { TooltipIcon } from 'components/display';
 import { Select } from 'components/form';
 import { Card } from 'components/layout';
-import { TooltipIcon } from 'components/display';
+import { useActiveDenoms } from 'data/queries/oracle';
+import { useIsClassic } from 'data/query';
+import { useCurrency } from 'data/settings/Currency';
+import { Aggregate, useTxVolume } from 'data/Xpla/XplaAPI';
+import { head, last } from 'ramda';
+import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { sortDenoms } from 'utils/coin';
+
 import ChartContainer from './components/ChartContainer';
 import Filter from './components/Filter';
 import Range from './components/Range';

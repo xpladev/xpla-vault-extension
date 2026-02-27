@@ -1,5 +1,6 @@
-import { useMemo } from 'react';
 import { MnemonicKey } from '@xpla/xpla.js';
+import { useMemo } from 'react';
+
 import CreateWalletWizard from './CreateWalletWizard';
 import Quiz from './Quiz';
 

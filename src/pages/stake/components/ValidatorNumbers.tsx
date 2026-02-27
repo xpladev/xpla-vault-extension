@@ -1,5 +1,6 @@
-import { Content, Contents } from 'types/components';
 import { Grid } from 'components/layout';
+import { Content, Contents } from 'types/components';
+
 import styles from './ValidatorNumbers.module.scss';
 
 export const ValidatorNumber = ({ title, content }: Content) => {

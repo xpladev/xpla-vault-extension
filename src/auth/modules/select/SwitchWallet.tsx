@@ -2,6 +2,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { truncate } from '@xpla.kitchen/utils';
 import classNames from 'classnames/bind';
 import { Flex } from 'components/layout';
+
 import AuthButton from '../../components/AuthButton';
 import MultisigBadge from '../../components/MultisigBadge';
 import useAuth from '../../hooks/useAuth';

@@ -1,14 +1,14 @@
-import { useTranslation } from 'react-i18next';
-import qs from 'qs';
 import { readDenom } from '@xpla.kitchen/utils';
-import { ReactComponent as Binance } from 'styles/images/exchanges/Binance.svg';
-import { ReactComponent as KuCoin } from 'styles/images/exchanges/KuCoin.svg';
-import { ReactComponent as Huobi } from 'styles/images/exchanges/Huobi.svg';
-import { ReactComponent as Bitfinex } from 'styles/images/exchanges/Bitfinex.svg';
-import { ReactComponent as Kraken } from 'styles/images/exchanges/Kraken.svg';
-import Transak from 'styles/images/exchanges/Transak.png';
-import Kado from 'styles/images/exchanges/Kado.svg';
 import { ListGroup } from 'components/display';
+import qs from 'qs';
+import { useTranslation } from 'react-i18next';
+import { ReactComponent as Binance } from 'styles/images/exchanges/Binance.svg';
+import { ReactComponent as Bitfinex } from 'styles/images/exchanges/Bitfinex.svg';
+import { ReactComponent as Huobi } from 'styles/images/exchanges/Huobi.svg';
+import Kado from 'styles/images/exchanges/Kado.svg';
+import { ReactComponent as Kraken } from 'styles/images/exchanges/Kraken.svg';
+import { ReactComponent as KuCoin } from 'styles/images/exchanges/KuCoin.svg';
+import Transak from 'styles/images/exchanges/Transak.png';
 
 export const exchanges = {
   axpla: [],

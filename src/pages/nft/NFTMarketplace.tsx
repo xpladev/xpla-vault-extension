@@ -1,7 +1,8 @@
-import { useTranslation } from 'react-i18next';
-import { useCW721Marketplace } from 'data/Xpla/XplaAssets';
 import { ExternalLink } from 'components/general';
 import { Card } from 'components/layout';
+import { useCW721Marketplace } from 'data/Xpla/XplaAssets';
+import { useTranslation } from 'react-i18next';
+
 import styles from './NFTMarketplace.module.scss';
 
 const NFTMarketplace = () => {

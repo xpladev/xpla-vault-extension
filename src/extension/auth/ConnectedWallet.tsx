@@ -1,13 +1,14 @@
-import { useTranslation } from 'react-i18next';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { isWallet, useAuth } from 'auth';
-import { Flex, Grid } from 'components/layout';
 import { ModalButton } from 'components/feedback';
+import { Flex, Grid } from 'components/layout';
+import { useTranslation } from 'react-i18next';
+
 import WalletCard from '../components/WalletCard';
-import ManageWallet from './ManageWallet';
-import SwitchWalletButton from './SwitchWalletButton';
 import AddWalletButton from './AddWalletButton';
 import LedgerShowAddressButton from './LedgerShowAddressButton';
+import ManageWallet from './ManageWallet';
+import SwitchWalletButton from './SwitchWalletButton';
 
 const ConnectedWallet = () => {
   const { t } = useTranslation();

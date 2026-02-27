@@ -1,5 +1,6 @@
-import { ReactNode } from 'react';
 import { useTokenBalance } from 'data/queries/wasm';
+import { ReactNode } from 'react';
+
 import { Props as AssetProps } from './Asset';
 
 interface Props extends TokenItem {

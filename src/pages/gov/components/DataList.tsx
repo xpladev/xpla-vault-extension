@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 import { Grid } from 'components/layout';
 import { Contents } from 'types/components';
+
 import styles from './DataList.module.scss';
 
 const cx = classNames.bind(styles);

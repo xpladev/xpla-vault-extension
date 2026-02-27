@@ -1,6 +1,7 @@
-import { useQuery } from 'react-query';
 import axios from 'axios';
 import { useNetwork } from 'data/wallet';
+import { useQuery } from 'react-query';
+
 import { queryKey, RefetchOptions } from '../query';
 
 export const useNodeInfo = () => {

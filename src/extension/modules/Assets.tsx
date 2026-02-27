@@ -1,19 +1,20 @@
-import { useTranslation } from 'react-i18next';
-import { useIsClassic } from 'data/query';
-import { useActiveDenoms } from 'data/queries/oracle';
-import { readNativeDenom } from 'data/token';
-import {
-  useCustomTokensIBC,
-  useCustomTokensERC20,
-  useCustomTokensCW20,
-} from 'data/settings/CustomTokens';
 import { Button } from 'components/general';
 import { Grid } from 'components/layout';
+import { useActiveDenoms } from 'data/queries/oracle';
+import { useIsClassic } from 'data/query';
+import {
+  useCustomTokensCW20,
+  useCustomTokensERC20,
+  useCustomTokensIBC,
+} from 'data/settings/CustomTokens';
+import { readNativeDenom } from 'data/token';
+import AddTokens from 'pages/wallet/AddTokens';
 import { useCoins } from 'pages/wallet/Coins';
-import IBCAsset from 'pages/wallet/IBCAsset';
 import CW20Asset from 'pages/wallet/CW20Asset';
 import ERC20Asset from 'pages/wallet/ERC20Asset';
-import AddTokens from 'pages/wallet/AddTokens';
+import IBCAsset from 'pages/wallet/IBCAsset';
+import { useTranslation } from 'react-i18next';
+
 import Asset from './Asset';
 import styles from './Assets.module.scss';
 

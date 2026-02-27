@@ -1,7 +1,7 @@
 import { readDenom } from '@xpla.kitchen/utils';
+import { RadioGroup } from 'components/form';
 import { useActiveDenoms } from 'data/queries/oracle';
 import { useCurrencyState } from 'data/settings/Currency';
-import { RadioGroup } from 'components/form';
 
 const CurrencySetting = () => {
   const { data: activeDenoms = [] } = useActiveDenoms();

@@ -1,15 +1,16 @@
 import { AccAddress, EvmAddress } from '@xpla/xpla.js';
+import { Fetching } from 'components/feedback';
+import { useContractInfoERC721 } from 'data/queries/evm';
+import { useInitMsg } from 'data/queries/wasm';
+import { combineState } from 'data/query';
 import {
   useCustomTokensCW721,
   useCustomTokensERC721,
 } from 'data/settings/CustomTokens';
 import { useCW721Whitelist, useERC721Whitelist } from 'data/Xpla/XplaAssets';
-import { useContractInfoERC721 } from 'data/queries/evm';
-import { useInitMsg } from 'data/queries/wasm';
-import { Fetching } from 'components/feedback';
-import WithSearchInput, { FilterType } from './WithSearchInput';
+
 import TokenList from './TokenList';
-import { combineState } from 'data/query';
+import WithSearchInput, { FilterType } from './WithSearchInput';
 
 interface Props {
   whitelist: { cw721: CW721Whitelist; erc721: ERC721Whitelist };
@@ -116,8 +117,8 @@ const Component = ({
   const responseItem = initMsg
     ? { contract: keyword, ...initMsg }
     : erc721Info
-    ? { contract: keyword, ...erc721Info }
-    : undefined;
+      ? { contract: keyword, ...erc721Info }
+      : undefined;
 
   // conclusion
   const result = listedItem ?? responseItem;

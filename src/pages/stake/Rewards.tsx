@@ -1,13 +1,14 @@
-import { useTranslation } from 'react-i18next';
-import { useCurrency } from 'data/settings/Currency';
-import { combineState } from 'data/query';
+import { TooltipIcon } from 'components/display';
+import { ModalButton } from 'components/feedback';
+import { TokenCard, TokenCardGrid } from 'components/token';
 import { calcRewardsValues, useRewards } from 'data/queries/distribution';
 import { useExchangeRates } from 'data/queries/oracle';
 import { useMemoizedCalcValue } from 'data/queries/oracle';
+import { combineState } from 'data/query';
+import { useCurrency } from 'data/settings/Currency';
 import { WithTokenItem } from 'data/token';
-import { ModalButton } from 'components/feedback';
-import { TokenCard, TokenCardGrid } from 'components/token';
-import { TooltipIcon } from 'components/display';
+import { useTranslation } from 'react-i18next';
+
 import StakedCard from './components/StakedCard';
 import RewardsTooltip from './RewardsTooltip';
 

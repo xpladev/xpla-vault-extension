@@ -1,6 +1,7 @@
-import { PropsWithChildren } from 'react';
 import classNames from 'classnames';
 import { Flex } from 'components/layout';
+import { PropsWithChildren } from 'react';
+
 import styles from './VoteProgress.module.scss';
 
 const Flag = ({ left, children }: PropsWithChildren<{ left: string }>) => {

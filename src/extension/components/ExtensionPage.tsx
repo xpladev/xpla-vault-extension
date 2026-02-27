@@ -1,6 +1,7 @@
-import { PropsWithChildren, ReactNode } from 'react';
-import { Card } from 'components/layout';
 import { ErrorBoundary, WithFetching } from 'components/feedback';
+import { Card } from 'components/layout';
+import { PropsWithChildren, ReactNode } from 'react';
+
 import Container from '../layouts/Container';
 import styles from './ExtensionPage.module.scss';
 

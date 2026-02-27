@@ -1,4 +1,5 @@
 import { Validator } from '@xpla/xpla.js';
+
 import { Contacts } from './components';
 
 export interface XplaValidator extends Validator.Data {

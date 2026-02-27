@@ -1,9 +1,9 @@
+import { Grid } from 'components/layout';
+import { useCustomNetworks } from 'data/settings/CustomNetworks';
+import { useNetworkState } from 'data/wallet';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useNetworkState } from 'data/wallet';
-import { useCustomNetworks } from 'data/settings/CustomNetworks';
-import { Grid } from 'components/layout';
 import CustomItem from 'txs/AddressBook/CustomItem';
 
 const ManageNetworksForm = () => {

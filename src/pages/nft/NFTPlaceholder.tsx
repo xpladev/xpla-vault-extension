@@ -1,9 +1,10 @@
-import { useState } from 'react';
-import { groupBy } from 'ramda';
 import classNames from 'classnames/bind';
-import useInterval from 'utils/hooks/useInterval';
-import { useCW721Whitelist } from 'data/Xpla/XplaAssets';
 import { Flex } from 'components/layout';
+import { useCW721Whitelist } from 'data/Xpla/XplaAssets';
+import { groupBy } from 'ramda';
+import { useState } from 'react';
+import useInterval from 'utils/hooks/useInterval';
+
 import styles from './NFTPlaceholder.module.scss';
 
 const cx = classNames.bind(styles);

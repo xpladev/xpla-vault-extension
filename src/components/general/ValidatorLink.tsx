@@ -1,5 +1,6 @@
 import { ValAddress } from '@xpla/xpla.js';
 import { getFindMoniker, useValidators } from 'data/queries/staking';
+
 import { FinderLink } from '../general';
 import { InternalLink } from './Internal';
 

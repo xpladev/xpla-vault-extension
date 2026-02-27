@@ -1,5 +1,6 @@
+import { Card, Page } from 'components/layout';
 import { useTranslation } from 'react-i18next';
-import { Page, Card } from 'components/layout';
+
 import TxContext from '../TxContext';
 import InstantiateContractForm from './InstantiateContractForm';
 

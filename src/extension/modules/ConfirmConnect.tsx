@@ -1,8 +1,9 @@
-import { useTranslation } from 'react-i18next';
 import { Grid } from 'components/layout';
-import { ConnectRequest } from '../utils';
+import { useTranslation } from 'react-i18next';
+
 import ConfirmButtons from '../components/ConfirmButtons';
 import { useRequest } from '../RequestContainer';
+import { ConnectRequest } from '../utils';
 import styles from './ConfirmConnect.module.scss';
 
 const ConfirmConnect = ({ origin }: ConnectRequest) => {

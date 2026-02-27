@@ -1,8 +1,9 @@
-import { useTranslation } from 'react-i18next';
-import { useSupply } from 'data/queries/bank';
-import { useMemoizedCalcValue } from 'data/queries/oracle';
 import { Card } from 'components/layout';
 import { Read } from 'components/token';
+import { useSupply } from 'data/queries/bank';
+import { useMemoizedCalcValue } from 'data/queries/oracle';
+import { useTranslation } from 'react-i18next';
+
 import DashboardContent from './components/DashboardContent';
 import SelectDenom from './components/SelectDenom';
 

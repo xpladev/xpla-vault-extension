@@ -1,12 +1,13 @@
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import axios, { AxiosError } from 'axios';
+import { Details } from 'components/display';
+import { Button } from 'components/general';
+import { Grid } from 'components/layout';
+import { useLCDClient } from 'data/queries/lcdClient';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import axios, { AxiosError } from 'axios';
-import DoneAllIcon from '@mui/icons-material/DoneAll';
-import { useLCDClient } from 'data/queries/lcdClient';
-import { Grid } from 'components/layout';
-import { Details } from 'components/display';
-import { Button } from 'components/general';
+
 import useAuth from '../../hooks/useAuth';
 
 const CreatedWallet = ({ name, address }: SingleWallet) => {

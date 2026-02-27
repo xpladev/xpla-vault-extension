@@ -1,7 +1,7 @@
-import { useMemo } from 'react';
 import { LCDClient } from '@xpla/xpla.js';
-import { useNetwork } from 'data/wallet';
 import { useIsClassic } from 'data/query';
+import { useNetwork } from 'data/wallet';
+import { useMemo } from 'react';
 
 export const useLCDClient = () => {
   const network = useNetwork();

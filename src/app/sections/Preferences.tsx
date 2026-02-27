@@ -1,14 +1,15 @@
-import { useTranslation } from 'react-i18next';
 import LanguageIcon from '@mui/icons-material/Language';
-import { useIsClassic } from 'data/query';
-import { Tabs } from 'components/layout';
-import { Popover } from 'components/display';
 import { sandbox } from 'auth/scripts/env';
-import PopoverNone from '../components/PopoverNone';
+import { Popover } from 'components/display';
+import { Tabs } from 'components/layout';
+import { useIsClassic } from 'data/query';
+import { useTranslation } from 'react-i18next';
+
 import HeaderIconButton from '../components/HeaderIconButton';
-import NetworkSetting from './NetworkSetting';
-import LanguageSetting from './LanguageSetting';
+import PopoverNone from '../components/PopoverNone';
 import CurrencySetting from './CurrencySetting';
+import LanguageSetting from './LanguageSetting';
+import NetworkSetting from './NetworkSetting';
 
 const Preferences = () => {
   const { t } = useTranslation();

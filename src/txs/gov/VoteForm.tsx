@@ -1,13 +1,14 @@
-import { useCallback, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
-import classNames from 'classnames/bind';
 import { MsgVote, Vote } from '@xpla/xpla.js';
-import { useAddress } from 'data/wallet';
+import classNames from 'classnames/bind';
+import { Form } from 'components/form';
 import { useBankBalance } from 'data/queries/bank';
 import { useGetVoteOptionItem } from 'data/queries/gov';
-import { Form } from 'components/form';
+import { useAddress } from 'data/wallet';
 import useProposalId from 'pages/gov/useProposalId';
+import { useCallback, useMemo } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+
 import Tx, { getInitialGasDenom } from '../Tx';
 import styles from './VoteForm.module.scss';
 

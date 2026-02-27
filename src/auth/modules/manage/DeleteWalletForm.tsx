@@ -1,13 +1,14 @@
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import { isWallet } from 'auth';
+import { Wrong } from 'components/feedback';
+import { Form, FormItem, FormWarning, Input, Submit } from 'components/form';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import DoneAllIcon from '@mui/icons-material/DoneAll';
-import { Form, FormItem, FormWarning, Input, Submit } from 'components/form';
-import { Wrong } from 'components/feedback';
-import { isWallet } from 'auth';
-import { deleteWallet } from '../../scripts/keystore';
+
 import useAuth from '../../hooks/useAuth';
+import { deleteWallet } from '../../scripts/keystore';
 import ConfirmModal from './ConfirmModal';
 
 interface Values {

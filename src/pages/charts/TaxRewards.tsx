@@ -1,19 +1,20 @@
-import { useCallback, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import BigNumber from 'bignumber.js';
-import { head, last } from 'ramda';
 import { capitalize } from '@mui/material';
 import { readAmount, readDenom } from '@xpla.kitchen/utils';
-import { combineState } from 'data/query';
-import { useMemoizedPrices } from 'data/queries/oracle';
-import { Aggregate, useTaxRewards } from 'data/Xpla/XplaAPI';
-import { useCurrency } from 'data/settings/Currency';
+import BigNumber from 'bignumber.js';
+import { TooltipIcon } from 'components/display';
 import { Select } from 'components/form';
 import { Card } from 'components/layout';
-import { TooltipIcon } from 'components/display';
+import { useMemoizedPrices } from 'data/queries/oracle';
+import { combineState } from 'data/query';
+import { useCurrency } from 'data/settings/Currency';
+import { Aggregate, useTaxRewards } from 'data/Xpla/XplaAPI';
+import { head, last } from 'ramda';
+import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import ChartContainer from './components/ChartContainer';
-import Range from './components/Range';
 import Filter from './components/Filter';
+import Range from './components/Range';
 
 const TaxRewards = () => {
   const { t } = useTranslation();

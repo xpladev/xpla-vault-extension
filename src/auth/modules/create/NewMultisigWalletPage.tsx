@@ -1,5 +1,6 @@
-import { useTranslation } from 'react-i18next';
 import { Card, Page } from 'components/layout';
+import { useTranslation } from 'react-i18next';
+
 import NewMultisigWalletForm from './NewMultisigWalletForm';
 
 const NewMultisigWalletPage = () => {

@@ -1,5 +1,6 @@
 import { isDenomIBC, isDenomNative } from '@xpla.kitchen/utils';
 import classNames from 'classnames/bind';
+
 import styles from './TokenBadge.module.scss';
 
 const cx = classNames.bind(styles);

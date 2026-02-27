@@ -1,8 +1,9 @@
-import { useTranslation } from 'react-i18next';
 import { ProposalV1 } from '@xpla/xpla.js';
+import { ToNow } from 'components/display';
 import { useParseProposalV1Type } from 'data/queries/gov';
 import { useProposalStatusItem } from 'data/queries/gov';
-import { ToNow } from 'components/display';
+import { useTranslation } from 'react-i18next';
+
 import styles from './ProposalHeader.module.scss';
 
 const ProposalHeader = ({ proposal }: { proposal: ProposalV1 }) => {

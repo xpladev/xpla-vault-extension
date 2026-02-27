@@ -1,6 +1,7 @@
+import classNames from 'classnames/bind';
 import { ButtonHTMLAttributes, ForwardedRef, ReactNode } from 'react';
 import { forwardRef } from 'react';
-import classNames from 'classnames/bind';
+
 import { LoadingCircular } from '../feedback';
 import styles from './Button.module.scss';
 

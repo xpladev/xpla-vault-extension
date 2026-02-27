@@ -1,15 +1,16 @@
-import { useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
+import DangerousOutlinedIcon from '@mui/icons-material/DangerousOutlined';
+import { Form, FormItem, Submit } from 'components/form';
 import update from 'immutability-helper';
 import numeral from 'numeral';
-import DangerousOutlinedIcon from '@mui/icons-material/DangerousOutlined';
+import { useMemo, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import shuffle from 'utils/shuffle';
-import { Form, FormItem, Submit } from 'components/form';
+
 import AuthButton from '../../components/AuthButton';
+import ConfirmModal from '../manage/ConfirmModal';
 import { useCreateWallet } from './CreateWalletWizard';
 import styles from './Quiz.module.scss';
-import ConfirmModal from '../manage/ConfirmModal';
 
 export interface QuizItem {
   index: number;

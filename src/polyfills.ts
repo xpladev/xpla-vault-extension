@@ -4,9 +4,6 @@
  */
 
 // ─── 1. Buffer 전역 주입 ──────────────────────────────────────────────────────
-import Buffer from 'vite-plugin-node-polyfills/shims/buffer';
-globalThis.Buffer = globalThis.Buffer ?? Buffer;
-
 // ─── 2. Recoil → React 19 호환 shim ──────────────────────────────────────────
 // 핵심 원인:
 //   Recoil의 pre-bundled CJS 청크가 `import_react.default.__SECRET_INTERNALS_...`로 접근
@@ -17,6 +14,9 @@ globalThis.Buffer = globalThis.Buffer ?? Buffer;
 //   → __CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE 로 대체
 //   → .H = 현재 hooks dispatcher (구 ReactCurrentDispatcher.current)
 import React from 'react';
+import Buffer from 'vite-plugin-node-polyfills/shims/buffer';
+
+globalThis.Buffer = globalThis.Buffer ?? Buffer;
 
 const R = React as unknown as Record<string, unknown>;
 const i = R[

@@ -1,5 +1,6 @@
-import { useTranslation } from 'react-i18next';
 import { Contacts } from 'components/layout';
+import { useTranslation } from 'react-i18next';
+
 import styles from './Links.module.scss';
 
 const community = {
@@ -14,7 +15,7 @@ const Links = () => {
 
   return (
     <div className={styles.links}>
-      <div className={styles.tutorial}></div>
+      <div className={styles.tutorial} />
 
       <div className={styles.community}>
         <Contacts contacts={community} menu />

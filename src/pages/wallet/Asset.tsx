@@ -1,10 +1,11 @@
-import { useTranslation } from 'react-i18next';
-import { has } from 'utils/num';
-import { useCurrency } from 'data/settings/Currency';
 import { WithFetching } from 'components/feedback';
 import { Read, TokenIcon } from 'components/token';
-import AssetActions from './AssetActions';
+import { useCurrency } from 'data/settings/Currency';
+import { useTranslation } from 'react-i18next';
+import { has } from 'utils/num';
+
 import styles from './Asset.module.scss';
+import AssetActions from './AssetActions';
 
 export interface Props extends TokenItem, QueryState {
   balance?: Amount;

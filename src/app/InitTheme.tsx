@@ -1,6 +1,6 @@
+import { useThemeState, useValidateTheme } from 'data/settings/Theme';
 import { useEffect } from 'react';
 import { DefaultTheme } from 'utils/localStorage';
-import { useThemeState, useValidateTheme } from 'data/settings/Theme';
 
 const InitTheme = () => {
   const [theme, setTheme] = useThemeState();

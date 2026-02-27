@@ -1,6 +1,6 @@
-import BigNumber from 'bignumber.js';
 import { readAmount, toAmount } from '@xpla.kitchen/utils';
 import { Coin, Coins } from '@xpla/xpla.js';
+import BigNumber from 'bignumber.js';
 import { has } from 'utils/num';
 
 export const getPlaceholder = (decimals = 6) => '0.'.padEnd(decimals + 2, '0');

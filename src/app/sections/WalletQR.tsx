@@ -1,9 +1,9 @@
+import QRCode from 'auth/components/QRCode';
+import { ModalButton } from 'components/feedback';
+import { Grid } from 'components/layout';
+import { useAddress } from 'data/wallet';
 import { useTranslation } from 'react-i18next';
 import { RenderButton } from 'types/components';
-import { useAddress } from 'data/wallet';
-import { Grid } from 'components/layout';
-import { ModalButton } from 'components/feedback';
-import QRCode from 'auth/components/QRCode';
 
 const WalletQR = ({ renderButton }: { renderButton: RenderButton }) => {
   const { t } = useTranslation();

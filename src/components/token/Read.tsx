@@ -1,8 +1,9 @@
-import { ForwardedRef, forwardRef, Fragment } from 'react';
-import classNames from 'classnames/bind';
 import { FormatConfig } from '@xpla.kitchen/utils';
 import { formatPercent, readAmount, truncate } from '@xpla.kitchen/utils';
+import classNames from 'classnames/bind';
 import { WithTokenItem } from 'data/token';
+import { ForwardedRef, forwardRef, Fragment } from 'react';
+
 import styles from './Read.module.scss';
 
 const cx = classNames.bind(styles);
@@ -31,10 +32,10 @@ const Read = forwardRef(
     const fixed = !auto
       ? props.fixed
       : Number(amount) >= Math.pow(10, (props.decimals ?? 6) + 3)
-      ? 0
-      : Number(amount) < Math.pow(10, props.decimals ?? 6)
-      ? props.decimals
-      : 2;
+        ? 0
+        : Number(amount) < Math.pow(10, props.decimals ?? 6)
+          ? props.decimals
+          : 2;
 
     const config = { ...props, comma, fixed };
     const [integer, decimal] = readAmount(amount, config).split('.');

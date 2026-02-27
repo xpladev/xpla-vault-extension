@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import classNames from 'classnames/bind';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import useTimeout from 'utils/hooks/useTimeout';
+import classNames from 'classnames/bind';
 import { Flex } from 'components/layout';
+import { useState } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { useTranslation } from 'react-i18next';
+import useTimeout from 'utils/hooks/useTimeout';
+
 import styles from './Copy.module.scss';
 
 const cx = classNames.bind(styles);

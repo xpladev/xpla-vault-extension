@@ -1,10 +1,11 @@
-import { useTranslation } from 'react-i18next';
-import { useAddress } from 'data/wallet';
-import { Button, LinkButton } from 'components/general';
 import { ModalButton } from 'components/feedback';
+import { Button, LinkButton } from 'components/general';
 import { ExtraActions } from 'components/layout';
-import ContractQuery from './ContractQuery';
+import { useAddress } from 'data/wallet';
+import { useTranslation } from 'react-i18next';
+
 import { useContract } from './Contract';
+import ContractQuery from './ContractQuery';
 
 const ContractItemActions = () => {
   const { t } = useTranslation();

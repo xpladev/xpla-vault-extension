@@ -1,13 +1,14 @@
-import { PropsWithChildren } from 'react';
-import classNames from 'classnames/bind';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import { FormatConfig } from '@xpla.kitchen/utils';
-import { getMaxHeightStyle } from 'utils/style';
+import classNames from 'classnames/bind';
 import { useCurrency } from 'data/settings/Currency';
+import { PropsWithChildren } from 'react';
+import { getMaxHeightStyle } from 'utils/style';
+
 import { Flex } from '../layout';
-import TokenIcon from './TokenIcon';
 import Read from './Read';
 import styles from './TokenCard.module.scss';
+import TokenIcon from './TokenIcon';
 
 interface Props extends Partial<TokenItem>, Partial<FormatConfig> {
   // customizable

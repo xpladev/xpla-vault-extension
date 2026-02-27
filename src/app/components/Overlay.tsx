@@ -1,4 +1,5 @@
 import { PropsWithChildren } from 'react';
+
 import styles from './Overlay.module.scss';
 
 const Overlay = ({ children }: PropsWithChildren<{}>) => {

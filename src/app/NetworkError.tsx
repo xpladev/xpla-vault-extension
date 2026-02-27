@@ -1,8 +1,9 @@
-import { useTranslation } from 'react-i18next';
-import Logo from 'styles/images/LocalXpla.png';
-import { useNetworkState } from 'data/wallet';
 import { Button, ExternalLink } from 'components/general';
 import { FlexColumn } from 'components/layout';
+import { useNetworkState } from 'data/wallet';
+import { useTranslation } from 'react-i18next';
+import Logo from 'styles/images/LocalXpla.png';
+
 import styles from './NetworkError.module.scss';
 
 const NetworkError = () => {
@@ -20,8 +21,8 @@ const NetworkError = () => {
           {network === 'mainnet'
             ? t('Too many requests. Try again later.')
             : isLocalXpla
-            ? t('LocalXpla is not running')
-            : t(`${network} is not running`)}
+              ? t('LocalXpla is not running')
+              : t(`${network} is not running`)}
         </h1>
       </article>
 

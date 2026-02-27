@@ -1,17 +1,18 @@
-import { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
 import { ValAddress } from '@xpla/xpla.js';
-import { has } from 'utils/num';
+import { LinkButton } from 'components/general';
+import { Card, Col, ExtraActions, Grid } from 'components/layout';
+import { Read } from 'components/token';
+import { calcRewardsValues, useRewards } from 'data/queries/distribution';
+import { useMemoizedCalcValue } from 'data/queries/oracle';
+import { useDelegation, useDelegations } from 'data/queries/staking';
+import { getAvailableStakeActions } from 'data/queries/staking';
 import { combineState } from 'data/query';
 import { useCurrency } from 'data/settings/Currency';
-import { useMemoizedCalcValue } from 'data/queries/oracle';
-import { useDelegations, useDelegation } from 'data/queries/staking';
-import { getAvailableStakeActions } from 'data/queries/staking';
-import { calcRewardsValues, useRewards } from 'data/queries/distribution';
-import { LinkButton } from 'components/general';
-import { Col, Card, ExtraActions, Grid } from 'components/layout';
-import { Read } from 'components/token';
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { StakeAction } from 'txs/stake/StakeForm';
+import { has } from 'utils/num';
+
 import styles from './ValidatorActions.module.scss';
 
 const ValidatorActions = ({ destination }: { destination: ValAddress }) => {

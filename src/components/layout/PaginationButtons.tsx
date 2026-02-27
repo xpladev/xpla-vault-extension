@@ -1,7 +1,8 @@
-import { useTranslation } from 'react-i18next';
-import classNames from 'classnames';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import classNames from 'classnames';
+import { useTranslation } from 'react-i18next';
+
 import Flex from './Flex';
 import styles from './PaginationButtons.module.scss';
 

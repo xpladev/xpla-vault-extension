@@ -1,18 +1,19 @@
-import { useTranslation } from 'react-i18next';
 import classNames from 'classnames/bind';
-import { useAddress } from 'data/wallet';
+import { ModalButton } from 'components/feedback';
+import { InternalButton } from 'components/general';
+import { Button } from 'components/general';
+import { Card, Col, Grid } from 'components/layout';
 import {
   useCustomTokensCW721,
   useCustomTokensERC721,
 } from 'data/settings/CustomTokens';
-import { InternalButton } from 'components/general';
-import { Col, Card, Grid } from 'components/layout';
-import { ModalButton } from 'components/feedback';
+import { useAddress } from 'data/wallet';
+import { useTranslation } from 'react-i18next';
+
 import ManageCustomTokensCW721 from '../custom/ManageCustomTokensCW721';
-import NFTPlaceholder from './NFTPlaceholder';
 import NFTAssetGroup from './NFTAssetGroup';
 import styles from './NFTAssets.module.scss';
-import { Button } from 'components/general';
+import NFTPlaceholder from './NFTPlaceholder';
 
 const cx = classNames.bind(styles);
 

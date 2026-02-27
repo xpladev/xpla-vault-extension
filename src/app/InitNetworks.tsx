@@ -1,9 +1,9 @@
-import { PropsWithChildren, useEffect, useState } from 'react';
-import { fromPairs } from 'ramda';
 import axios from 'axios';
 import { ASSETS } from 'config/constants';
-import createContext from 'utils/createContext';
 import { useCustomNetworks } from 'data/settings/CustomNetworks';
+import { fromPairs } from 'ramda';
+import { PropsWithChildren, useEffect, useState } from 'react';
+import createContext from 'utils/createContext';
 
 export const [useNetworks, NetworksProvider] =
   createContext<CustomNetworks>('useNetworks');

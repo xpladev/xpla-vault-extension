@@ -1,6 +1,7 @@
-import { useTranslation } from 'react-i18next';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { ModalButton } from 'components/feedback';
+import { useTranslation } from 'react-i18next';
+
 import AddWallet from './AddWallet';
 import styles from './ConnectedWallet.module.scss';
 

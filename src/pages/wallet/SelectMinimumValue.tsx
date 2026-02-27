@@ -1,5 +1,5 @@
-import { useMinimumValue } from 'data/settings/MinimumValue';
 import { Select } from 'components/form';
+import { useMinimumValue } from 'data/settings/MinimumValue';
 
 const SelectMinimumValue = () => {
   const [value, set, list] = useMinimumValue();

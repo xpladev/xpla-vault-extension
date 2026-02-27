@@ -1,6 +1,7 @@
+import InboxOutlinedIcon from '@mui/icons-material/InboxOutlined';
 import { PropsWithChildren, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import InboxOutlinedIcon from '@mui/icons-material/InboxOutlined';
+
 import State from './State';
 
 const Empty = ({ icon, children }: PropsWithChildren<{ icon?: ReactNode }>) => {

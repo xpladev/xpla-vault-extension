@@ -1,5 +1,6 @@
-import { useQuery } from 'react-query';
 import { isDenomIBC } from '@xpla.kitchen/utils';
+import { useQuery } from 'react-query';
+
 import { queryKey, RefetchOptions } from '../query';
 import { useLCDClient } from './lcdClient';
 

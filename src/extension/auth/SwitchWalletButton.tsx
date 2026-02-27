@@ -1,10 +1,11 @@
-import { useTranslation } from 'react-i18next';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import { useAddress } from 'data/wallet';
-import { ModalButton } from 'components/feedback';
 import { useAuth } from 'auth';
-import SwitchWallet from './SwitchWallet';
+import { ModalButton } from 'components/feedback';
+import { useAddress } from 'data/wallet';
+import { useTranslation } from 'react-i18next';
+
 import styles from './ConnectedWallet.module.scss';
+import SwitchWallet from './SwitchWallet';
 
 const SwitchWalletButton = () => {
   const { t } = useTranslation();

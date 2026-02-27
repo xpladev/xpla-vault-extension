@@ -1,13 +1,14 @@
-import { useTranslation } from 'react-i18next';
-import BigNumber from 'bignumber.js';
 import { readPercent } from '@xpla.kitchen/utils';
-import { getAmount } from 'utils/coin';
-import { combineState } from 'data/query';
-import { useProposal } from 'data/queries/gov';
-import { useDeposits, useDepositParams } from 'data/queries/gov';
+import BigNumber from 'bignumber.js';
+import { ToNow } from 'components/display';
 import { Card } from 'components/layout';
 import { Read } from 'components/token';
-import { ToNow } from 'components/display';
+import { useProposal } from 'data/queries/gov';
+import { useDepositParams, useDeposits } from 'data/queries/gov';
+import { combineState } from 'data/query';
+import { useTranslation } from 'react-i18next';
+import { getAmount } from 'utils/coin';
+
 import Orb from './components/Orb';
 import styles from './ProposalDeposits.module.scss';
 

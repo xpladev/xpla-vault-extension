@@ -1,6 +1,7 @@
-import { useInfiniteQuery, useQueries, useQuery } from 'react-query';
-import axios from 'axios';
 import { AccAddress } from '@xpla/xpla.js';
+import axios from 'axios';
+import { useInfiniteQuery, useQueries, useQuery } from 'react-query';
+
 import { queryKey, RefetchOptions } from '../query';
 import { useAddress } from '../wallet';
 import { useLCDClient } from './lcdClient';
@@ -140,12 +141,8 @@ export const useCW721InfinityTokens = (contract: AccAddress) => {
         },
       );
 
-      let lastTokenId: string | undefined = undefined;
-      if (tokens.length === 10) {
-        lastTokenId = tokens[tokens.length - 1];
-      } else {
-        lastTokenId = undefined;
-      }
+      const lastTokenId: string | undefined =
+        tokens.length === 10 ? tokens[tokens.length - 1] : undefined;
 
       return { tokens, lastTokenId };
     },
@@ -162,8 +159,8 @@ export const getIpfsGateway = (src: any = '') => {
     return src.startsWith('ipfs://')
       ? src.replace('ipfs://', 'https://web3-storage.xpla.dev/ipfs/')
       : src.startsWith('https://') || src.startsWith('http://')
-      ? src
-      : undefined;
+        ? src
+        : undefined;
   } else {
     return;
   }

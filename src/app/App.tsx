@@ -1,32 +1,27 @@
-import { getErrorMessage } from 'utils/error';
-import Layout, { Page } from 'components/layout';
-import { Banner, Content, Header, Actions, Sidebar } from 'components/layout';
 import { ErrorBoundary, Wrong } from 'components/feedback';
-
-/* routes */
-import { useNav } from './routes';
-
-/* banner */
-import NetworkName from './sections/NetworkName';
-
-/* sidebar */
-import Nav from './sections/Nav';
-import Aside from './sections/Aside';
-
-/* header */
-import IsClassicNetwork from './sections/IsClassicNetwork';
-import Refresh from './sections/Refresh';
-import Preferences from './sections/Preferences';
-import SelectTheme from './sections/SelectTheme';
-import ConnectWallet from './sections/ConnectWallet';
-
-/* extra */
-import LatestTx from './sections/LatestTx';
-import ValidatorButton from './sections/ValidatorButton';
-import DevTools from './sections/DevTools';
+import Layout, { Page } from 'components/layout';
+import { Actions, Banner, Content, Header, Sidebar } from 'components/layout';
+import { getErrorMessage } from 'utils/error';
 
 /* init */
 import InitBankBalance from './InitBankBalance';
+/* routes */
+import { useNav } from './routes';
+import Aside from './sections/Aside';
+import ConnectWallet from './sections/ConnectWallet';
+import DevTools from './sections/DevTools';
+/* header */
+import IsClassicNetwork from './sections/IsClassicNetwork';
+/* extra */
+import LatestTx from './sections/LatestTx';
+/* sidebar */
+import Nav from './sections/Nav';
+/* banner */
+import NetworkName from './sections/NetworkName';
+import Preferences from './sections/Preferences';
+import Refresh from './sections/Refresh';
+import SelectTheme from './sections/SelectTheme';
+import ValidatorButton from './sections/ValidatorButton';
 
 const App = () => {
   const { element: routes } = useNav();

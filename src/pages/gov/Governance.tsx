@@ -1,6 +1,7 @@
-import { useTranslation } from 'react-i18next';
 import { LinkButton } from 'components/general';
 import { Page } from 'components/layout';
+import { useTranslation } from 'react-i18next';
+
 import Proposals from './Proposals';
 
 const Governance = () => {

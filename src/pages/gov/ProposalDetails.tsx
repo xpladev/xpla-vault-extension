@@ -1,19 +1,20 @@
-import { useTranslation } from 'react-i18next';
 import { Proposal } from '@xpla/xpla.js';
-import { useProposal } from 'data/queries/gov';
-import { Col, Row, Page, Card, Grid } from 'components/layout';
 import { useGoBackOnError } from 'app/routes';
+import { Card, Col, Grid, Page, Row } from 'components/layout';
+import { useProposal } from 'data/queries/gov';
+import { useTranslation } from 'react-i18next';
+
 import ProposalActions from './ProposalActions';
-import ProposalHeader from './ProposalHeader';
-import ProposalDescription from './ProposalDescription';
-import ProposalSummary from './ProposalSummary';
-import ProposalDeposits from './ProposalDeposits';
 import ProposalDepositors from './ProposalDepositors';
+import ProposalDeposits from './ProposalDeposits';
+import ProposalDescription from './ProposalDescription';
+import ProposalHeader from './ProposalHeader';
+import ProposalMessageList from './ProposalMessageList';
+import ProposalParams from './ProposalParams';
+import ProposalSummary from './ProposalSummary';
 import ProposalVotes from './ProposalVotes';
 import ProposalVotesByValidator from './ProposalVotesByValidator';
-import ProposalParams from './ProposalParams';
 import useProposalId from './useProposalId';
-import ProposalMessageList from './ProposalMessageList';
 
 const ProposalDetails = () => {
   const { t } = useTranslation();

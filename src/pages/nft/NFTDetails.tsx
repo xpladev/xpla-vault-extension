@@ -1,9 +1,10 @@
-import { Fragment } from 'react';
+import { Details } from 'components/display';
+import { TokenBadge } from 'components/token';
 // import { Pre } from 'components/general';
 import _ from 'lodash';
-import { Details } from 'components/display';
+import { Fragment } from 'react';
+
 import styles from './NFTDetails.module.scss';
-import { TokenBadge } from 'components/token';
 
 const NFTDetails = ({
   data,

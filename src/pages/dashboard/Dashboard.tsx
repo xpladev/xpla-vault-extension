@@ -1,12 +1,13 @@
-import { useTranslation } from 'react-i18next';
 import classNames from 'classnames/bind';
-import { useIsClassic } from 'data/query';
 import { Col, Page } from 'components/layout';
-import Issuance from './Issuance';
-import CommunityPool from './CommunityPool';
-import StakingRatio from './StakingRatio';
+import { useIsClassic } from 'data/query';
+import { useTranslation } from 'react-i18next';
+
 import Charts from './Charts';
+import CommunityPool from './CommunityPool';
 import styles from './Dashboard.module.scss';
+import Issuance from './Issuance';
+import StakingRatio from './StakingRatio';
 
 const cx = classNames.bind(styles);
 

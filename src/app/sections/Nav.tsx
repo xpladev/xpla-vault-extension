@@ -1,10 +1,11 @@
+import CloseIcon from '@mui/icons-material/Close';
+import MenuIcon from '@mui/icons-material/Menu';
+import classNames from 'classnames/bind';
+import { mobileIsMenuOpenState } from 'components/layout';
 import { useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import classNames from 'classnames/bind';
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
-import { mobileIsMenuOpenState } from 'components/layout';
+
 import { useNav } from '../routes';
 import styles from './Nav.module.scss';
 

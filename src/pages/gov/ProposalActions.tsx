@@ -1,6 +1,6 @@
-import { useTranslation } from 'react-i18next';
 import { ProposalV1 } from '@xpla/xpla.js';
 import { LinkButton } from 'components/general';
+import { useTranslation } from 'react-i18next';
 
 const ProposalActions = ({ proposal }: { proposal: ProposalV1 }) => {
   const { t } = useTranslation();

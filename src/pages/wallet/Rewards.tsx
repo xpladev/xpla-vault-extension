@@ -1,17 +1,18 @@
-import { useTranslation } from 'react-i18next';
 import DownloadIcon from '@mui/icons-material/Download';
-import { has } from 'utils/num';
-import { useCurrency } from 'data/settings/Currency';
-import { combineState } from 'data/query';
+import DelegationsPromote from 'app/containers/DelegationsPromote';
+import { LinkButton } from 'components/general';
+import { Card, Grid } from 'components/layout';
+import { Read } from 'components/token';
 import { calcRewardsValues, useRewards } from 'data/queries/distribution';
 import { useMemoizedCalcValue } from 'data/queries/oracle';
 import { calcDelegationsTotal } from 'data/queries/staking';
 import { calcUnbondingsTotal } from 'data/queries/staking';
 import { useDelegations, useUnbondings } from 'data/queries/staking';
-import { LinkButton } from 'components/general';
-import { Card, Grid } from 'components/layout';
-import { Read } from 'components/token';
-import DelegationsPromote from 'app/containers/DelegationsPromote';
+import { combineState } from 'data/query';
+import { useCurrency } from 'data/settings/Currency';
+import { useTranslation } from 'react-i18next';
+import { has } from 'utils/num';
+
 import styles from './Rewards.module.scss';
 
 const Rewards = () => {

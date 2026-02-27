@@ -1,6 +1,6 @@
-import { useTranslation } from 'react-i18next';
 import { LinkButton } from 'components/general';
 import { ExtraActions } from 'components/layout';
+import { useTranslation } from 'react-i18next';
 
 const ContractActions = () => {
   const { t } = useTranslation();

@@ -1,13 +1,14 @@
-import { useTranslation } from 'react-i18next';
-import { useAddress } from 'data/wallet';
-import { useCustomTokensIBC } from 'data/settings/CustomTokens';
-import { useCustomTokensCW20 } from 'data/settings/CustomTokens';
 import { InternalButton } from 'components/general';
 import { Card } from 'components/layout';
-import IBCAsset from './IBCAsset';
-import CW20Asset from './CW20Asset';
+import { useCustomTokensIBC } from 'data/settings/CustomTokens';
+import { useCustomTokensCW20 } from 'data/settings/CustomTokens';
+import { useAddress } from 'data/wallet';
+import { useTranslation } from 'react-i18next';
+
 import AddTokens from './AddTokens';
 import Asset from './Asset';
+import CW20Asset from './CW20Asset';
+import IBCAsset from './IBCAsset';
 
 const Tokens = () => {
   const { t } = useTranslation();

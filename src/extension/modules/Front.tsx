@@ -1,17 +1,18 @@
 import { useAuth } from 'auth';
-import TxContext from 'txs/TxContext';
 import { Col, Grid, Tabs } from 'components/layout';
 import NFTAssets from 'pages/nft/NFTAssets';
-import SwitchWallet from '../auth/SwitchWallet';
+import TxContext from 'txs/TxContext';
+
 import AddWallet from '../auth/AddWallet';
 import ConnectedWallet from '../auth/ConnectedWallet';
+import SwitchWallet from '../auth/SwitchWallet';
 import ExtensionPage from '../components/ExtensionPage';
 import { useRequest } from '../RequestContainer';
+import Activate from './Activate';
+import Assets from './Assets';
 import ConfirmConnect from './ConfirmConnect';
 import ConfirmTx from './ConfirmTx';
-import Assets from './Assets';
 import Welcome from './Welcome';
-import Activate from './Activate';
 
 const Front = () => {
   const { wallet, wallets } = useAuth();

@@ -1,8 +1,9 @@
 import { ReactNode } from 'react';
+
 import { Flex } from '../layout';
-import TokenIcon from './TokenIcon';
-import TokenBadge from './TokenBadge';
 import styles from './Token.module.scss';
+import TokenBadge from './TokenBadge';
+import TokenIcon from './TokenIcon';
 
 interface Props extends Partial<TokenItem> {
   // customizable

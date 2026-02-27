@@ -1,13 +1,14 @@
+import { Form, FormError, FormItem } from 'components/form';
+import { Input, Submit, TextArea } from 'components/form';
+import { decode } from 'js-base64';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { decode } from 'js-base64';
-import { Form, FormError, FormItem } from 'components/form';
-import { Input, TextArea, Submit } from 'components/form';
+
+import useAuth from '../../hooks/useAuth';
 import decrypt from '../../scripts/decrypt';
 import { addWallet, PasswordError } from '../../scripts/keystore';
-import useAuth from '../../hooks/useAuth';
 
 interface Values {
   key: string;

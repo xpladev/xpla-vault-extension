@@ -1,5 +1,6 @@
-import { useCreateWallet } from './CreateWalletWizard';
 import { useEffect } from 'react';
+
+import { useCreateWallet } from './CreateWalletWizard';
 
 const SelectAddress = () => {
   const { values, createWallet } = useCreateWallet();

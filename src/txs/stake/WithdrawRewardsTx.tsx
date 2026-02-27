@@ -1,13 +1,14 @@
-import { useTranslation } from 'react-i18next';
-import { combineState } from 'data/query';
-import { calcRewardsValues, useRewards } from 'data/queries/distribution';
-import { useDelegations, useValidators } from 'data/queries/staking';
-import { has } from 'utils/num';
-import { useCurrency } from 'data/settings/Currency';
-import { useActiveDenoms, useMemoizedCalcValue } from 'data/queries/oracle';
-import { useIBCWhitelist } from 'data/Xpla/XplaAssets';
-import { Page, Card } from 'components/layout';
 import DelegationsPromote from 'app/containers/DelegationsPromote';
+import { Card, Page } from 'components/layout';
+import { calcRewardsValues, useRewards } from 'data/queries/distribution';
+import { useActiveDenoms, useMemoizedCalcValue } from 'data/queries/oracle';
+import { useDelegations, useValidators } from 'data/queries/staking';
+import { combineState } from 'data/query';
+import { useCurrency } from 'data/settings/Currency';
+import { useIBCWhitelist } from 'data/Xpla/XplaAssets';
+import { useTranslation } from 'react-i18next';
+import { has } from 'utils/num';
+
 import TxContext from '../TxContext';
 import WithdrawRewardsForm from './WithdrawRewardsForm';
 

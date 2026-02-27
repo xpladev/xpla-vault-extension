@@ -1,16 +1,17 @@
-import { useTranslation } from 'react-i18next';
-import classNames from 'classnames/bind';
-import PaletteOutlinedIcon from '@mui/icons-material/PaletteOutlined';
-import LockIcon from '@mui/icons-material/Lock';
 import InfoIcon from '@mui/icons-material/Info';
+import LockIcon from '@mui/icons-material/Lock';
+import PaletteOutlinedIcon from '@mui/icons-material/PaletteOutlined';
 import { capitalize } from '@mui/material';
 import { readAmount } from '@xpla.kitchen/utils';
-import { themes } from 'styles/themes/themes';
-import { useAddress } from 'data/wallet';
-import { useThemeState, useValidateTheme } from 'data/settings/Theme';
-import { Flex, FlexColumn, Grid } from 'components/layout';
-import { Radio } from 'components/form';
+import classNames from 'classnames/bind';
 import { ModalButton } from 'components/feedback';
+import { Radio } from 'components/form';
+import { Flex, FlexColumn, Grid } from 'components/layout';
+import { useThemeState, useValidateTheme } from 'data/settings/Theme';
+import { useAddress } from 'data/wallet';
+import { useTranslation } from 'react-i18next';
+import { themes } from 'styles/themes/themes';
+
 import HeaderIconButton from '../components/HeaderIconButton';
 import styles from './SelectTheme.module.scss';
 

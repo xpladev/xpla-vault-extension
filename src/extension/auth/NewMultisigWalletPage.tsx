@@ -1,5 +1,6 @@
-import { useTranslation } from 'react-i18next';
 import NewMultisigWalletForm from 'auth/modules/create/NewMultisigWalletForm';
+import { useTranslation } from 'react-i18next';
+
 import ExtensionPage from '../components/ExtensionPage';
 
 const NewMultisigWalletPage = () => {

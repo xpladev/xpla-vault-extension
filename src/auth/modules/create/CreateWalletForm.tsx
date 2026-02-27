@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
-import { Grid } from 'components/layout';
+import { Modal } from 'components/feedback';
 import { Form, FormItem, FormWarning, Submit, Value } from 'components/form';
 import { Checkbox, Input } from 'components/form';
-import { Modal } from 'components/feedback';
+import { Grid } from 'components/layout';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+
 import validate from '../../scripts/validate';
+import styles from './CreateWalletForm.module.scss';
 import { useCreateWallet, Values as DefaultValues } from './CreateWalletWizard';
 import WhatIsMnemonic from './WhatIsMnemonic';
-import styles from './CreateWalletForm.module.scss';
 
 interface Values extends DefaultValues {
   confirm: string;

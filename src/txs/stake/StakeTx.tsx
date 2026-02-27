@@ -1,11 +1,12 @@
-import { useTranslation } from 'react-i18next';
-import { useLocation, useParams } from 'react-router-dom';
+import { Auto, Card, Page, Tabs } from 'components/layout';
+import { useBalances } from 'data/queries/bank';
 import { getAvailableStakeActions } from 'data/queries/staking';
 import { useDelegations, useValidators } from 'data/queries/staking';
 import { combineState } from 'data/query';
-import { useBalances } from 'data/queries/bank';
-import { Auto, Page, Tabs, Card } from 'components/layout';
 import ValidatorCompact from 'pages/stake/ValidatorCompact';
+import { useTranslation } from 'react-i18next';
+import { useLocation, useParams } from 'react-router-dom';
+
 import TxContext from '../TxContext';
 import StakeForm, { StakeAction } from './StakeForm';
 

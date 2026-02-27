@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ReactComponent as C2X } from 'styles/images/C2X.svg';
+
 import styles from './ProfileIcon.module.scss';
 
 interface Props {

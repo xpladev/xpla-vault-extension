@@ -1,11 +1,10 @@
+import { isWallet, useAuth } from 'auth';
+import axios, { AxiosError } from 'axios';
+import { useLCDClient } from 'data/queries/lcdClient';
+import { useAddress } from 'data/wallet';
+import { useXplaAPIURL } from 'data/Xpla/XplaAPI';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import axios, { AxiosError } from 'axios';
-
-import { isWallet, useAuth } from 'auth';
-import { useAddress } from 'data/wallet';
-import { useLCDClient } from 'data/queries/lcdClient';
-import { useXplaAPIURL } from 'data/Xpla/XplaAPI';
 
 import ActivateForm from './ActivateForm';
 import styles from './ActivateForm.module.scss';

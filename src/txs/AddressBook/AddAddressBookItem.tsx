@@ -1,14 +1,14 @@
-import { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
 import PersonIcon from '@mui/icons-material/Person';
 import { truncate } from '@xpla.kitchen/utils';
-import { useAddressBook } from 'data/settings/AddressBook';
-import { useTnsAddress } from 'data/external/tns';
-import { InlineFlex } from 'components/layout';
-import { Form, FormItem, FormItemMemo, Submit, Input } from 'components/form';
-import { Fetching, useModal } from 'components/feedback';
 import { TooltipClickIcon } from 'components/display';
+import { Fetching, useModal } from 'components/feedback';
+import { Form, FormItem, FormItemMemo, Input, Submit } from 'components/form';
+import { InlineFlex } from 'components/layout';
+import { useTnsAddress } from 'data/external/tns';
+import { useAddressBook } from 'data/settings/AddressBook';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import validate from 'txs/validate';
 
 const AddAddressBookItem = () => {

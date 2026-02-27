@@ -1,7 +1,8 @@
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import numeral from 'numeral';
 import { ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import numeral from 'numeral';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+
 import styles from './Upload.module.scss';
 
 interface Props {

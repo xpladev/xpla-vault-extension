@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import classNames from 'classnames/bind';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { Coins, Msg } from '@xpla/xpla.js';
 import { readMsg } from '@xpla/msg-reader';
-import { useIsClassic } from 'data/query';
+import { Coins, Msg } from '@xpla/xpla.js';
 import TxMessage from 'app/containers/TxMessage';
+import classNames from 'classnames/bind';
+import { useIsClassic } from 'data/query';
+import { useState } from 'react';
+
 import styles from './Message.module.scss';
 
 const cx = classNames.bind(styles);

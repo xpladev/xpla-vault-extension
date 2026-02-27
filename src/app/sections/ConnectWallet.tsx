@@ -1,16 +1,17 @@
-import { useTranslation } from 'react-i18next';
 import UsbIcon from '@mui/icons-material/Usb';
 import { useWallet } from '@xpla/wallet-provider';
-import { VAULT } from 'config/constants';
-import { RenderButton } from 'types/components';
-import { useAddress } from 'data/wallet';
-import { Button, ExternalLink } from 'components/general';
-import { Grid } from 'components/layout';
+import { useAuth } from 'auth';
+import SwitchWallet from 'auth/modules/select/SwitchWallet';
 import { List } from 'components/display';
 import { ModalButton } from 'components/feedback';
 import { FormHelp } from 'components/form';
-import { useAuth } from 'auth';
-import SwitchWallet from 'auth/modules/select/SwitchWallet';
+import { Button, ExternalLink } from 'components/general';
+import { Grid } from 'components/layout';
+import { VAULT } from 'config/constants';
+import { useAddress } from 'data/wallet';
+import { useTranslation } from 'react-i18next';
+import { RenderButton } from 'types/components';
+
 import Connected from './Connected';
 
 interface Props {

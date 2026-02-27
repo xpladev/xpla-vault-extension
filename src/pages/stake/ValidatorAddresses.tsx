@@ -1,7 +1,8 @@
-import { useTranslation } from 'react-i18next';
 import { AccAddress, Validator } from '@xpla/xpla.js';
 import { FinderLink } from 'components/general';
 import { Card, Grid } from 'components/layout';
+import { useTranslation } from 'react-i18next';
+
 import { ValidatorNumber } from './components/ValidatorNumbers';
 import styles from './ValidatorAddresses.module.scss';
 

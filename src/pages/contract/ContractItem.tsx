@@ -1,9 +1,10 @@
 import { ContractInfo } from '@xpla/xpla.js';
 import { FinderLink } from 'components/general';
 import { Card } from 'components/layout';
-import ContractItemActions from './ContractItemActions';
+
 import ContractDetails from './ContractDetails';
 import styles from './ContractItem.module.scss';
+import ContractItemActions from './ContractItemActions';
 
 const ContractItem = (props: ContractInfo) => {
   const { address } = props;

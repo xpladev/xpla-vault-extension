@@ -1,13 +1,14 @@
-import { useState } from 'react';
 import { formatNumber } from '@xpla.kitchen/utils';
+import { Flex, Grid } from 'components/layout';
+import { Read } from 'components/token';
 import { useCurrency } from 'data/settings/Currency';
 import { useThemeAnimation } from 'data/settings/Theme';
 import { ChartInterval, useXplaPriceChart } from 'data/Xpla/XplaAPI';
-import { Flex, Grid } from 'components/layout';
-import { Read } from 'components/token';
-import { convert, LOADING } from './components/ChartContainer';
+import { useState } from 'react';
+
 import ButtonGroup from './components/ButtonGroup';
 import Chart from './components/Chart';
+import { convert, LOADING } from './components/ChartContainer';
 
 const XplaPriceChart = () => {
   const currency = useCurrency();

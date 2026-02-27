@@ -1,7 +1,7 @@
-import { useCallback } from 'react';
-import { atom, useRecoilState, useRecoilValue } from 'recoil';
 import BigNumber from 'bignumber.js';
 import { always } from 'ramda';
+import { useCallback } from 'react';
+import { atom, useRecoilState, useRecoilValue } from 'recoil';
 import themes, { Theme } from 'styles/themes/themes';
 import { DefaultTheme, SettingKey } from 'utils/localStorage';
 import { getLocalSetting, setLocalSetting } from 'utils/localStorage';

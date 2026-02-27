@@ -1,21 +1,22 @@
-import { useCallback, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
+import { toAmount } from '@xpla.kitchen/utils';
 import { AccAddress, Coin, Coins, ValAddress } from '@xpla/xpla.js';
 import { Delegation, Validator } from '@xpla/xpla.js';
 import { MsgDelegate, MsgUndelegate } from '@xpla/xpla.js';
 import { MsgBeginRedelegate } from '@xpla/xpla.js';
-import { toAmount } from '@xpla.kitchen/utils';
-import { getAmount } from 'utils/coin';
-import { queryKey } from 'data/query';
-import { useAddress } from 'data/wallet';
+import { Form, FormItem, FormWarning, Input, Select } from 'components/form';
+import { Grid } from 'components/layout';
 import { useBankBalance } from 'data/queries/bank';
 import { getFindMoniker } from 'data/queries/staking';
-import { Grid } from 'components/layout';
-import { Form, FormItem, FormWarning, Input, Select } from 'components/form';
+import { queryKey } from 'data/query';
+import { useAddress } from 'data/wallet';
+import { useCallback, useMemo } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { getAmount } from 'utils/coin';
+
+import Tx, { getInitialGasDenom } from '../Tx';
 import { getPlaceholder, toInput } from '../utils';
 import validate from '../validate';
-import Tx, { getInitialGasDenom } from '../Tx';
 
 interface TxValues {
   source?: ValAddress;

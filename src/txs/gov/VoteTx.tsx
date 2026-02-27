@@ -1,8 +1,9 @@
-import { useTranslation } from 'react-i18next';
+import { Auto, Card, Page } from 'components/layout';
 import { useProposal } from 'data/queries/gov';
-import { Auto, Page, Card } from 'components/layout';
-import useProposalId from 'pages/gov/useProposalId';
 import ProposalHeader from 'pages/gov/ProposalHeader';
+import useProposalId from 'pages/gov/useProposalId';
+import { useTranslation } from 'react-i18next';
+
 import TxContext from '../TxContext';
 import VoteForm from './VoteForm';
 

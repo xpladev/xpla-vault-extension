@@ -1,8 +1,9 @@
-import { Component, PropsWithChildren, ReactNode } from 'react';
 import { AxiosError } from 'axios';
+import { Component, PropsWithChildren, ReactNode } from 'react';
 import { getErrorMessage } from 'utils/error';
-import Wrong from './Wrong';
+
 import Forbidden from './Forbidden';
+import Wrong from './Wrong';
 
 interface Props {
   fallback?: (error: Error) => ReactNode;
@@ -30,7 +31,7 @@ class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
     ) : getIsForbidden(error) ? (
       <Forbidden />
     ) : (
-      fallback?.(error) ?? <Wrong>{getErrorMessage(error)}</Wrong>
+      (fallback?.(error) ?? <Wrong>{getErrorMessage(error)}</Wrong>)
     );
   }
 }

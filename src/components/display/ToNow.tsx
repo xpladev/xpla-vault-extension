@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { toNow } from 'utils/date';
 import useInterval from 'utils/hooks/useInterval';
+
 import Tooltip from './Tooltip';
 
 interface Props {

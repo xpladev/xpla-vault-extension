@@ -1,5 +1,6 @@
-import { PropsWithChildren, ReactNode } from 'react';
 import classNames from 'classnames/bind';
+import { PropsWithChildren, ReactNode } from 'react';
+
 import styles from './Grid.module.scss';
 
 const cx = classNames.bind(styles);

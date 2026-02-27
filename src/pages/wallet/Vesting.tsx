@@ -1,16 +1,17 @@
-import { useTranslation } from 'react-i18next';
-import { useQuery } from 'react-query';
-import { useAddress } from 'data/wallet';
-import { useIsClassic } from 'data/query';
+import { Card } from 'components/layout';
+import { Read } from 'components/token';
 import { useLCDClient } from 'data/queries/lcdClient';
 import { VestingAccountTypes } from 'data/queries/vesting';
 import { parseVestingSchedule, queryAccounts } from 'data/queries/vesting';
+import { useIsClassic } from 'data/query';
 import { readNativeDenom } from 'data/token';
-import { Card } from 'components/layout';
-import { Read } from 'components/token';
+import { useAddress } from 'data/wallet';
+import { useTranslation } from 'react-i18next';
+import { useQuery } from 'react-query';
+
 import Asset from './Asset';
-import VestingScheduleTable from './VestingScheduleTable';
 import styles from './Vesting.module.scss';
+import VestingScheduleTable from './VestingScheduleTable';
 
 const Vesting = () => {
   const { t } = useTranslation();

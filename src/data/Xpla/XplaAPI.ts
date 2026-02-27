@@ -1,13 +1,14 @@
-import { useMemo } from 'react';
-import { useQuery } from 'react-query';
+import { ValAddress } from '@xpla/xpla.js';
+import { useNetworks } from 'app/InitNetworks';
 import axios, { AxiosError } from 'axios';
 import BigNumber from 'bignumber.js';
-import { ValAddress } from '@xpla/xpla.js';
-import { XplaValidator } from 'types/validator';
-import { XplaProposalItem } from 'types/proposal';
-import { useNetwork } from 'data/wallet';
 import { useOracleParams } from 'data/queries/oracle';
-import { useNetworks } from 'app/InitNetworks';
+import { useNetwork } from 'data/wallet';
+import { useMemo } from 'react';
+import { useQuery } from 'react-query';
+import { XplaProposalItem } from 'types/proposal';
+import { XplaValidator } from 'types/validator';
+
 import { queryKey, RefetchOptions } from '../query';
 
 export enum Aggregate {

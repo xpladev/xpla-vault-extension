@@ -1,9 +1,9 @@
+import { FormItem, Input } from 'components/form';
+import { Card, Page } from 'components/layout';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SettingKey } from 'utils/localStorage';
 import { getLocalSetting, setLocalSetting } from 'utils/localStorage';
-import { Card, Page } from 'components/layout';
-import { FormItem, Input } from 'components/form';
 
 const Settings = () => {
   const { t } = useTranslation();

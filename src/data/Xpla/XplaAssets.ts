@@ -1,10 +1,11 @@
-import { useQuery } from 'react-query';
+import { AccAddress } from '@xpla/xpla.js';
 import axios, { AxiosError } from 'axios';
+import { ASSETS } from 'config/constants';
 import { fromPairs, toPairs } from 'ramda';
 import { flatten, groupBy, map, mergeAll, values } from 'ramda';
-import { AccAddress } from '@xpla/xpla.js';
-import { ASSETS } from 'config/constants';
+import { useQuery } from 'react-query';
 import shuffle from 'utils/shuffle';
+
 import { queryKey, RefetchOptions } from '../query';
 import { useNetworkName } from '../wallet';
 

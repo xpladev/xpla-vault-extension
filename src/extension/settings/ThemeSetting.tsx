@@ -1,7 +1,7 @@
 import { capitalize } from '@mui/material';
-import themes from 'styles/themes/themes';
-import { useFindTheme, useThemeState } from 'data/settings/Theme';
 import { RadioGroup } from 'components/form';
+import { useFindTheme, useThemeState } from 'data/settings/Theme';
+import themes from 'styles/themes/themes';
 
 const ThemeSetting = () => {
   const [theme, setTheme] = useThemeState();

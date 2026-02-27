@@ -1,5 +1,6 @@
 import { ForwardedRef, PropsWithChildren, TextareaHTMLAttributes } from 'react';
 import { forwardRef } from 'react';
+
 import styles from './TextArea.module.scss';
 
 const TextArea = forwardRef(

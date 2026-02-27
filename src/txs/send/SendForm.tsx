@@ -1,23 +1,24 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
 import PersonIcon from '@mui/icons-material/Person';
+import { isDenom, toAmount, truncate } from '@xpla.kitchen/utils';
 import { AccAddress, EvmAddress } from '@xpla/xpla.js';
 import { MsgExecuteContract, MsgSend } from '@xpla/xpla.js';
-import { isDenom, toAmount, truncate } from '@xpla.kitchen/utils';
-import { debounce } from 'lodash';
+import { TooltipClickIcon } from 'components/display';
+import { Form, FormItem, FormItemMemo, Input } from 'components/form';
+import { Auto, Card, InlineFlex } from 'components/layout';
+import { useTnsAddress } from 'data/external/tns';
+import { useBankBalance } from 'data/queries/bank';
 import { queryKey } from 'data/query';
 import { useAddress } from 'data/wallet';
-import { useBankBalance } from 'data/queries/bank';
-import { useTnsAddress } from 'data/external/tns';
+import { debounce } from 'lodash';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { hexToBech32 } from 'utils/evm';
-import { TooltipClickIcon } from 'components/display';
-import { Auto, Card, InlineFlex } from 'components/layout';
-import { Form, FormItem, FormItemMemo, Input } from 'components/form';
+
 import AddressBookList from '../AddressBook/AddressBookList';
+import Tx, { getInitialGasDenom } from '../Tx';
 import { getPlaceholder, toInput } from '../utils';
 import validate from '../validate';
-import Tx, { getInitialGasDenom } from '../Tx';
 
 interface TxValues {
   recipient?: string; // AccAddress | TNS
@@ -140,10 +141,11 @@ const SendForm = ({ token, decimals, balance, symbol }: Props) => {
   //   return defaultTxValues;
   // }, [connectedAddress, recipient, input, decimals]);
 
-  const updateEstimationTxValues = useCallback(
-    debounce((newValues: TxValues) => {
-      setEstimationTxValues(newValues);
-    }, 500),
+  const updateEstimationTxValues = useMemo(
+    () =>
+      debounce((newValues: TxValues) => {
+        setEstimationTxValues(newValues);
+      }, 500),
     [],
   );
 

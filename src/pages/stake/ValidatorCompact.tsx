@@ -1,13 +1,14 @@
-import { useTranslation } from 'react-i18next';
-import classNames from 'classnames/bind';
-import LaptopOutlinedIcon from '@mui/icons-material/LaptopOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import { Contacts as ContactsParams } from 'types/components';
-import { useValidator } from 'data/queries/staking';
-import { useXplaValidator } from 'data/Xpla/XplaAPI';
-import { ReactComponent as XplaValidatorProfiles } from 'styles/images/stake/XplaValidatorProfiles.svg';
+import LaptopOutlinedIcon from '@mui/icons-material/LaptopOutlined';
+import classNames from 'classnames/bind';
 import { ExternalLink, validateLink } from 'components/general';
 import { Card, Contacts, Flex, Grid } from 'components/layout';
+import { useValidator } from 'data/queries/staking';
+import { useXplaValidator } from 'data/Xpla/XplaAPI';
+import { useTranslation } from 'react-i18next';
+import { ReactComponent as XplaValidatorProfiles } from 'styles/images/stake/XplaValidatorProfiles.svg';
+import { Contacts as ContactsParams } from 'types/components';
+
 import ProfileIcon from './components/ProfileIcon';
 import { ValidatorJailed, ValidatorStatus } from './components/ValidatorTag';
 import useAddressParams from './useAddressParams';

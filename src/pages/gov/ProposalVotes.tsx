@@ -1,17 +1,18 @@
-import { useTranslation } from 'react-i18next';
-import classNames from 'classnames/bind';
-import BigNumber from 'bignumber.js';
-import { StakingPool, Tally, TallyParams, Vote } from '@xpla/xpla.js';
 import { readAmount, readPercent } from '@xpla.kitchen/utils';
-import { has } from 'utils/num';
-import { combineState } from 'data/query';
+import { StakingPool, Tally, TallyParams, Vote } from '@xpla/xpla.js';
+import BigNumber from 'bignumber.js';
+import classNames from 'classnames/bind';
+import { ToNow } from 'components/display';
+import { Empty, Fetching } from 'components/feedback';
+import { Card, Col, Grid, Row } from 'components/layout';
+import { Read } from 'components/token';
 import { useGetVoteOptionItem } from 'data/queries/gov';
 import { useProposal, useTally, useTallyParams } from 'data/queries/gov';
 import { useStakingPool } from 'data/queries/staking';
-import { Col, Row, Card, Grid } from 'components/layout';
-import { Fetching, Empty } from 'components/feedback';
-import { Read } from 'components/token';
-import { ToNow } from 'components/display';
+import { combineState } from 'data/query';
+import { useTranslation } from 'react-i18next';
+import { has } from 'utils/num';
+
 import VoteProgress from './components/VoteProgress';
 import styles from './ProposalVotes.module.scss';
 

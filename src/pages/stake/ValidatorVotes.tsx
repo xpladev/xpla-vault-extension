@@ -1,12 +1,13 @@
+import { readPercent } from '@xpla.kitchen/utils';
+import { Card, Grid, Table } from 'components/layout';
+import { useGetVoteOptionItem } from 'data/queries/gov';
+import { useVotingPowerRate } from 'data/Xpla/XplaAPI';
+import { reverse } from 'ramda';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { reverse } from 'ramda';
-import { readPercent } from '@xpla.kitchen/utils';
 import { XplaValidator } from 'types/validator';
-import { useGetVoteOptionItem } from 'data/queries/gov';
-import { useVotingPowerRate } from 'data/Xpla/XplaAPI';
-import { Card, Grid, Table } from 'components/layout';
+
 import ValidatorNumbers from './components/ValidatorNumbers';
 
 const ValidatorVotes = ({ validator }: { validator: XplaValidator }) => {

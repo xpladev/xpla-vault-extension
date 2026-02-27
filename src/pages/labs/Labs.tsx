@@ -1,4 +1,5 @@
 import { Page, Tabs } from 'components/layout';
+
 import Pairs from './Pairs';
 
 const Labs = () => {

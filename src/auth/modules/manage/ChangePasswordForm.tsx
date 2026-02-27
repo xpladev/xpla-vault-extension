@@ -1,11 +1,12 @@
+import { Form, FormItem, Input, Submit } from 'components/form';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { Form, FormItem, Input, Submit } from 'components/form';
+
+import useAuth from '../../hooks/useAuth';
 import { changePassword } from '../../scripts/keystore';
 import validate from '../../scripts/validate';
-import useAuth from '../../hooks/useAuth';
 import ConfirmModal from './ConfirmModal';
 
 interface Values {

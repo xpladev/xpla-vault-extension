@@ -1,6 +1,6 @@
-import { ParsedVestingSchedule } from 'data/queries/vesting';
 import { Table } from 'components/layout';
 import { Read, ReadPercent } from 'components/token';
+import { ParsedVestingSchedule } from 'data/queries/vesting';
 
 const VestingScheduleTable = ({ type, schedule }: ParsedVestingSchedule) => {
   return (

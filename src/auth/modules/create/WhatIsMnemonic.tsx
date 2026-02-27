@@ -1,7 +1,8 @@
-import { useState } from 'react';
 import ArrowBack from '@mui/icons-material/ArrowBack';
-import mnemonicLoopGif from 'styles/images/mnemonic-loop.gif';
 import { Button } from 'components/general';
+import { useState } from 'react';
+import mnemonicLoopGif from 'styles/images/mnemonic-loop.gif';
+
 import styles from './WhatIsMnemonic.module.scss';
 
 interface Props {

@@ -1,11 +1,12 @@
-import { useTranslation } from 'react-i18next';
-import { getAmount, sortCoins } from 'utils/coin';
-import { useCommunityPool } from 'data/queries/distribution';
-import { useMemoizedCalcValue } from 'data/queries/oracle';
 import { Card } from 'components/layout';
 import { Read } from 'components/token';
-import SelectDenom from './components/SelectDenom';
+import { useCommunityPool } from 'data/queries/distribution';
+import { useMemoizedCalcValue } from 'data/queries/oracle';
+import { useTranslation } from 'react-i18next';
+import { getAmount, sortCoins } from 'utils/coin';
+
 import DashboardContent from './components/DashboardContent';
+import SelectDenom from './components/SelectDenom';
 
 const CommunityPool = () => {
   const { t } = useTranslation();

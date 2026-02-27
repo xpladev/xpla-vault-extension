@@ -1,6 +1,7 @@
 import { Grid } from 'components/layout';
-import Links from './Links';
+
 import styles from './Aside.module.scss';
+import Links from './Links';
 
 const Aside = () => {
   return (

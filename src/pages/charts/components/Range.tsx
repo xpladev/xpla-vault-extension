@@ -1,5 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import ButtonGroup from './ButtonGroup';
 import styles from './Range.module.scss';
 

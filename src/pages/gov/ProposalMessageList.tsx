@@ -1,5 +1,6 @@
 import { ProposalV1 } from '@xpla/xpla.js';
-import { Col, Card } from 'components/layout';
+import { Card, Col } from 'components/layout';
+
 import MessageList from './components/MessageList';
 
 const ProposalMessageList = ({ proposal }: { proposal: ProposalV1 }) => {

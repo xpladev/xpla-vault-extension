@@ -1,11 +1,12 @@
-import { PropsWithChildren, ReactNode, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import ReactModal from 'react-modal';
-import classNames from 'classnames/bind';
 import CloseIcon from '@mui/icons-material/Close';
+import classNames from 'classnames/bind';
+import { PropsWithChildren, ReactNode, useEffect, useState } from 'react';
+import ReactModal from 'react-modal';
+import { useLocation } from 'react-router-dom';
 import { RenderButton } from 'types/components';
 import createContext from 'utils/createContext';
 import { getMaxHeightStyle } from 'utils/style';
+
 import styles from './Modal.module.scss';
 
 const cx = classNames.bind(styles);

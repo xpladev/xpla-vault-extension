@@ -1,6 +1,7 @@
+import classNames from 'classnames/bind';
 import { PropsWithChildren } from 'react';
 import { atom, useRecoilValue } from 'recoil';
-import classNames from 'classnames/bind';
+
 import Container from './Container';
 import styles from './Layout.module.scss';
 

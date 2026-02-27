@@ -1,28 +1,29 @@
-import { useCallback, useEffect, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useFieldArray, useForm } from 'react-hook-form';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { AccAddress, Coins, MsgSubmitProposal } from '@xpla/xpla.js';
-import { TextProposal, CommunityPoolSpendProposal } from '@xpla/xpla.js';
-import { ParameterChangeProposal, ParamChange } from '@xpla/xpla.js';
-import { ExecuteContractProposal } from '@xpla/xpla.js';
 import { isDenomXplaNative } from '@xpla.kitchen/utils';
 import { readAmount, readDenom, toAmount } from '@xpla.kitchen/utils';
-import { SAMPLE_ADDRESS } from 'config/constants';
-import { getAmount, sortCoins } from 'utils/coin';
-import { has } from 'utils/num';
-import { parseJSON } from 'utils/data';
-import { queryKey } from 'data/query';
-import { useAddress } from 'data/wallet';
-import { useBankBalance } from 'data/queries/bank';
-import { Grid } from 'components/layout';
+import { AccAddress, Coins, MsgSubmitProposal } from '@xpla/xpla.js';
+import { CommunityPoolSpendProposal, TextProposal } from '@xpla/xpla.js';
+import { ParamChange, ParameterChangeProposal } from '@xpla/xpla.js';
+import { ExecuteContractProposal } from '@xpla/xpla.js';
 import { Form, FormGroup, FormItem } from 'components/form';
 import { FormHelp, FormWarning } from 'components/form';
-import { Input, TextArea, Select } from 'components/form';
+import { Input, Select, TextArea } from 'components/form';
+import { Grid } from 'components/layout';
+import { SAMPLE_ADDRESS } from 'config/constants';
+import { useBankBalance } from 'data/queries/bank';
+import { queryKey } from 'data/query';
+import { useAddress } from 'data/wallet';
+import { useCallback, useEffect, useMemo } from 'react';
+import { useFieldArray, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { getAmount, sortCoins } from 'utils/coin';
+import { parseJSON } from 'utils/data';
+import { has } from 'utils/num';
+
+import Tx, { getInitialGasDenom } from '../Tx';
 import { getCoins, getPlaceholder, toInput } from '../utils';
 import validate from '../validate';
-import Tx, { getInitialGasDenom } from '../Tx';
 
 enum ProposalType {
   TEXT = 'Text proposal',

@@ -1,12 +1,13 @@
-import { combineState } from 'data/query';
-import { useDelegations, useUnbondings } from 'data/queries/staking';
-import { useRewards } from 'data/queries/distribution';
-import { Col, Row } from 'components/layout';
-import { Fetching } from 'components/feedback';
 import DelegationsPromote from 'app/containers/DelegationsPromote';
+import { Fetching } from 'components/feedback';
+import { Col, Row } from 'components/layout';
+import { useRewards } from 'data/queries/distribution';
+import { useDelegations, useUnbondings } from 'data/queries/staking';
+import { combineState } from 'data/query';
+
 import Delegations from './Delegations';
-import Unbondings from './Unbondings';
 import Rewards from './Rewards';
+import Unbondings from './Unbondings';
 
 const Staked = () => {
   const { data: delegations, ...delegationsState } = useDelegations();

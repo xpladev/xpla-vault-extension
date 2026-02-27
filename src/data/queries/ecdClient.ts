@@ -1,6 +1,6 @@
-import { useMemo } from 'react';
 import { ECDClient } from '@xpla/xpla.js';
 import { useNetwork } from 'data/wallet';
+import { useMemo } from 'react';
 
 export const useECDClient = () => {
   const network = useNetwork();

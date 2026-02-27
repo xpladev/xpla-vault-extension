@@ -1,6 +1,7 @@
-import { useTranslation } from 'react-i18next';
+import { Card, Page } from 'components/layout';
 import { useConnectedMoniker } from 'data/queries/distribution';
-import { Page, Card } from 'components/layout';
+import { useTranslation } from 'react-i18next';
+
 import TxContext from '../TxContext';
 import WithdrawCommissionForm from './WithdrawCommissionForm';
 

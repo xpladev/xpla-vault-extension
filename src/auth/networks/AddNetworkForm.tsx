@@ -1,10 +1,10 @@
+import { useNetworks } from 'app/InitNetworks';
+import { Checkbox, Form, FormItem, Input, Submit } from 'components/form';
+import { useCustomNetworks } from 'data/settings/CustomNetworks';
+import { useNetworkState } from 'data/wallet';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { useNetworkState } from 'data/wallet';
-import { useCustomNetworks } from 'data/settings/CustomNetworks';
-import { Form, FormItem, Submit, Input, Checkbox } from 'components/form';
-import { useNetworks } from 'app/InitNetworks';
 
 const AddNetwork = () => {
   const { t } = useTranslation();

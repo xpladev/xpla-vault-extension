@@ -1,16 +1,17 @@
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import QrCodeIcon from '@mui/icons-material/QrCode';
-import PasswordIcon from '@mui/icons-material/Password';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
-import LogoutIcon from '@mui/icons-material/Logout';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { ReactComponent as CheckEvmIcon } from 'styles/images/menu/CheckEvm.svg';
+import LogoutIcon from '@mui/icons-material/Logout';
+import PasswordIcon from '@mui/icons-material/Password';
+import QrCodeIcon from '@mui/icons-material/QrCode';
 import { Col, Page } from 'components/layout';
-import is from '../../scripts/is';
-import useAuth from '../../hooks/useAuth';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { ReactComponent as CheckEvmIcon } from 'styles/images/menu/CheckEvm.svg';
+
 import AuthList from '../../components/AuthList';
+import useAuth from '../../hooks/useAuth';
+import is from '../../scripts/is';
 import ConnectedWallet from './ConnectedWallet';
 
 export const useManageWallet = () => {
@@ -77,8 +78,15 @@ export const useManageWallet = () => {
   return is.multisig(wallet)
     ? [toPostMultisig, toDelete, disconnectWallet]
     : is.ledger(wallet)
-    ? [toSignMultisig, disconnectWallet]
-    : [toExport, toEvmStyle, toPassword, toDelete, toSignMultisig, lockWallet];
+      ? [toSignMultisig, disconnectWallet]
+      : [
+          toExport,
+          toEvmStyle,
+          toPassword,
+          toDelete,
+          toSignMultisig,
+          lockWallet,
+        ];
 };
 
 const ManageWallets = () => {

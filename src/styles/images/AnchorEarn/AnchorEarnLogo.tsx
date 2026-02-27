@@ -1,5 +1,6 @@
-import { ReactComponent as Logo } from './AnchorEarnLogo.svg';
 import './AnchorEarnLogo.scss';
+
+import { ReactComponent as Logo } from './AnchorEarnLogo.svg';
 
 const AnchorEarnLogo = () => {
   return <Logo />;

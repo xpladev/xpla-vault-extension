@@ -1,14 +1,15 @@
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
 import { LegacyAminoMultisigPublicKey } from '@xpla/xpla.js';
+import { Modal } from 'components/feedback';
 import { Form, FormItem } from 'components/form';
 import { Input, Submit } from 'components/form';
-import { Modal } from 'components/feedback';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+
 import { addWallet } from '../../scripts/keystore';
 import validate from '../../scripts/validate';
-import CreateMultisigWalletForm from './CreateMultisigWalletForm';
 import CreatedWallet from './CreatedWallet';
+import CreateMultisigWalletForm from './CreateMultisigWalletForm';
 
 interface Values {
   name: string;

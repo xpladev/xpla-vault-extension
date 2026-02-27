@@ -1,6 +1,7 @@
+import { ModalButton } from 'components/feedback';
 import { useTranslation } from 'react-i18next';
 import { RenderButton } from 'types/components';
-import { ModalButton } from 'components/feedback';
+
 import ManageCustomTokens from '../custom/ManageCustomTokens';
 
 interface Props {

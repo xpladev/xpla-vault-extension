@@ -1,5 +1,6 @@
-import { ReactNode } from 'react';
 import { Grid } from 'components/layout';
+import { ReactNode } from 'react';
+
 import styles from './DashboardContent.module.scss';
 
 interface Props {

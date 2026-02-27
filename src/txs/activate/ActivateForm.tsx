@@ -1,30 +1,27 @@
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
-import axios from 'axios';
-import { useSetRecoilState } from 'recoil';
-
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import * as secp256k1 from '@noble/secp256k1';
 import { AccAddress, RawKey } from '@xpla/xpla.js';
-
 import { isWallet, useAuth } from 'auth';
 import {
   getDecryptedKey,
   PasswordError,
   testPassword,
 } from 'auth/scripts/keystore';
+import axios from 'axios';
+import { Modal } from 'components/feedback';
+import { Form, FormItem, Input, Submit } from 'components/form';
+import { Pre } from 'components/general';
+import { Card, Grid } from 'components/layout';
+import { latestTxState } from 'data/queries/tx';
 import { useAddress } from 'data/wallet';
 import { useXplaAPIURL } from 'data/Xpla/XplaAPI';
-import { latestTxState } from 'data/queries/tx';
-
-import { Modal } from 'components/feedback';
-import { Card, Grid } from 'components/layout';
-import { Form, FormItem, Input, Submit } from 'components/form';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 
 import styles from './ActivateForm.module.scss';
-import { Pre } from 'components/general';
-import { useNavigate } from 'react-router-dom';
 
 interface TxValues {
   address?: AccAddress; // hidden input

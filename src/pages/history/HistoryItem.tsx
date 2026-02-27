@@ -1,11 +1,12 @@
-import { Fragment } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Dl, ToNow } from 'components/display';
 import { FinderLink } from 'components/general';
 import { Card } from 'components/layout';
-import { Dl, ToNow } from 'components/display';
 import { ReadMultiple } from 'components/token';
-import HistoryMessage from './HistoryMessage';
+import { Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import styles from './HistoryItem.module.scss';
+import HistoryMessage from './HistoryMessage';
 
 const HistoryItem = ({ txhash, timestamp, ...props }: AccountHistoryItem) => {
   const { success, msgs, collapsed, fee, memo, raw_log } = props;

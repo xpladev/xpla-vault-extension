@@ -1,9 +1,10 @@
-import { useTranslation } from 'react-i18next';
-import { intervalToDuration } from 'date-fns';
-import { useDepositParams } from 'data/queries/gov';
-import { useVotingParams } from 'data/queries/gov';
 import { Card } from 'components/layout';
 import { Read } from 'components/token';
+import { useDepositParams } from 'data/queries/gov';
+import { useVotingParams } from 'data/queries/gov';
+import { intervalToDuration } from 'date-fns';
+import { useTranslation } from 'react-i18next';
+
 import DataList from './components/DataList';
 
 const GovernanceParams = () => {

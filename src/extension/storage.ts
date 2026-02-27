@@ -1,6 +1,6 @@
 import { AccAddress } from '@xpla/xpla.js';
-import extension from 'extensionizer';
 import decrypt from 'auth/scripts/decrypt';
+import extension from 'extensionizer';
 
 /* network */
 export const storeNetwork = (network: XplaNetwork) => {

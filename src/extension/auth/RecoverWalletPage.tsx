@@ -1,5 +1,6 @@
-import { useTranslation } from 'react-i18next';
 import RecoverWalletForm from 'auth/modules/create/RecoverWalletForm';
+import { useTranslation } from 'react-i18next';
+
 import ExtensionPage from '../components/ExtensionPage';
 
 const RecoverWallet = () => {

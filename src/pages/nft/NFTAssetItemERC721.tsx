@@ -1,18 +1,19 @@
-import { useTranslation } from 'react-i18next';
-import classNames from 'classnames/bind';
-import qs from 'qs';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import ShortcutOutlinedIcon from '@mui/icons-material/ShortcutOutlined';
-import { getIpfsGateway } from 'data/queries/wasm';
-import { useTokenInfoERC721 } from 'data/queries/evm';
-import { InternalButton, InternalLink } from 'components/general';
-import { Grid } from 'components/layout';
+import classNames from 'classnames/bind';
 import { WithFetching } from 'components/feedback';
 import { ModalButton } from 'components/feedback';
-import NFTDetails from './NFTDetails';
-import styles from './NFTAssetItem.module.scss';
+import { InternalButton, InternalLink } from 'components/general';
+import { Grid } from 'components/layout';
 import { TokenBadge } from 'components/token';
+import { useTokenInfoERC721 } from 'data/queries/evm';
+import { getIpfsGateway } from 'data/queries/wasm';
+import qs from 'qs';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import styles from './NFTAssetItem.module.scss';
+import NFTDetails from './NFTDetails';
 
 const cx = classNames.bind(styles);
 

@@ -1,15 +1,16 @@
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import BluetoothTransport from '@ledgerhq/hw-transport-web-ble';
 import UsbIcon from '@mui/icons-material/Usb';
 import { LedgerKey } from '@xpla/ledger-xpla-js';
-import BluetoothTransport from '@ledgerhq/hw-transport-web-ble';
-import { LEDGER_TRANSPORT_TIMEOUT } from 'config/constants';
 import { Form, FormError, FormItem, FormWarning } from 'components/form';
 import { Checkbox, Input, Submit } from 'components/form';
-import validate from '../scripts/validate';
+import { LEDGER_TRANSPORT_TIMEOUT } from 'config/constants';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+
 import useAuth from '../hooks/useAuth';
+import validate from '../scripts/validate';
 
 interface Values {
   index: number;

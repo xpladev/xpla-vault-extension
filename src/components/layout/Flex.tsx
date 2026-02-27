@@ -1,5 +1,6 @@
-import { PropsWithChildren } from 'react';
 import classNames from 'classnames/bind';
+import { PropsWithChildren } from 'react';
+
 import styles from './Flex.module.scss';
 
 const cx = classNames.bind(styles);

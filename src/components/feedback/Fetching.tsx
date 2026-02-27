@@ -1,10 +1,11 @@
-import { PropsWithChildren, ReactNode, useState } from 'react';
 import LinearProgress from '@mui/material/LinearProgress';
+import { PropsWithChildren, ReactNode, useState } from 'react';
 import { getErrorMessage } from 'utils/error';
 import useTimeout from 'utils/hooks/useTimeout';
+
 import { Card } from '../layout';
-import Wrong from './Wrong';
 import styles from './Fetching.module.scss';
+import Wrong from './Wrong';
 
 interface Props extends QueryState {
   height?: number;

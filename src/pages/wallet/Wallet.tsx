@@ -1,8 +1,9 @@
 import { Auto, Page } from 'components/layout';
+
 import Coins from './Coins';
+import Rewards from './Rewards';
 import Tokens from './Tokens';
 import Vesting from './Vesting';
-import Rewards from './Rewards';
 
 const Wallet = () => {
   return (

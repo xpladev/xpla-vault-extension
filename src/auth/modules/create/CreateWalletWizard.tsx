@@ -1,10 +1,11 @@
+import { MnemonicKey } from '@xpla/xpla.js';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { MnemonicKey } from '@xpla/xpla.js';
 import createContext from 'utils/createContext';
+
 import { addWallet } from '../../scripts/keystore';
-import CreateWalletForm from './CreateWalletForm';
 import CreatedWallet from './CreatedWallet';
+import CreateWalletForm from './CreateWalletForm';
 
 export interface Values {
   name: string;

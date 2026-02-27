@@ -1,4 +1,5 @@
 import { useIsClassic } from 'data/query';
+
 import styles from './IsClassicNetwork.module.scss';
 
 const IsClassicNetwork = () => {

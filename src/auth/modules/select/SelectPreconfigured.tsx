@@ -1,7 +1,8 @@
-import { useTranslation } from 'react-i18next';
 import usePreconfigured from 'auth/hooks/usePreconfigured';
-import { useNetwork } from 'data/wallet';
 import { Select } from 'components/form';
+import { useNetwork } from 'data/wallet';
+import { useTranslation } from 'react-i18next';
+
 import useAuth from '../../hooks/useAuth';
 
 const SelectPreconfigured = () => {

@@ -1,6 +1,6 @@
-import { PropsWithChildren } from 'react';
 import { useInitialBankBalance } from 'data/queries/bank';
 import { BankBalanceProvider } from 'data/queries/bank';
+import { PropsWithChildren } from 'react';
 
 const InitBankBalance = ({ children }: PropsWithChildren<{}>) => {
   const { data: bankBalance } = useInitialBankBalance();

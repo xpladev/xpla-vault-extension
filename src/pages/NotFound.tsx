@@ -1,6 +1,6 @@
-import { useTranslation } from 'react-i18next';
-import { Page, Card } from 'components/layout';
 import { Wrong } from 'components/feedback';
+import { Card, Page } from 'components/layout';
+import { useTranslation } from 'react-i18next';
 
 const NotFound = () => {
   const { t } = useTranslation();

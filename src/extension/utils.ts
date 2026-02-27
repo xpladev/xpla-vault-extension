@@ -1,6 +1,6 @@
-import { useCallback } from 'react';
-import { CreateTxOptions, EvmMsg, Fee, Msg, Tx, SignMode } from '@xpla/xpla.js';
+import { CreateTxOptions, EvmMsg, Fee, Msg, SignMode, Tx } from '@xpla/xpla.js';
 import { useIsClassic } from 'data/query';
+import { useCallback } from 'react';
 
 /* primitive */
 export interface PrimitiveDefaultRequest {
@@ -9,8 +9,7 @@ export interface PrimitiveDefaultRequest {
 }
 
 export interface PrimitiveTxRequest
-  extends Partial<TxResponse>,
-    PrimitiveDefaultRequest {
+  extends Partial<TxResponse>, PrimitiveDefaultRequest {
   msgs: string[];
   fee?: string;
   memo?: string;
@@ -20,8 +19,7 @@ export interface PrimitiveTxRequest
 }
 
 export interface PrimitiveSignBytesRequest
-  extends Partial<TxResponse>,
-    PrimitiveDefaultRequest {
+  extends Partial<TxResponse>, PrimitiveDefaultRequest {
   bytes: string;
 }
 

@@ -1,5 +1,6 @@
-import { useTranslation } from 'react-i18next';
 import AddNetworkForm from 'auth/networks/AddNetworkForm';
+import { useTranslation } from 'react-i18next';
+
 import ExtensionPage from '../components/ExtensionPage';
 
 const AddNetworkPage = () => {

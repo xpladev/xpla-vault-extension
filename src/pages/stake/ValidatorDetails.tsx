@@ -1,15 +1,16 @@
-import { useTranslation } from 'react-i18next';
+import { useGoBackOnError } from 'app/routes';
+import { Auto, Col, Page } from 'components/layout';
 import { useValidator } from 'data/queries/staking';
 import { useXplaValidator } from 'data/Xpla/XplaAPI';
-import { Col, Page, Auto } from 'components/layout';
-import { useGoBackOnError } from 'app/routes';
+import { useTranslation } from 'react-i18next';
+
 import useAddressParams from './useAddressParams';
+import ValidatorActions from './ValidatorActions';
+import ValidatorAddresses from './ValidatorAddresses';
+import ValidatorCommission from './ValidatorCommission';
 import ValidatorCompact from './ValidatorCompact';
 import ValidatorSummary from './ValidatorSummary';
-import ValidatorCommission from './ValidatorCommission';
 import ValidatorVotes from './ValidatorVotes';
-import ValidatorAddresses from './ValidatorAddresses';
-import ValidatorActions from './ValidatorActions';
 
 const ValidatorDetails = () => {
   const { t } = useTranslation();

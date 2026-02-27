@@ -1,6 +1,7 @@
-import { useTranslation } from 'react-i18next';
-import { useThemeAnimation } from 'data/settings/Theme';
 import { FlexColumn } from 'components/layout';
+import { useThemeAnimation } from 'data/settings/Theme';
+import { useTranslation } from 'react-i18next';
+
 import { sandbox } from '../scripts/env';
 import styles from './Splash.module.scss';
 

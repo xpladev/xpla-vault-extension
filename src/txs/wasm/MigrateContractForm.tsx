@@ -1,14 +1,15 @@
-import { useCallback, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
 import { AccAddress, MsgMigrateContract } from '@xpla/xpla.js';
-import { parseJSON, validateMsg } from 'utils/data';
-import { useAddress } from 'data/wallet';
-import { useBankBalance } from 'data/queries/bank';
 import { Form, FormItem } from 'components/form';
-import { Input, EditorInput } from 'components/form';
-import validate from '../validate';
+import { EditorInput, Input } from 'components/form';
+import { useBankBalance } from 'data/queries/bank';
+import { useAddress } from 'data/wallet';
+import { useCallback, useMemo } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { parseJSON, validateMsg } from 'utils/data';
+
 import Tx, { getInitialGasDenom } from '../Tx';
+import validate from '../validate';
 
 interface TxValues {
   id?: number;

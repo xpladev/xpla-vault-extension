@@ -1,17 +1,18 @@
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { last } from 'ramda';
 import { capitalize } from '@mui/material';
 import { readPercent } from '@xpla.kitchen/utils';
-import { AggregateStakingReturn } from 'data/Xpla/XplaAPI';
-import { useStakingReturn } from 'data/Xpla/XplaAPI';
+import { TooltipIcon } from 'components/display';
 import { Select } from 'components/form';
 import { Card } from 'components/layout';
-import { TooltipIcon } from 'components/display';
 import { ReadPercent } from 'components/token';
+import { AggregateStakingReturn } from 'data/Xpla/XplaAPI';
+import { useStakingReturn } from 'data/Xpla/XplaAPI';
+import { last } from 'ramda';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import ChartContainer from './components/ChartContainer';
-import Range from './components/Range';
 import Filter from './components/Filter';
+import Range from './components/Range';
 
 const StakingReturn = () => {
   const { t } = useTranslation();

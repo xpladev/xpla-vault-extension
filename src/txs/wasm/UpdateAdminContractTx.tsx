@@ -1,6 +1,7 @@
+import { Card, Page } from 'components/layout';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { Page, Card } from 'components/layout';
+
 import TxContext from '../TxContext';
 import UpdateAdminContractForm from './UpdateAdminContractForm';
 

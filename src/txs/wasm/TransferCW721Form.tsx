@@ -1,23 +1,24 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
 import PersonIcon from '@mui/icons-material/Person';
+import { truncate } from '@xpla.kitchen/utils';
 import { AccAddress, EvmAddress } from '@xpla/xpla.js';
 import { MsgExecuteContract } from '@xpla/xpla.js';
-import { truncate } from '@xpla.kitchen/utils';
-import { debounce } from 'lodash';
+import { TooltipClickIcon } from 'components/display';
+import { Form, FormItem, FormItemMemo, Input } from 'components/form';
+import { Auto, Card, InlineFlex } from 'components/layout';
+import { useTnsAddress } from 'data/external/tns';
+import { useBankBalance } from 'data/queries/bank';
 import { queryKey } from 'data/query';
 import { useAddress } from 'data/wallet';
-import { useBankBalance } from 'data/queries/bank';
-import { useTnsAddress } from 'data/external/tns';
-import { hexToBech32 } from 'utils/evm';
-import { Auto, Card, InlineFlex } from 'components/layout';
-import { Form, FormItem, Input, FormItemMemo } from 'components/form';
-import { TooltipClickIcon } from 'components/display';
+import { debounce } from 'lodash';
 import NFTAssetItem from 'pages/nft/NFTAssetItem';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { hexToBech32 } from 'utils/evm';
+
 import AddressBookList from '../AddressBook/AddressBookList';
-import validate from '../validate';
 import Tx, { getInitialGasDenom } from '../Tx';
+import validate from '../validate';
 
 interface TxValues {
   recipient?: string; // AccAddress | TNS
@@ -132,10 +133,11 @@ const TransferCW721Form = ({ contract, id, balance }: Props) => {
   //   return defaultTxValues;
   // }, [connectedAddress, recipient]);
 
-  const updateEstimationTxValues = useCallback(
-    debounce((newValues: TxValues) => {
-      setEstimationTxValues(newValues);
-    }, 500),
+  const updateEstimationTxValues = useMemo(
+    () =>
+      debounce((newValues: TxValues) => {
+        setEstimationTxValues(newValues);
+      }, 500),
     [],
   );
 

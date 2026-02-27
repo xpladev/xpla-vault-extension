@@ -1,11 +1,11 @@
-import { PropsWithChildren } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useIsClassic } from 'data/query';
-import { useLCDClient } from 'data/queries/lcdClient';
+import { Wrong } from 'components/feedback';
 import { Pre } from 'components/general';
 import { Auto, Card, Grid } from 'components/layout';
-import { Wrong } from 'components/feedback';
 import { ReadMultiple } from 'components/token';
+import { useLCDClient } from 'data/queries/lcdClient';
+import { useIsClassic } from 'data/query';
+import { PropsWithChildren } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ReadTx = (props: PropsWithChildren<{ tx: string }>) => {
   const { tx: encoded, children } = props;

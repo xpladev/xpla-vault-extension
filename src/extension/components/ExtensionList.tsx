@@ -1,7 +1,8 @@
-import { ReactNode } from 'react';
-import { Link } from 'react-router-dom';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Flex, Grid } from 'components/layout';
+import { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
+
 import styles from './ExtensionList.module.scss';
 
 interface DefaultItemProps {

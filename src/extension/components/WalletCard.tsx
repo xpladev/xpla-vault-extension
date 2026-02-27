@@ -1,9 +1,10 @@
-import { ReactNode } from 'react';
 import QrCodeIcon from '@mui/icons-material/QrCode';
-import { Flex, Grid } from 'components/layout';
 import WalletQR from 'app/sections/WalletQR';
 import { isWallet, useAuth } from 'auth';
 import MultisigBadge from 'auth/components/MultisigBadge';
+import { Flex, Grid } from 'components/layout';
+import { ReactNode } from 'react';
+
 import Copy from './Copy';
 import styles from './WalletCard.module.scss';
 

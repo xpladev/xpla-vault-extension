@@ -1,8 +1,9 @@
 import { Proposal } from '@xpla/xpla.js';
 import { FinderLink } from 'components/general';
-import { Col, Card } from 'components/layout';
+import { Card, Col } from 'components/layout';
 import { Read } from 'components/token';
 import { useIsClassic } from 'data/query';
+
 import DataList from './components/DataList';
 
 const ProposalSummary = ({ proposal }: { proposal: Proposal }) => {

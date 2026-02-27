@@ -1,22 +1,23 @@
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import GroupsIcon from '@mui/icons-material/Groups';
 import QrCodeIcon from '@mui/icons-material/QrCode';
 import UsbIcon from '@mui/icons-material/Usb';
 import { truncate } from '@xpla.kitchen/utils';
 import { useWallet } from '@xpla/wallet-provider';
-import { useAddress } from 'data/wallet';
-import { useTnsName } from 'data/external/tns';
+import { isWallet, useAuth } from 'auth';
+import SwitchWallet from 'auth/modules/select/SwitchWallet';
+import { Popover, Tooltip } from 'components/display';
 import { Button, Copy, FinderLink } from 'components/general';
 import CopyStyles from 'components/general/Copy.module.scss';
 import { Flex, Grid } from 'components/layout';
-import { Tooltip, Popover } from 'components/display';
-import { isWallet, useAuth } from 'auth';
-import SwitchWallet from 'auth/modules/select/SwitchWallet';
+import { useTnsName } from 'data/external/tns';
+import { useAddress } from 'data/wallet';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import PopoverNone from '../components/PopoverNone';
-import WalletQR from './WalletQR';
 import styles from './Connected.module.scss';
+import WalletQR from './WalletQR';
 
 const Connected = () => {
   const { t } = useTranslation();

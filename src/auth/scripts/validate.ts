@@ -1,4 +1,5 @@
 import { RawKey } from '@xpla/xpla.js';
+
 import { getStoredWallet } from './keystore';
 import wordlist from './wordlist.json';
 

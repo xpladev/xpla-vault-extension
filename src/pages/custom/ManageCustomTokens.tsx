@@ -1,4 +1,7 @@
 import { AccAddress, EvmAddress } from '@xpla/xpla.js';
+import { Fetching } from 'components/feedback';
+import { useContractInfoERC20 } from 'data/queries/evm';
+import { useTokenInfoCW20 } from 'data/queries/wasm';
 import { combineState } from 'data/query';
 import {
   useCustomTokensERC20,
@@ -6,15 +9,13 @@ import {
 } from 'data/settings/CustomTokens';
 import { useCustomTokensCW20 } from 'data/settings/CustomTokens';
 import {
-  useIBCWhitelist,
   useCW20Whitelist,
   useERC20WhiteList,
+  useIBCWhitelist,
 } from 'data/Xpla/XplaAssets';
-import { useTokenInfoCW20 } from 'data/queries/wasm';
-import { Fetching } from 'components/feedback';
-import WithSearchInput, { FilterType } from './WithSearchInput';
+
 import TokenList from './TokenList';
-import { useContractInfoERC20 } from 'data/queries/evm';
+import WithSearchInput, { FilterType } from './WithSearchInput';
 
 interface Props {
   whitelist: { ibc: IBCWhitelist; cw20: CW20Whitelist; erc20: ERC20Whitelist };
@@ -129,8 +130,8 @@ const Component = ({
   const responseItem = tokenInfo
     ? { token: keyword, ...tokenInfo }
     : erc20Info
-    ? { token: keyword, ...erc20Info }
-    : undefined;
+      ? { token: keyword, ...erc20Info }
+      : undefined;
 
   // conclusion
   const result = listedItem ?? responseItem;

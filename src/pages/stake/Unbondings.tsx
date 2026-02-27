@@ -1,16 +1,17 @@
-import { useTranslation } from 'react-i18next';
 import { AccAddress, Dec } from '@xpla/xpla.js';
-import { getMaxHeightStyle } from 'utils/style';
-import { useCurrency } from 'data/settings/Currency';
-import { combineState } from 'data/query';
-import { useMemoizedCalcValue } from 'data/queries/oracle';
-import { calcUnbondingsTotal, flattenUnbondings } from 'data/queries/staking';
-import { useValidators, useUnbondings } from 'data/queries/staking';
-import { ValidatorLink } from 'components/general';
+import { ToNow, TooltipIcon } from 'components/display';
 import { ModalButton } from 'components/feedback';
+import { ValidatorLink } from 'components/general';
 import { Table } from 'components/layout';
 import { Read } from 'components/token';
-import { ToNow, TooltipIcon } from 'components/display';
+import { useMemoizedCalcValue } from 'data/queries/oracle';
+import { calcUnbondingsTotal, flattenUnbondings } from 'data/queries/staking';
+import { useUnbondings, useValidators } from 'data/queries/staking';
+import { combineState } from 'data/query';
+import { useCurrency } from 'data/settings/Currency';
+import { useTranslation } from 'react-i18next';
+import { getMaxHeightStyle } from 'utils/style';
+
 import StakedCard from './components/StakedCard';
 
 const Unbondings = () => {

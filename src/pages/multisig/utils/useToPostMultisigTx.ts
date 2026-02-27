@@ -1,7 +1,7 @@
-import qs from 'qs';
 import { Tx as UnsignedTx } from '@xpla/xpla.js';
-import { useAddress } from 'data/wallet';
 import { useLCDClient } from 'data/queries/lcdClient';
+import { useAddress } from 'data/wallet';
+import qs from 'qs';
 
 const useToPostMultisigTx = () => {
   const address = useAddress();

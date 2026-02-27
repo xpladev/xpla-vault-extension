@@ -1,5 +1,6 @@
-import { PropsWithChildren } from 'react';
 import classNames from 'classnames';
+import { PropsWithChildren } from 'react';
+
 import styles from './Container.module.scss';
 
 interface Props {

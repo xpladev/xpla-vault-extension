@@ -1,6 +1,7 @@
-import { useTranslation } from 'react-i18next';
-import { useIsXplaAPIAvailable } from 'data/Xpla/XplaAPI';
 import { Wrong } from 'components/feedback';
+import { useIsXplaAPIAvailable } from 'data/Xpla/XplaAPI';
+import { useTranslation } from 'react-i18next';
+
 import HistoryList from './HistoryList';
 
 const History = () => {

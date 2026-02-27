@@ -1,16 +1,9 @@
-import { ChangeEvent, Fragment, ReactNode } from 'react';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { QueryKey, useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import classNames from 'classnames/bind';
-import BigNumber from 'bignumber.js';
-import { head, isNil } from 'ramda';
-
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { isDenom, isDenomIBC, readDenom } from '@xpla.kitchen/utils';
+import { useConnectedWallet, useWallet } from '@xpla/use-wallet';
+import { ConnectType, UserDenied } from '@xpla/wallet-types';
+import { CreateTxFailed, TxFailed } from '@xpla/wallet-types';
 import {
   Coin,
   Coins,
@@ -19,35 +12,39 @@ import {
   SyncTxBroadcastResult,
 } from '@xpla/xpla.js';
 import { CreateTxOptions, Fee } from '@xpla/xpla.js';
-import { ConnectType, UserDenied } from '@xpla/wallet-types';
-import { CreateTxFailed, TxFailed } from '@xpla/wallet-types';
-import { useWallet, useConnectedWallet } from '@xpla/use-wallet';
-
+import ConnectWallet from 'app/sections/ConnectWallet';
+import { isWallet, useAuth } from 'auth';
+import { PasswordError } from 'auth/scripts/keystore';
+import BigNumber from 'bignumber.js';
+import classNames from 'classnames/bind';
+import { Details } from 'components/display';
+import { Modal } from 'components/feedback';
+import { FormError, FormItem, Input, Select, Submit } from 'components/form';
+import { Pre } from 'components/general';
+import { Flex, Grid } from 'components/layout';
+import { Read } from 'components/token';
+import { useBankBalance, useIsWalletEmpty } from 'data/queries/bank';
+import { isBroadcastingState, latestTxState } from 'data/queries/tx';
+import { queryKey, RefetchOptions, useIsClassic } from 'data/query';
+import { useCurrency } from 'data/settings/Currency';
+import { useAddress, useNetwork } from 'data/wallet';
+import useToPostMultisigTx from 'pages/multisig/utils/useToPostMultisigTx';
+import { head, isNil } from 'ramda';
+import { ChangeEvent, Fragment, ReactNode } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { QueryKey, useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Contents } from 'types/components';
-import { has } from 'utils/num';
 import { getAmount, sortCoins } from 'utils/coin';
 import { getErrorMessage } from 'utils/error';
 import { getLocalSetting, SettingKey } from 'utils/localStorage';
-import { useCurrency } from 'data/settings/Currency';
-import { queryKey, RefetchOptions, useIsClassic } from 'data/query';
-import { useAddress, useNetwork } from 'data/wallet';
-import { isBroadcastingState, latestTxState } from 'data/queries/tx';
-import { useBankBalance, useIsWalletEmpty } from 'data/queries/bank';
+import { has } from 'utils/num';
 
-import { Pre } from 'components/general';
-import { Flex, Grid } from 'components/layout';
-import { FormError, Submit, Select, Input, FormItem } from 'components/form';
-import { Modal } from 'components/feedback';
-import { Details } from 'components/display';
-import { Read } from 'components/token';
-import ConnectWallet from 'app/sections/ConnectWallet';
-import useToPostMultisigTx from 'pages/multisig/utils/useToPostMultisigTx';
-import { isWallet, useAuth } from 'auth';
-import { PasswordError } from 'auth/scripts/keystore';
-
-import { toInput } from './utils';
-import { useTx } from './TxContext';
 import styles from './Tx.module.scss';
+import { useTx } from './TxContext';
+import { toInput } from './utils';
 
 const cx = classNames.bind(styles);
 
@@ -205,8 +202,8 @@ function Tx<TxValues>(props: Props<TxValues>) {
   const max = !gasFee.amount
     ? undefined
     : isDenom(token)
-    ? getNativeMax()
-    : balance;
+      ? getNativeMax()
+      : balance;
 
   /* (effect): Call the onChangeMax function whenever the max changes */
   useEffect(() => {
@@ -235,12 +232,12 @@ function Tx<TxValues>(props: Props<TxValues>) {
     passwordRequired && !password
       ? t('Enter password')
       : estimatedGasState.isLoading
-      ? t('Estimating fee...')
-      : estimatedGasState.error
-      ? t('Fee estimation failed')
-      : isBroadcasting
-      ? t('Broadcasting a tx...')
-      : props.disabled || '';
+        ? t('Estimating fee...')
+        : estimatedGasState.error
+          ? t('Fee estimation failed')
+          : isBroadcasting
+            ? t('Broadcasting a tx...')
+            : props.disabled || '';
 
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<Error>();
@@ -401,7 +398,7 @@ function Tx<TxValues>(props: Props<TxValues>) {
             <>
               {balanceAfterTx && nativeAfterTx && (
                 <>
-                  <div className={cx('send-line')}></div>
+                  <div className={cx('send-line')} />
                   <div className={cx('send-box')}>
                     <dl>
                       <dt>Post-Transaction</dt>
@@ -429,7 +426,7 @@ function Tx<TxValues>(props: Props<TxValues>) {
             <>
               {nativeAfterTx && (
                 <>
-                  <div className={cx('send-line')}></div>
+                  <div className={cx('send-line')} />
                   <div className={cx('send-box')}>
                     <dl>
                       <dt>Post-Transaction</dt>
@@ -455,10 +452,10 @@ function Tx<TxValues>(props: Props<TxValues>) {
     connectedWallet?.connectType === ConnectType.READONLY
       ? t('Wallet is connected as read-only mode')
       : !availableGasDenoms.length
-      ? t('Insufficient balance to pay transaction fee')
-      : isWalletEmpty
-      ? t('Coins required to post transactions')
-      : '';
+        ? t('Insufficient balance to pay transaction fee')
+        : isWalletEmpty
+          ? t('Coins required to post transactions')
+          : '';
 
   const submitButton = (
     <>
@@ -507,10 +504,10 @@ function Tx<TxValues>(props: Props<TxValues>) {
           error instanceof UserDenied
             ? t('User denied')
             : error instanceof CreateTxFailed
-            ? t('Failed to create tx')
-            : error instanceof TxFailed
-            ? t('Tx failed')
-            : t('Error'),
+              ? t('Failed to create tx')
+              : error instanceof TxFailed
+                ? t('Tx failed')
+                : t('Error'),
         children:
           error instanceof UserDenied ? null : (
             <Pre height={120} normal break>

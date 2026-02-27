@@ -1,8 +1,9 @@
-import { HTMLAttributes, useState } from 'react';
-import classNames from 'classnames/bind';
-import { AccAddress, EvmAddress } from '@xpla/xpla.js';
 import { isDenomIBC } from '@xpla.kitchen/utils';
+import { AccAddress, EvmAddress } from '@xpla/xpla.js';
+import classNames from 'classnames/bind';
 import { getIcon } from 'data/token';
+import { HTMLAttributes, useState } from 'react';
+
 import styles from './TokenIcon.module.scss';
 
 const cx = classNames.bind(styles);
@@ -20,8 +21,8 @@ const TokenIcon = ({ token, icon, size, ...rest }: Props) => {
     AccAddress.validate(token) || EvmAddress.validate(token)
       ? getIcon('svg/CW.svg')
       : isDenomIBC(token)
-      ? getIcon('svg/IBC.svg')
-      : getIcon('svg/XPLA.svg');
+        ? getIcon('svg/IBC.svg')
+        : getIcon('svg/XPLA.svg');
 
   const src = !icon || isError ? defaultIcon : icon;
   const sizes =

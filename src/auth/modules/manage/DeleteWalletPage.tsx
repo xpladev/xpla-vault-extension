@@ -1,8 +1,9 @@
-import { useTranslation } from 'react-i18next';
 import { Card, Page } from 'components/layout';
+import { useTranslation } from 'react-i18next';
+
 import ConnectedWallet from './ConnectedWallet';
-import GoBack from './GoBack';
 import DeleteWalletForm from './DeleteWalletForm';
+import GoBack from './GoBack';
 
 const DeleteWalletPage = () => {
   const { t } = useTranslation();

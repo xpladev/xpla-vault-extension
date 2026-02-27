@@ -1,11 +1,12 @@
-import { isNil } from 'ramda';
-import { useTranslation } from 'react-i18next';
-import classNames from 'classnames/bind';
 import AddIcon from '@mui/icons-material/Add';
 import CheckIcon from '@mui/icons-material/Check';
 import { truncate } from '@xpla.kitchen/utils';
+import classNames from 'classnames/bind';
 import { FinderLink } from 'components/general';
 import { Token } from 'components/token';
+import { isNil } from 'ramda';
+import { useTranslation } from 'react-i18next';
+
 import styles from './TokenItem.module.scss';
 
 const cx = classNames.bind(styles);

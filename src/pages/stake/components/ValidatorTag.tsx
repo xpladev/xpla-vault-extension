@@ -1,7 +1,7 @@
-import { useTranslation } from 'react-i18next';
 import { BondStatus } from '@xpla/xpla.proto/cosmos/staking/v1beta1/staking';
 import { bondStatusFromJSON } from '@xpla/xpla.proto/cosmos/staking/v1beta1/staking';
 import { Tag } from 'components/display';
+import { useTranslation } from 'react-i18next';
 
 export const ValidatorStatus = ({ status }: { status: BondStatus }) => {
   const { t } = useTranslation();

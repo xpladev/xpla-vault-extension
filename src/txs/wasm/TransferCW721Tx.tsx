@@ -1,8 +1,9 @@
+import { Page } from 'components/layout';
+import { useBankBalance } from 'data/queries/bank';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
-import { useBankBalance } from 'data/queries/bank';
 import { getAmount } from 'utils/coin';
-import { Page } from 'components/layout';
+
 // import { TokenBadge } from 'components/token';
 import TxContext from '../TxContext';
 import TransferCW721Form from './TransferCW721Form';
