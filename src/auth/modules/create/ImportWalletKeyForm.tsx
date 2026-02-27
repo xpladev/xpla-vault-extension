@@ -42,7 +42,7 @@ const ImportWalletKeyForm = () => {
     const rawKey = new RawKey(Uint8Array.from(Buffer.from(privateKey, 'hex')));
 
     const address = rawKey.accAddress;
-    addWallet({ name, password, address, key: rawKey.privateKey });
+    addWallet({ name, password, address, key: Buffer.from(rawKey.privateKey) });
     connect(name);
     navigate('/wallet');
   };

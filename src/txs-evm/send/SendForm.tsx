@@ -22,6 +22,7 @@ interface TxValues {
   address?: EvmAddress; // hidden input
   input?: string;
   memo?: string;
+  isSimul?: boolean;
 }
 
 interface Props extends TokenItem {
@@ -164,7 +165,7 @@ const EvmSendForm = ({ token, decimals, balance }: Props) => {
         <Card isFetching={tnsState.isLoading}>
           <Tx {...tx}>
             {({ max, fee, submit }) => (
-              <Form onSubmit={handleSubmit(submit.fn)}>
+              <Form onSubmit={handleSubmit(submit.fn as any)}>
                 <Grid gap={4}>
                   {!memo && (
                     <FormWarning>

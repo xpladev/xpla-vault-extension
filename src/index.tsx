@@ -1,5 +1,6 @@
+import './polyfills'; // Buffer 전역 주입 - 반드시 첫 번째 import
 import { StrictMode } from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { HashRouter } from 'react-router-dom';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { RecoilRoot } from 'recoil';
@@ -20,11 +21,15 @@ import App from 'extension/App';
 
 const connectorOpts = { bridge: BRIDGE };
 
-getChainOptions().then((chainOptions) =>
-  render(
+getChainOptions().then((chainOptions) => {
+  const container = document.getElementById('xpla')!;
+  const root = createRoot(container);
+  root.render(
     <StrictMode>
       <RecoilRoot>
-        <HashRouter>
+        <HashRouter
+          future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+        >
           <ScrollToTop />
           <WalletProvider {...chainOptions} connectorOpts={connectorOpts}>
             <InitNetworks>
@@ -38,6 +43,5 @@ getChainOptions().then((chainOptions) =>
         </HashRouter>
       </RecoilRoot>
     </StrictMode>,
-    document.getElementById('xpla'),
-  ),
-);
+  );
+});

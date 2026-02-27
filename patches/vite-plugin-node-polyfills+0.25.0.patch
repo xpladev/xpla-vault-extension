@@ -1,0 +1,36 @@
+diff --git a/node_modules/vite-plugin-node-polyfills/shims/buffer/index.ts b/node_modules/vite-plugin-node-polyfills/shims/buffer/index.ts
+index 3bf292b..4b81f52 100644
+--- a/node_modules/vite-plugin-node-polyfills/shims/buffer/index.ts
++++ b/node_modules/vite-plugin-node-polyfills/shims/buffer/index.ts
+@@ -1,13 +1,8 @@
+ import {
+   Blob,
+-  BlobOptions,
+   Buffer,
+   File,
+-  FileOptions,
+   INSPECT_MAX_BYTES,
+-  // eslint-disable-next-line n/no-deprecated-api
+-  SlowBuffer,
+-  TranscodeEncoding,
+   atob,
+   btoa,
+   constants,
+@@ -20,15 +15,13 @@ import {
+ // eslint-disable-next-line unicorn/prefer-node-protocol
+ } from 'buffer'
+ 
++export type { BlobOptions, FileOptions, TranscodeEncoding } from 'buffer'
++
+ export {
+   Blob,
+-  BlobOptions,
+   Buffer,
+   File,
+-  FileOptions,
+   INSPECT_MAX_BYTES,
+-  SlowBuffer,
+-  TranscodeEncoding,
+   atob,
+   btoa,
+   constants,

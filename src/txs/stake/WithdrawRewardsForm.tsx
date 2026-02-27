@@ -105,11 +105,11 @@ const WithdrawRewardsForm = ({ rewards, validators, ...props }: Props) => {
   const selectedValidatorsText = !selected.length
     ? t('Not selected')
     : selected.length === 1
-    ? findMoniker(selected[0])
-    : t('{{moniker}} and {{length}} others', {
-        moniker: findMoniker(selected[0]),
-        length: selected.length - 1,
-      });
+      ? findMoniker(selected[0])
+      : t('{{moniker}} and {{length}} others', {
+          moniker: findMoniker(selected[0]),
+          length: selected.length - 1,
+        });
 
   /* form */
   const { handleSubmit } = useForm({ mode: 'onChange' });
@@ -142,7 +142,7 @@ const WithdrawRewardsForm = ({ rewards, validators, ...props }: Props) => {
   return (
     <Tx {...tx}>
       {({ fee, submit }) => (
-        <Form onSubmit={handleSubmit(submit.fn)}>
+        <Form onSubmit={handleSubmit(submit.fn as any)}>
           <Grid gap={12}>
             {isClassic && (
               <section className={styles.target}>

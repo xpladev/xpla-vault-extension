@@ -1,14 +1,7 @@
 export const debug = {
-  query:
-    process.env.NODE_ENV === 'development' &&
-    process.env.REACT_APP_DEBUG_QUERY === 'true',
+  query: import.meta.env.DEV && import.meta.env.VITE_DEBUG_QUERY === 'true',
   translation:
-    process.env.NODE_ENV === 'development' &&
-    process.env.REACT_APP_DEBUG_TRANSLATION === 'true',
-  theme:
-    process.env.NODE_ENV === 'development' &&
-    process.env.REACT_APP_DEBUG_THEME === 'true',
-  auth:
-    process.env.NODE_ENV === 'development' &&
-    process.env.REACT_APP_ELECTRON === 'true',
+    import.meta.env.DEV && import.meta.env.VITE_DEBUG_TRANSLATION === 'true',
+  theme: import.meta.env.DEV && import.meta.env.VITE_DEBUG_THEME === 'true',
+  auth: import.meta.env.DEV && import.meta.env.VITE_ELECTRON === 'true',
 };

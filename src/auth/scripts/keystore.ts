@@ -72,10 +72,17 @@ type AddWalletParams =
 export const addWallet = (params: AddWalletParams) => {
   const wallets = getStoredWallets();
 
-  if (wallets.find((wallet) => wallet.name === params.name))
+  const sameNameWallet = wallets.find((wallet) => wallet.name === params.name);
+  if (sameNameWallet && sameNameWallet.address !== params.address) {
+    // 같은 이름이지만 다른 주소 → 이미 다른 지갑이 해당 이름 사용 중
     throw new Error('Wallet already exists');
+  }
 
-  const next = wallets.filter((wallet) => wallet.address !== params.address);
+  // 같은 이름+같은 주소이면 덮어쓰기 허용 (동일 지갑 재복구)
+  const next = wallets.filter(
+    (wallet) =>
+      wallet.address !== params.address && wallet.name !== params.name,
+  );
 
   if (is.multisig(params)) {
     storeWallets([...next, params]);

@@ -141,7 +141,7 @@ const StakeForm = (props: Props) => {
   return (
     <Tx {...tx}>
       {({ max, fee, submit }) => (
-        <Form onSubmit={handleSubmit(submit.fn)}>
+        <Form onSubmit={handleSubmit(submit.fn as any)}>
           {
             {
               [StakeAction.DELEGATE]: (

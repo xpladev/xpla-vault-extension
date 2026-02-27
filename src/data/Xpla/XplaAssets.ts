@@ -142,12 +142,15 @@ const sortWhitelistERC20 = (data: ERC20Whitelist) => {
 
 export const shuffleByProtocol = <T extends CW20Whitelist | CW721Whitelist>(
   array: T,
-) => {
+): T => {
   const shuffledPair = shuffle(
     toPairs(
       groupBy(([, { protocol, name }]) => protocol ?? name, toPairs(array)),
     ),
   );
 
-  return mergeAll(flatten(map(fromPairs, values(fromPairs(shuffledPair)))));
+  const groups = Object.values(fromPairs(shuffledPair as any) as any) as Array<
+    Array<[string, any]>
+  >;
+  return mergeAll(groups.map(fromPairs) as any) as unknown as T;
 };

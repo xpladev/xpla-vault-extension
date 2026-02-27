@@ -1,4 +1,5 @@
 @use "sass:math";
+@use "sass:map";
 @import "mixins";
 
 @mixin size($min-width, $height) {
@@ -69,10 +70,10 @@ $colors: (
 @each $color, $value in $colors {
   .#{$color} {
     @include variant(
-      map-get($value, bg-h),
-      map-get($value, bg-s),
-      map-get($value, bg-l),
-      map-get($value, color)
+      map.get($value, bg-h),
+      map.get($value, bg-s),
+      map.get($value, bg-l),
+      map.get($value, color)
     );
   }
 }

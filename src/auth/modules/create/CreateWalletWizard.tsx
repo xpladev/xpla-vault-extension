@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { MnemonicKey } from '@xpla/xpla.js';
 import createContext from 'utils/createContext';
@@ -51,11 +51,15 @@ const CreateWalletWizard = ({ defaultMnemonic = '', beforeCreate }: Props) => {
 
   /* create wallet */
   const [createdWallet, setCreatedWallet] = useState<SingleWallet>();
+  // StrictMode에서 useEffect가 두 번 실행되는 것을 방지하기 위한 ref
+  const isCreatingRef = useRef(false);
   const createWallet = (coinType: Bip, index = 0) => {
+    if (isCreatingRef.current) return;
+    isCreatingRef.current = true;
     const { name, password, mnemonic } = values;
     const mk = new MnemonicKey({ mnemonic, coinType, index });
     const address = mk.accAddress;
-    addWallet({ name, password, address, key: mk.privateKey });
+    addWallet({ name, password, address, key: Buffer.from(mk.privateKey) });
     setCreatedWallet({ name, address });
     setStep(3);
   };

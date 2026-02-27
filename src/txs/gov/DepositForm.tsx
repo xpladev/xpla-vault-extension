@@ -14,7 +14,7 @@ import validate from '../validate';
 import Tx, { getInitialGasDenom } from '../Tx';
 
 interface TxValues {
-  input?: string;
+  input: string;
 }
 
 const DepositForm = () => {

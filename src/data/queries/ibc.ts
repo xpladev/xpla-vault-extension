@@ -9,11 +9,9 @@ export const useIBCBaseDenom = (denom: Denom, enabled: boolean) => {
   return useQuery(
     [queryKey.ibc.denomTrace, denom],
     async () => {
-      const { base_denom } = await lcd.ibcTransfer.denomTrace(
-        denom.replace('ibc/', ''),
-      );
+      const [ibcDenom] = await lcd.ibcTransfer.denom(denom.replace('ibc/', ''));
 
-      return base_denom;
+      return ibcDenom.base;
     },
     { ...RefetchOptions.INFINITY, enabled: isDenomIBC(denom) && enabled },
   );

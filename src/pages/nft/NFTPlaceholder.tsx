@@ -71,7 +71,11 @@ const NFTPlaceholder = () => {
     Object.values(data).filter(({ icon }) => icon),
   );
 
-  return <List list={Object.values(byProtocol)} />;
+  return (
+    <List
+      list={Object.values(byProtocol).filter(Boolean) as CW721ContractItem[][]}
+    />
+  );
 };
 
 export default NFTPlaceholder;

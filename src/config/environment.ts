@@ -1,2 +1,2 @@
 export const ALCHEMY_PAY_API_URL =
-  process.env.REACT_APP_ALCHEMY_PAY_API_URL || '';
+  import.meta.env.VITE_ALCHEMY_PAY_API_URL || '';

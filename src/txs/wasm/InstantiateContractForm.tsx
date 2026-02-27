@@ -64,7 +64,7 @@ const InstantiateContractForm = () => {
           code_id,
           init_msg,
           coins,
-          label || undefined,
+          label || '',
         ),
       ];
 

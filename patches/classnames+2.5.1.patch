@@ -1,0 +1,13 @@
+diff --git a/node_modules/classnames/bind.d.ts b/node_modules/classnames/bind.d.ts
+index f89f787..7dbb502 100644
+--- a/node_modules/classnames/bind.d.ts
++++ b/node_modules/classnames/bind.d.ts
+@@ -5,7 +5,7 @@ declare namespace classNames {
+ }
+ 
+ interface ClassNames {
+-	(this: classNames.Binding | undefined, ...args: ArgumentArray): string;
++	(...args: ArgumentArray): string;
+ 
+ 	default: ClassNames;
+ }

@@ -1,10 +1,9 @@
 import { initReactI18next } from 'react-i18next';
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import { Dictionary } from 'ramda';
 import { debug } from 'utils/env';
 
-const flatten = (obj: object, initial = {}): Dictionary<string> => {
+const flatten = (obj: object, initial = {}): Record<string, string> => {
   return Object.entries(obj).reduce((prev, [key, value]) => {
     if (!value) return prev;
     const next =

@@ -6,7 +6,7 @@ import { has } from 'utils/num';
 export const getPlaceholder = (decimals = 6) => '0.'.padEnd(decimals + 2, '0');
 
 export const toInput = (amount: BigNumber.Value, decimals = 18) =>
-  new BigNumber(readAmount(amount, { decimals })).toString();
+  new BigNumber(readAmount(amount as string | number, { decimals })).toString();
 
 /* field array (coins) */
 export interface CoinInput {

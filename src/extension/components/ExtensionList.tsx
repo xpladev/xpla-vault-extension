@@ -26,29 +26,29 @@ const ExtensionList = ({ list }: { list: Item[] }) => {
     { children, description, icon, ...item }: Item,
     index: number,
   ) => {
-    const props = {
-      className: styles.item,
-      children: (
-        <>
-          <Flex gap={8}>
-            {icon}
+    const content = (
+      <>
+        <Flex gap={8}>
+          {icon}
 
-            <Grid gap={2}>
-              <h1 className={styles.title}>{children}</h1>
-              {description && <p className={styles.desc}>{description}</p>}
-            </Grid>
-          </Flex>
+          <Grid gap={2}>
+            <h1 className={styles.title}>{children}</h1>
+            {description && <p className={styles.desc}>{description}</p>}
+          </Grid>
+        </Flex>
 
-          <ChevronRightIcon fontSize="small" />
-        </>
-      ),
-      key: index,
-    };
+        <ChevronRightIcon fontSize="small" />
+      </>
+    );
 
     return 'to' in item ? (
-      <Link {...props} to={item.to} />
+      <Link key={index} className={styles.item} to={item.to}>
+        {content}
+      </Link>
     ) : (
-      <button {...props} onClick={item.onClick} />
+      <button key={index} className={styles.item} onClick={item.onClick}>
+        {content}
+      </button>
     );
   };
 

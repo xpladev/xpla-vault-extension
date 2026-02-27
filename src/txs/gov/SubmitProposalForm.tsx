@@ -65,7 +65,11 @@ type TxValues =
   | ParameterChangeProposalValues
   | ExecuteContractProposalValues;
 
-const DEFAULT_PAREMETER_CHANGE = { subspace: '', key: '', value: '' };
+const DEFAULT_PAREMETER_CHANGE = {
+  subspace: '',
+  key: '',
+  value: '',
+} as unknown as ParamChange;
 
 interface Props {
   communityPool: Coins;
@@ -371,7 +375,7 @@ const SubmitProposalForm = ({ communityPool, minDeposit }: Props) => {
   return (
     <Tx {...tx}>
       {({ max, fee, submit }) => (
-        <Form onSubmit={handleSubmit(submit.fn)}>
+        <Form onSubmit={handleSubmit(submit.fn as any)}>
           <Grid gap={4}>
             <FormHelp>{t('Upload proposal after forum discussion')}</FormHelp>
             <FormWarning>

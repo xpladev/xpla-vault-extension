@@ -21,6 +21,7 @@ interface TxValues {
   recipient?: string; // AccAddress | TNS
   address?: AccAddress; // hidden input
   memo?: string;
+  isSimul?: boolean;
 }
 
 interface Props {
@@ -152,7 +153,7 @@ const EvmTransferERC721Form = ({ contract, id, balance }: Props) => {
 
           <Tx {...tx}>
             {({ fee, submit }) => (
-              <Form onSubmit={handleSubmit(submit.fn)}>
+              <Form onSubmit={handleSubmit(submit.fn as any)}>
                 <FormItem
                   label={
                     <TooltipClickIcon
