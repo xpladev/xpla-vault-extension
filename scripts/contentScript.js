@@ -95,6 +95,8 @@ function documentElementCheck() {
 /**
  * Sets up two-way communication streams between the
  * browser extension and local per-page browser context.
+ * pageStream은 inpage.js와의 SYN/ACK 핸드셰이크가 완료된 스트림이므로 유지하고,
+ * extensionStream(background.js 포트)만 재연결한다.
  */
 async function setupStreams() {
   const pageStream = new LocalMessageDuplexStream({
@@ -102,14 +104,36 @@ async function setupStreams() {
     target: 'xplavault:inpage',
   });
 
+  connectToBackground(pageStream);
+}
+
+/**
+ * background.js Service Worker에 포트를 연결하고,
+ * MV3 Service Worker 종료 시 자동으로 재연결한다.
+ *
+ * @param {LocalMessageDuplexStream} pageStream - inpage.js와의 스트림 (유지)
+ */
+function connectToBackground(pageStream) {
   const extensionPort = extension.runtime.connect({
     name: 'XplaExtension',
   });
-
   const extensionStream = new PortStream(extensionPort);
 
-  extensionStream.pipe(pageStream);
-  pageStream.pipe(extensionStream);
+  // 미처리 에러로 인한 크래시 방지
+  extensionStream.on('error', (err) => {
+    console.warn('Xpla(contentScript): extension stream error', err);
+  });
+
+  // end:false → extensionStream 종료 시 pageStream이 닫히지 않도록 보호
+  extensionStream.pipe(pageStream, { end: false });
+  pageStream.pipe(extensionStream, { end: false });
+
+  // MV3 Service Worker 종료 감지 → 자동 재연결
+  extensionPort.onDisconnect.addListener(() => {
+    extensionStream.unpipe(pageStream);
+    pageStream.unpipe(extensionStream);
+    setTimeout(() => connectToBackground(pageStream), 1000);
+  });
 }
 
 /**

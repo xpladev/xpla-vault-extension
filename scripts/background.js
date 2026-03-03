@@ -16,14 +16,6 @@ const connectRemote = (remotePort) => {
     portStream.write({ name, payload });
   };
 
-  remotePort.onDisconnect.addListener(() => {
-    console.warn('Port disconnected, attempting to reconnect...');
-    setTimeout(
-      () => extension.runtime.connect({ name: 'XplaExtension' }),
-      1000,
-    );
-  });
-
   portStream.on('data', (data) => {
     console.log('Xpla(background): portStream.on', data);
     const { type, ...payload } = data;
