@@ -2,6 +2,39 @@
 import extension from 'extensionizer';
 import PortStream from 'extension-port-stream';
 
+/* 연결된 모든 contentScript 포트 목록 */
+const activePorts = [];
+
+/* 모든 연결된 포트에 이벤트 메시지 브로드캐스트 */
+const broadcastToAllPorts = (name, payload) => {
+  activePorts.forEach((portStream) => {
+    try {
+      portStream.write({ name, payload });
+    } catch (e) {
+      console.warn('Xpla(background): broadcast failed', e);
+    }
+  });
+};
+
+/* wallet/network 변경 → 연결된 dApp에 이벤트 브로드캐스트 */
+extension.storage.onChanged.addListener((changes, namespace) => {
+  if (namespace !== 'local') return;
+
+  // 계정 변경 (로그인·지갑 전환·로그아웃)
+  if ('wallet' in changes) {
+    const address = changes.wallet.newValue?.address;
+    broadcastToAllPorts('accountsChanged', address ? [address] : []);
+  }
+
+  // 네트워크 변경 (chainID 가 달라질 때만)
+  if ('network' in changes) {
+    const { oldValue, newValue } = changes.network;
+    if (newValue && oldValue && newValue.chainID !== oldValue.chainID) {
+      broadcastToAllPorts('chainChanged', newValue.chainID);
+    }
+  }
+});
+
 const connectRemote = (remotePort) => {
   if (remotePort.name !== 'XplaExtension') {
     return;
@@ -11,6 +44,13 @@ const connectRemote = (remotePort) => {
 
   console.log('Xpla(background): connectRemote', remotePort);
   const portStream = new PortStream(remotePort);
+
+  /* 포트 등록 및 disconnect 시 제거 */
+  activePorts.push(portStream);
+  remotePort.onDisconnect.addListener(() => {
+    const idx = activePorts.indexOf(portStream);
+    if (idx !== -1) activePorts.splice(idx, 1);
+  });
 
   const sendResponse = (name, payload) => {
     portStream.write({ name, payload });
